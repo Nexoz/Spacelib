@@ -30,4 +30,6 @@ public interface UtilisateurFacadeLocal {
 
     int count();
     
+    Utilisateur authentifier(String login, String MDP);
+    
 }

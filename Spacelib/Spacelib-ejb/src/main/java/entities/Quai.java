@@ -7,9 +7,11 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -22,6 +24,17 @@ public class Quai implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @OneToOne(fetch = LAZY, mappedBy = "quai")
+    private Navette navArrimée;
+
+    public Navette getNavArrimée() {
+        return navArrimée;
+    }
+
+    public void setNavArrimée(Navette navArrimée) {
+        this.navArrimée = navArrimée;
+    }
 
     private Navette navette;
     

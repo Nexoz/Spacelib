@@ -8,7 +8,8 @@ package repositories;
 import entities.Station;
 import java.util.List;
 import javax.ejb.Local;
-
+import entities.Quai;
+import entities.Navette;
 /**
  *
  * @author jb
@@ -29,5 +30,12 @@ public interface StationFacadeLocal {
     List<Station> findRange(int[] range);
 
     int count();
+    
+    List<Station> getAllStations();
+    
+    void ajouterQuai(Station station,Quai q);
+    
+    int getTempsTrajet(Station station);
+    
     
 }
