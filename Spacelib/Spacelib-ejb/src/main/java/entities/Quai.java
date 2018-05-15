@@ -23,6 +23,8 @@ public class Quai implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private Navette navette;
+    
     public Long getId() {
         return id;
     }
@@ -31,6 +33,16 @@ public class Quai implements Serializable {
         this.id = id;
     }
 
+    public Navette getNavette() {
+        return navette;
+    }
+
+    public void setNavette(Navette navette) {
+        this.navette = navette;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;
