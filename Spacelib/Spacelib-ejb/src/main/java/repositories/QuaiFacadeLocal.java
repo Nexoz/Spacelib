@@ -5,6 +5,7 @@
  */
 package repositories;
 
+import entities.Navette;
 import entities.Quai;
 import java.util.List;
 import javax.ejb.Local;
@@ -29,5 +30,9 @@ public interface QuaiFacadeLocal {
     List<Quai> findRange(int[] range);
 
     int count();
+    
+    void arrimer(Quai quai ,Navette navette);
+    
+    boolean hasNavette(Quai quai);
     
 }

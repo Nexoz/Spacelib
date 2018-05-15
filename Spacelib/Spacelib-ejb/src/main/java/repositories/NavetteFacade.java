@@ -6,6 +6,9 @@
 package repositories;
 
 import entities.Navette;
+import entities.Operation;
+import entities.Station;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +30,39 @@ public class NavetteFacade extends AbstractFacade<Navette> implements NavetteFac
 
     public NavetteFacade() {
         super(Navette.class);
+    }
+
+    /**
+     * Retoune l'état de révision de la navette
+     * @param navette Navette dont on veut connaitre l'état de révision
+     * @return true si la navette est a réviser - false sinon 
+     */
+    @Override
+    public boolean isWaitingRevision (Navette navette) {
+        if (navette.getProchaineRevision() < 3){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Ajoute une opération à la liste de la navette 
+     * @param navette Navette où on ajoute l'opération
+     * @param operation Opération à ajouter à la navette
+     */
+    @Override
+    public void ajouterOperation(Navette navette, Operation operation) {
+        navette.getListeOperations().add(operation);
+    }
+
+    /**
+     * Remet le compteur de révision à 0
+     * @param navette Navette dont on veut remettre le compteur à 0
+     */
+    @Override
+    public void resetRevision(Navette navette) {
+        navette.setProchaineRevision(0);
     }
     
 }

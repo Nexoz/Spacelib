@@ -6,6 +6,8 @@
 package repositories;
 
 import entities.Navette;
+import entities.Operation;
+import entities.Station;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -29,5 +31,12 @@ public interface NavetteFacadeLocal {
     List<Navette> findRange(int[] range);
 
     int count();
+    
+    boolean isWaitingRevision (Navette navette);
+    
+    void ajouterOperation(Navette navette, Operation operation);
+    
+    void resetRevision(Navette navette);
+    
     
 }
