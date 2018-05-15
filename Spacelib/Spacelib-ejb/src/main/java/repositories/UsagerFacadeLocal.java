@@ -30,4 +30,5 @@ public interface UsagerFacadeLocal {
 
     int count();
     
+   // Usager nouvelUsager( String nom,String prenom, String login, String password);
 }

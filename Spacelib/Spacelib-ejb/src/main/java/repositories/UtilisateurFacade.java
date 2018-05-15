@@ -6,6 +6,7 @@
 package repositories;
 
 import entities.Utilisateur;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,15 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
 
     public UtilisateurFacade() {
         super(Utilisateur.class);
+    }
+    
+    @Override
+    public Utilisateur authentifier(String login, String MDP){
+        for(Utilisateur u : this.findAll()){
+        if(u.getLogin().equals(login)&& u.getPassword().equals(MDP))
+            return u;
+        }
+        return null;
     }
     
 }

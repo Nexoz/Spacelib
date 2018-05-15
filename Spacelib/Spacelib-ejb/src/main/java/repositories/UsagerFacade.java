@@ -29,4 +29,10 @@ public class UsagerFacade extends AbstractFacade<Usager> implements UsagerFacade
         super(Usager.class);
     }
     
+   /* public Usager nouvelUsager( String nom,String prenom, String login, String password){
+        Usager usager = new Usager( nom, prenom,  login,  password);
+        this.create(usager);
+        return usager;
+    }*/
+    
 }
