@@ -6,6 +6,7 @@
 package repositories;
 
 import entities.Revision;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,44 @@ public class RevisionFacade extends AbstractFacade<Revision> implements Revision
 
     public RevisionFacade() {
         super(Revision.class);
+    }
+    
+    /**
+     * Marque le début de la révision
+     * @param r Révision concernée
+     */
+    @Override
+    public void debutRevision(Revision r) {
+        r.setDateDebut(new Date());
+    }
+
+    /**
+     * Marque la fin de la révision
+     * @param r Révision concernée
+     */
+    @Override
+    public void finRevision(Revision r) {
+        r.setDateFin(new Date());
+    }
+
+    /**
+     * Dit si la révision est en cours
+     * @param r Révision concernée
+     * @return Vrai si la révision est en cours
+     */
+    @Override
+    public boolean estEnCours(Revision r) {
+        return r.getDateDebut() != null && r.getDateFin() == null;
+    }
+
+    /**
+     * Dit si la révision est terminée
+     * @param r Révision concernée
+     * @return Vrai si la révision est terminée
+     */
+    @Override
+    public boolean estTerminee(Revision r) {
+        return r.getDateDebut() != null && r.getDateFin() != null;
     }
     
 }

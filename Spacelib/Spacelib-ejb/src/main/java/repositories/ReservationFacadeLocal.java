@@ -5,6 +5,8 @@
  */
 package repositories;
 
+import entities.Navette;
+import entities.Quai;
 import entities.Reservation;
 import java.util.List;
 import javax.ejb.Local;
@@ -29,5 +31,9 @@ public interface ReservationFacadeLocal {
     List<Reservation> findRange(int[] range);
 
     int count();
+    
+    void voyageAchevé(Reservation r);
+    
+    void voyageInitié(Reservation r);
     
 }

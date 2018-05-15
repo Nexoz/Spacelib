@@ -29,5 +29,21 @@ public class Reservation extends Operation implements Serializable {
     public String toString() {
         return "Réservation " + super.toString();
     }
+
+    public Quai getQuaiDepart() {
+        return quaiDepart;
+    }
+
+    public void setQuaiDepart(Quai quaiDepart) {
+        this.quaiDepart = quaiDepart;
+    }
+
+    public Quai getQuaiArrivee() {
+        return quaiArrivee;
+    }
+
+    public void setQuaiArrivee(Quai quaiArrivee) {
+        this.quaiArrivee = quaiArrivee;
+    }
     
 }

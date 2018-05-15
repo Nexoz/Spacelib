@@ -5,6 +5,7 @@
  */
 package repositories;
 
+import entities.Navette;
 import entities.Revision;
 import java.util.List;
 import javax.ejb.Local;
@@ -17,7 +18,7 @@ import javax.ejb.Local;
 public interface RevisionFacadeLocal {
 
     void create(Revision revision);
-
+    
     void edit(Revision revision);
 
     void remove(Revision revision);
@@ -29,5 +30,13 @@ public interface RevisionFacadeLocal {
     List<Revision> findRange(int[] range);
 
     int count();
+    
+    void debutRevision(Revision r);
+    
+    void finRevision(Revision r);
+    
+    boolean estEnCours(Revision r);
+    
+    boolean estTerminee(Revision r);
     
 }

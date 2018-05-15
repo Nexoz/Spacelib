@@ -6,6 +6,7 @@
 package repositories;
 
 import entities.Reservation;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,24 @@ public class ReservationFacade extends AbstractFacade<Reservation> implements Re
 
     public ReservationFacade() {
         super(Reservation.class);
+    }
+
+    /**
+     * Marque la fin d'un voyage
+     * @param r Réservation conercnée
+     */
+    @Override
+    public void voyageAchevé(Reservation r) {
+        r.setDateFin(new Date());
+    }
+
+    /**
+     * Marque le début d'un voyage
+     * @param r Réservation conercnée
+     */
+    @Override
+    public void voyageInitié(Reservation r) {
+        r.setDateDebut(new Date());
     }
     
 }
