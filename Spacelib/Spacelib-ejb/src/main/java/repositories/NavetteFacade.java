@@ -7,6 +7,7 @@ package repositories;
 
 import entities.Navette;
 import entities.Operation;
+import entities.Quai;
 import entities.Station;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -63,6 +64,21 @@ public class NavetteFacade extends AbstractFacade<Navette> implements NavetteFac
     @Override
     public void resetRevision(Navette navette) {
         navette.setProchaineRevision(0);
+    }
+
+    @Override
+    public void arrimer(Navette navette ,Quai quai) {
+        navette.setQuaiArrimage(quai);
+    }
+
+    @Override
+    public void desarrimer(Navette navette) {
+        navette.setQuaiArrimage(null);
+    }
+
+    @Override
+    public void incrementerVoyage(Navette navette) {
+        navette.setProchaineRevision(navette.getProchaineRevision()-1);
     }
     
 }

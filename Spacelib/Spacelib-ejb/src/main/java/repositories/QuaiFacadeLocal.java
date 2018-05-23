@@ -33,6 +33,8 @@ public interface QuaiFacadeLocal {
     
     void arrimer(Quai quai, Navette navette);
     
+    void desarrimer(Quai quai);
+    
     boolean hasNavette(Quai quai);
     
     Navette getNavette(Quai quai);

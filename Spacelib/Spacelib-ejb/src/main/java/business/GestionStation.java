@@ -5,7 +5,11 @@
  */
 package business;
 
+import entities.Station;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import repositories.StationFacade;
 
 /**
  *
@@ -14,6 +18,17 @@ import javax.ejb.Stateless;
 @Stateless
 public class GestionStation implements GestionStationLocal {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @EJB
+    private StationFacade stationfacade;
+    
+    @Override
+    public List<Station> consulterStation() {
+        return stationfacade.getAllStations();
+    }
+
+    @Override
+    public void ajouterStation(Station station) {
+        stationfacade.create(station);
+    }
+
 }
