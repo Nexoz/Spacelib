@@ -7,6 +7,7 @@ package repositories;
 
 import entities.Navette;
 import entities.Operation;
+import entities.Quai;
 import entities.Station;
 import java.util.List;
 import javax.ejb.Local;
@@ -38,5 +39,9 @@ public interface NavetteFacadeLocal {
     
     void resetRevision(Navette navette);
     
+    void arrimer (Navette navette,Quai quai);
     
+    void desarrimer (Navette nanette);
+    
+    void incrementerVoyage (Navette navette);
 }

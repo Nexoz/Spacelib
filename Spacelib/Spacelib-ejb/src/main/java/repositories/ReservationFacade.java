@@ -5,6 +5,7 @@
  */
 package repositories;
 
+import entities.Quai;
 import entities.Reservation;
 import java.util.Date;
 import javax.ejb.Stateless;
@@ -46,6 +47,16 @@ public class ReservationFacade extends AbstractFacade<Reservation> implements Re
     @Override
     public void voyageInitié(Reservation r) {
         r.setDateDebut(new Date());
+    }
+
+    @Override
+    public void quaiDepart(Reservation r,Quai quai) {
+        r.setQuaiDepart(quai);
+    }
+
+    @Override
+    public void quaiArrivee(Reservation r, Quai quai) {
+        r.setQuaiArrivee(quai);
     }
     
 }
