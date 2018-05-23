@@ -5,6 +5,9 @@
  */
 package business;
 
+import entities.Navette;
+import entities.Quai;
+import entities.Reservation;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +16,6 @@ import javax.ejb.Local;
  */
 @Local
 public interface GestionVoyageLocal {
-    
+    void finaliserVoyage(Navette navette, Reservation reservation, Quai quai);
+    void reserverNavette (Navette navette, Reservation reservetion, Quai quaiDepart);
 }

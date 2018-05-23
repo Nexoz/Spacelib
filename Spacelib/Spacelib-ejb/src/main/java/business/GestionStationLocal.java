@@ -5,6 +5,8 @@
  */
 package business;
 
+import entities.Station;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +15,6 @@ import javax.ejb.Local;
  */
 @Local
 public interface GestionStationLocal {
-    
+    List<Station> consulterStation();
+    void ajouterStation(Station station);
 }
