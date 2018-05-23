@@ -37,5 +37,6 @@ public interface StationFacadeLocal {
     
     int getTempsTrajet(Station station);
     
+    List<Quai> getQuais(Station station);
     
 }

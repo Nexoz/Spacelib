@@ -35,8 +35,6 @@ public class Quai implements Serializable {
     public void setNavArrimée(Navette navArrimée) {
         this.navArrimée = navArrimée;
     }
-
-    private Navette navette;
     
     public Long getId() {
         return id;
@@ -45,16 +43,6 @@ public class Quai implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public Navette getNavette() {
-        return navette;
-    }
-
-    public void setNavette(Navette navette) {
-        this.navette = navette;
-    }
-
-    
     
     @Override
     public int hashCode() {

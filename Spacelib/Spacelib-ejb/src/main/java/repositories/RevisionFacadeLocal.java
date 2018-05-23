@@ -31,7 +31,7 @@ public interface RevisionFacadeLocal {
 
     int count();
     
-    void debutRevision(Revision r);
+    Revision debutRevision(Revision r);
     
     void finRevision(Revision r);
     
@@ -39,4 +39,5 @@ public interface RevisionFacadeLocal {
     
     boolean estTerminee(Revision r);
     
+    Navette getNavette(Revision r);
 }

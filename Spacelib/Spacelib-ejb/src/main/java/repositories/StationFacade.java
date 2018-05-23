@@ -50,6 +50,11 @@ public class StationFacade extends AbstractFacade<Station> implements StationFac
         return 0;
     }
     
+    @Override
+    public List<Quai> getQuais(Station station){
+        return station.getListeQuais();
+    }
+    
  /*   @Override
     public List<Navette> getNavetteAReviser(Station station){
         List<Navette> navProblem = new ArrayList<>();

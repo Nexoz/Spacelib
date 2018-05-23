@@ -38,7 +38,7 @@ public class QuaiFacade extends AbstractFacade<Quai> implements QuaiFacadeLocal 
      */
     @Override
     public void arrimer(Quai quai,Navette navette) {
-        quai.setNavette(navette);
+        quai.setNavArrimée(navette);
     }
 
     /**
@@ -48,11 +48,16 @@ public class QuaiFacade extends AbstractFacade<Quai> implements QuaiFacadeLocal 
      */
     @Override
     public boolean hasNavette(Quai quai) {
-        if (quai.getNavette() == null){
+        if (quai.getNavArrimée() == null){
             return false;
         }else{
             return true;
         }
+    }
+
+    @Override
+    public Navette getNavette(Quai quai) {
+        return quai.getNavArrimée();
     }
     
     

@@ -5,6 +5,10 @@
  */
 package business;
 
+import entities.Navette;
+import entities.Revision;
+import entities.Station;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -14,4 +18,8 @@ import javax.ejb.Local;
 @Local
 public interface GestionRevisionLocal {
     
+    Revision selectionnerRevision(Station s, Navette n);
+    List<Navette> listerNavetteAReviser(Station s);
+    void finaliserRevision(Revision r);
+    List<Revision> getRevisionsEnCours(Station s);
 }

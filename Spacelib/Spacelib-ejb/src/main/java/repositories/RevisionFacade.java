@@ -5,6 +5,7 @@
  */
 package repositories;
 
+import entities.Navette;
 import entities.Revision;
 import java.util.Date;
 import javax.ejb.Stateless;
@@ -33,10 +34,13 @@ public class RevisionFacade extends AbstractFacade<Revision> implements Revision
     /**
      * Marque le début de la révision
      * @param r Révision concernée
+     * @return 
      */
     @Override
-    public void debutRevision(Revision r) {
+    public Revision debutRevision(Revision r) {
         r.setDateDebut(new Date());
+        this.create(r);
+        return r;
     }
 
     /**
@@ -66,6 +70,11 @@ public class RevisionFacade extends AbstractFacade<Revision> implements Revision
     @Override
     public boolean estTerminee(Revision r) {
         return r.getDateDebut() != null && r.getDateFin() != null;
+    }
+
+    @Override
+    public Navette getNavette(Revision r) {
+        return r.getNavette();
     }
     
 }

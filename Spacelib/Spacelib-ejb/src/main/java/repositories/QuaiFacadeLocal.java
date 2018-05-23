@@ -31,8 +31,10 @@ public interface QuaiFacadeLocal {
 
     int count();
     
-    void arrimer(Quai quai ,Navette navette);
+    void arrimer(Quai quai, Navette navette);
     
     boolean hasNavette(Quai quai);
+    
+    Navette getNavette(Quai quai);
     
 }
