@@ -5,11 +5,16 @@
  */
 package services;
 
+import business.GestionRevisionLocal;
+import business.GestionStationLocal;
+import business.GestionUtilisateurLocal;
 import entities.Mecanicien;
 import entities.Navette;
 import entities.Revision;
 import entities.Station;
+import entities.Utilisateur;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
@@ -19,34 +24,49 @@ import javax.ejb.Stateless;
 @Stateless
 public class ServiceMecanicien implements ServiceMecanicienLocal {
 
+    @EJB
+    private GestionUtilisateurLocal gestionUtilisateur;
+    
+    @EJB
+    private GestionRevisionLocal gestionRevision;
+    
+    @EJB
+    private GestionStationLocal gestionStation;
+        
+    
     @Override
     public Mecanicien authentifierMecanicien(String login, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Utilisateur u = gestionUtilisateur.authentifier(login, password);
+        if(u instanceof Mecanicien){
+            return (Mecanicien) u;
+        }else{
+            return null;
+        }          
     }
 
     @Override
     public List<Station> getListStations() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gestionStation.consulterStation();
     }
 
     @Override
     public Revision selectionnerRevision(Station s, Navette n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gestionRevision.selectionnerRevision(s, n);
     }
 
     @Override
     public List<Navette> listerNavetteAReviser(Station s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gestionRevision.listerNavetteAReviser(s);
     }
 
     @Override
     public void finaliserRevision(Revision r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        gestionRevision.finaliserRevision(r);
     }
 
     @Override
     public List<Revision> getRevisionsEnCours(Station s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gestionRevision.getRevisionsEnCours(s);
     }
 
     // Add business logic below. (Right-click in editor and choose
