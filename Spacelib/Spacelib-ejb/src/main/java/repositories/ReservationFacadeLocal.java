@@ -39,6 +39,6 @@ public interface ReservationFacadeLocal {
     void quaiDepart(Reservation r, Quai quai);
     
     void quaiArrivee(Reservation r, Quai quai);
-
+    
     
 }

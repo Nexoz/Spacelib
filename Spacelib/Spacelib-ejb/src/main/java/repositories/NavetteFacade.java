@@ -80,5 +80,19 @@ public class NavetteFacade extends AbstractFacade<Navette> implements NavetteFac
     public void incrementerVoyage(Navette navette) {
         navette.setProchaineRevision(navette.getProchaineRevision()-1);
     }
+
+    @Override
+    public void passerEnRevision(Navette navette) {
+        navette.setProchaineRevision(-1);
+    }
+
+    @Override
+    public boolean isEnRevision(Navette navette) {
+        if (navette.getProchaineRevision() == -1){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
 }
