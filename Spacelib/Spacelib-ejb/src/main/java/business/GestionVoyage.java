@@ -10,9 +10,9 @@ import entities.Quai;
 import entities.Reservation;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import repositories.NavetteFacade;
-import repositories.QuaiFacade;
-import repositories.ReservationFacade;
+import repositories.NavetteFacadeLocal;
+import repositories.QuaiFacadeLocal;
+import repositories.ReservationFacadeLocal;
 
 /**
  *
@@ -22,13 +22,13 @@ import repositories.ReservationFacade;
 public class GestionVoyage implements GestionVoyageLocal {
 
     @EJB
-    private ReservationFacade reservationFacade;
+    private ReservationFacadeLocal reservationFacade;
     
     @EJB
-    private NavetteFacade navetteFacade;
+    private NavetteFacadeLocal navetteFacade;
     
     @EJB
-    private QuaiFacade quaiFacade;
+    private QuaiFacadeLocal quaiFacade;
     
     @Override
     public void finaliserVoyage(Navette navette, Reservation reservation, Quai quai) {
