@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
@@ -28,6 +29,7 @@ public class Operation implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne(fetch = LAZY)
     private Navette navette;
     
     @Temporal(TIMESTAMP)

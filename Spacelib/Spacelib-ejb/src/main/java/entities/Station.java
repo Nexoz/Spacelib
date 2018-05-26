@@ -30,7 +30,7 @@ public class Station implements Serializable {
     private String position;
     private String nom;
     
-    @OneToMany(fetch = LAZY, mappedBy = "quai")
+    @OneToMany(fetch = LAZY, mappedBy = "station")
     private List<Quai> listeQuais;
 
     public Long getId() {
