@@ -31,18 +31,28 @@ public class GestionVoyage implements GestionVoyageLocal {
     private QuaiFacadeLocal quaiFacade;
     
     @Override
-    public void finaliserVoyage(Navette navette, Reservation reservation, Quai quai) {
-        quaiFacade.arrimer(quai, navette);
-        reservationFacade.voyageAchevé(reservation);
-        navetteFacade.arrimer(navette, quai);
-        navetteFacade.incrementerVoyage(navette);
+    public void finaliserVoyage(long idNavette, long idReservation, long idQuai) {
+        final Navette navette = this.navetteFacade.find(idNavette);
+        final Reservation reservation = this.reservationFacade.find(idReservation);
+        final Quai quai = this.quaiFacade.find(idQuai);
+        if(navette !=null && reservation !=null && quai !=null){
+            quaiFacade.arrimer(quai, navette);
+            reservationFacade.voyageAchevé(reservation);
+            navetteFacade.arrimer(navette, quai);
+            navetteFacade.incrementerVoyage(navette);
+        }
     }
 
     @Override
-    public void reserverNavette(Navette navette, Reservation reservation, Quai quaiDepart) {
-        reservationFacade.quaiDepart(reservation, quaiDepart);
-        reservationFacade.voyageInitié(reservation);
-        navetteFacade.ajouterOperation(navette, reservation);
+    public void reserverNavette(long idNavette, long idReservation, long idQuaiDepart) {
+        final Navette navette = this.navetteFacade.find(idNavette);
+        final Reservation reservation = this.reservationFacade.find(idReservation);
+        final Quai quaiDepart = this.quaiFacade.find(idQuaiDepart);
+        if(navette !=null && reservation !=null && quaiDepart !=null){
+            reservationFacade.quaiDepart(reservation, quaiDepart);
+            reservationFacade.voyageInitié(reservation);
+            navetteFacade.ajouterOperation(navette, reservation);
+        }
     }
 
     // Add business logic below. (Right-click in editor and choose

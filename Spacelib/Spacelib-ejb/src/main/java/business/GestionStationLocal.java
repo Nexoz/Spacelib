@@ -16,5 +16,5 @@ import javax.ejb.Local;
 @Local
 public interface GestionStationLocal {
     List<Station> consulterStation();
-    void ajouterStation(Station station);
+    void ajouterStation(long idStation);
 }

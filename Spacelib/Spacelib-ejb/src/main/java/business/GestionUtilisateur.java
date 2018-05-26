@@ -26,8 +26,12 @@ public class GestionUtilisateur implements GestionUtilisateurLocal {
     }
 
     @Override
-    public long creerCompte(Utilisateur u) {
-        ufl.create(u);
-        return u.getId();
+    public long creerCompte(long idUtilisateur) {
+        final Utilisateur u = this.ufl.find(idUtilisateur);
+        if(u!= null){
+            ufl.create(u);
+            return u.getId();
+        }
+        return -1;
     }
 }

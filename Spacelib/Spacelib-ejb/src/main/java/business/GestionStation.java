@@ -27,7 +27,8 @@ public class GestionStation implements GestionStationLocal {
     }
 
     @Override
-    public void ajouterStation(Station station) {
+    public void ajouterStation(long idStation) {
+        final Station station = this.stationfacade.find(idStation);
         stationfacade.create(station);
     }
 

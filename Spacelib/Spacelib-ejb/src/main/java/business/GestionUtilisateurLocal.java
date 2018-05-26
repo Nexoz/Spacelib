@@ -16,5 +16,5 @@ import javax.ejb.Local;
 public interface GestionUtilisateurLocal {
  
     Utilisateur authentifier(String login, String password);
-    long creerCompte(Utilisateur u);
+    long creerCompte(long idUtilisateur);
 }

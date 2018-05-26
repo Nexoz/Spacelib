@@ -16,6 +16,6 @@ import javax.ejb.Local;
  */
 @Local
 public interface GestionVoyageLocal {
-    void finaliserVoyage(Navette navette, Reservation reservation, Quai quai);
-    void reserverNavette (Navette navette, Reservation reservetion, Quai quaiDepart);
+    void finaliserVoyage(long idNavette, long idReservation, long idQuai);
+    void reserverNavette (long idNavette, long idReservetion, long idQuaiDepart);
 }
