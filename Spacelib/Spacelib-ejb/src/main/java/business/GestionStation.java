@@ -9,7 +9,7 @@ import entities.Station;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import repositories.StationFacade;
+import repositories.StationFacadeLocal;
 
 /**
  *
@@ -19,7 +19,7 @@ import repositories.StationFacade;
 public class GestionStation implements GestionStationLocal {
 
     @EJB
-    private StationFacade stationfacade;
+    private StationFacadeLocal stationfacade;
     
     @Override
     public List<Station> consulterStation() {
