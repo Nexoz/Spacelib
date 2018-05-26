@@ -12,7 +12,7 @@ import java.util.List;
  * @author Pierre
  */
 public interface SpacelibAdminRemote {
-    List<Station> consulterStation();
+   /* List<Station> consulterStation();
     void ajouterStation(Station station);
     void supprimerStation(Station station);
     void ModifierStation(Station station);
@@ -21,7 +21,7 @@ public interface SpacelibAdminRemote {
     void supprimerQuai(Quai quai);
     void acheterNavette (Navette navette, Quai quai);
     void modifierNavette (Navette navette);
-    void supprimerNavette (Navette navette);
+    void supprimerNavette (Navette navette);*/
     
     
 }
