@@ -8,6 +8,9 @@ package business;
 import entities.Navette;
 import entities.Quai;
 import entities.Reservation;
+import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.ReservationInconnuException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import repositories.NavetteFacadeLocal;
@@ -31,28 +34,42 @@ public class GestionVoyage implements GestionVoyageLocal {
     private QuaiFacadeLocal quaiFacade;
     
     @Override
-    public void finaliserVoyage(long idNavette, long idReservation, long idQuai) {
+    public void finaliserVoyage(long idNavette, long idReservation, long idQuai) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException{
         final Navette navette = this.navetteFacade.find(idNavette);
-        final Reservation reservation = this.reservationFacade.find(idReservation);
-        final Quai quai = this.quaiFacade.find(idQuai);
-        if(navette !=null && reservation !=null && quai !=null){
-            quaiFacade.arrimer(quai, navette);
-            reservationFacade.voyageAchevé(reservation);
-            navetteFacade.arrimer(navette, quai);
-            navetteFacade.incrementerVoyage(navette);
+        if (navette == null) {
+            throw new NavetteInconnuException();
         }
+        final Reservation reservation = this.reservationFacade.find(idReservation);
+        if (reservation == null) {
+            throw new ReservationInconnuException();
+        }
+        final Quai quai = this.quaiFacade.find(idQuai);
+        if (quai == null) {
+            throw new QuaiInconnuException();
+        }
+        quaiFacade.arrimer(quai, navette);
+        reservationFacade.voyageAchevé(reservation);
+        navetteFacade.arrimer(navette, quai);
+        navetteFacade.incrementerVoyage(navette);
     }
 
     @Override
-    public void reserverNavette(long idNavette, long idReservation, long idQuaiDepart) {
+    public void reserverNavette(long idNavette, long idReservation, long idQuaiDepart) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException{
         final Navette navette = this.navetteFacade.find(idNavette);
-        final Reservation reservation = this.reservationFacade.find(idReservation);
-        final Quai quaiDepart = this.quaiFacade.find(idQuaiDepart);
-        if(navette !=null && reservation !=null && quaiDepart !=null){
-            reservationFacade.quaiDepart(reservation, quaiDepart);
-            reservationFacade.voyageInitié(reservation);
-            navetteFacade.ajouterOperation(navette, reservation);
+        if (navette == null) {
+            throw new NavetteInconnuException();
         }
+        final Reservation reservation = this.reservationFacade.find(idReservation);
+        if (reservation == null) {
+            throw new ReservationInconnuException();
+        }
+        final Quai quaiDepart = this.quaiFacade.find(idQuaiDepart);
+        if (quaiDepart == null) {
+            throw new QuaiInconnuException();
+        }
+        reservationFacade.quaiDepart(reservation, quaiDepart);
+        reservationFacade.voyageInitié(reservation);
+        navetteFacade.ajouterOperation(navette, reservation);
     }
 
     // Add business logic below. (Right-click in editor and choose

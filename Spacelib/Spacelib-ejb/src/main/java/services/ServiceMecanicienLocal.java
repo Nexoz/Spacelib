@@ -9,6 +9,9 @@ import entities.Mecanicien;
 import entities.Navette;
 import entities.Revision;
 import entities.Station;
+import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.RevisionInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -21,8 +24,8 @@ public interface ServiceMecanicienLocal {
     
     Mecanicien authentifierMecanicien(String login, String password);
     List<Station> getListStations();
-    Revision selectionnerRevision(Long ids, Long idn);
-    List<Navette> listerNavetteAReviser(Long ids);
-    void finaliserRevision(Long idr);
-    List<Revision> getRevisionsEnCours(Long ids);
+    Revision selectionnerRevision(Long ids, Long idn) throws StationInconnuException, NavetteInconnuException ;
+    List<Navette> listerNavetteAReviser(Long ids) throws StationInconnuException;
+    void finaliserRevision(Long idr) throws RevisionInconnuException;
+    List<Revision> getRevisionsEnCours(Long ids)throws StationInconnuException;
 }

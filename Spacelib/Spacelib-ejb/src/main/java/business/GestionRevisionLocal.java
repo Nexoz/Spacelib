@@ -7,7 +7,9 @@ package business;
 
 import entities.Navette;
 import entities.Revision;
-import entities.Station;
+import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.RevisionInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -18,8 +20,8 @@ import javax.ejb.Local;
 @Local
 public interface GestionRevisionLocal {
     
-    Revision selectionnerRevision(Long idStation, Long idNavette);
-    List<Navette> listerNavetteAReviser(Long idStation);
-    void finaliserRevision(Long idRevision);
-    List<Revision> getRevisionsEnCours(Long idStation);
+    Revision selectionnerRevision(Long idStation, Long idNavette) throws StationInconnuException, NavetteInconnuException;
+    List<Navette> listerNavetteAReviser(Long idStation) throws StationInconnuException;
+    void finaliserRevision(Long idRevision) throws RevisionInconnuException;
+    List<Revision> getRevisionsEnCours(Long idStation) throws StationInconnuException;
 }

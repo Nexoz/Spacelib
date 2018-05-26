@@ -5,9 +5,13 @@
  */
 package business;
 
+
 import entities.Navette;
 import entities.Quai;
 import entities.Station;
+import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -37,50 +41,93 @@ public class GestionStation implements GestionStationLocal {
     }
 
     @Override
-    public void ajouterStation(long idStation) {
-        final Station station = this.stationfacade.find(idStation);
-        stationfacade.create(station);
+    public void ajouterStation(long idStation) throws StationInconnuException  {
+        final Station s = stationfacade.find(idStation);
+        if (s == null) {
+            throw new StationInconnuException();
+        }
+        stationfacade.create(s);
     }
 
     @Override
-    public void supprimerStation(Station station) {
-        stationfacade.remove(station);
+    public void supprimerStation(long idStation) throws StationInconnuException{
+        Station s = stationfacade.find(idStation);
+        if (s == null) {
+            throw new StationInconnuException();
+        }
+        stationfacade.remove(s);
     }
 
     @Override
-    public void ModifierStation(Station station) {
-        stationfacade.edit(station);
+    public void ModifierStation(long idStation)  throws StationInconnuException{
+        Station s = stationfacade.find(idStation);
+        if (s == null) {
+            throw new StationInconnuException();
+        }
+        stationfacade.edit(s);
     }
 
     @Override
-    public void ajouterQuai(Station station, Quai quai) {
-        station.getListeQuais().add(quai);
-        stationfacade.edit(station);
+    public void ajouterQuai(long idStation, long idQuai) throws StationInconnuException, QuaiInconnuException{
+        Station s = stationfacade.find(idStation);
+        if (s == null) {
+            throw new StationInconnuException();
+        }
+        Quai quai = quaiFacade.find(idQuai);
+        if (quai == null) {
+            throw new QuaiInconnuException();
+        }
+        s.getListeQuais().add(quai);
+        stationfacade.edit(s);
     }
 
     @Override
-    public void modifierQuai(Quai quai) {
+    public void modifierQuai(long idQuai) throws QuaiInconnuException{
+        Quai quai = quaiFacade.find(idQuai);
+        if (quai == null) {
+            throw new QuaiInconnuException();
+        }
         quaiFacade.edit(quai);
     }
 
     @Override
-    public void supprimerQuai(Quai quai) {
+    public void supprimerQuai(long idQuai) throws QuaiInconnuException{
+        Quai quai = quaiFacade.find(idQuai);
+        if (quai == null) {
+            throw new QuaiInconnuException();
+        }
         quaiFacade.edit(quai);
     }
 
     @Override
-    public void acheterNavette(Navette navette, Quai quai) {
+    public void acheterNavette(long idNavette, long idQuai) throws NavetteInconnuException, QuaiInconnuException{
+        Quai quai = quaiFacade.find(idQuai);
+        if (quai == null) {
+            throw new QuaiInconnuException();
+        }
+        Navette navette = navetteFacade.find(idNavette);
+        if (navette == null) {
+            throw new NavetteInconnuException();
+        }
         navetteFacade.create(navette);
         navetteFacade.arrimer(navette, quai);
     }
 
     @Override
-    public void modifierNavette(Navette navette) {
+    public void modifierNavette(long idNavette) throws NavetteInconnuException{
+        Navette navette = navetteFacade.find(idNavette);
+        if (navette == null) {
+            throw new NavetteInconnuException();
+        }
         navetteFacade.edit(navette);
     }
 
     @Override
-    public void supprimerNavette(Navette navette) {
+    public void supprimerNavette(long idNavette) throws NavetteInconnuException{
+        Navette navette = navetteFacade.find(idNavette);
+        if (navette == null) {
+            throw new NavetteInconnuException();
+        }
         navetteFacade.remove(navette);
     }
 

@@ -13,6 +13,9 @@ import entities.Navette;
 import entities.Revision;
 import entities.Station;
 import entities.Utilisateur;
+import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.RevisionInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -50,22 +53,22 @@ public class ServiceMecanicien implements ServiceMecanicienLocal {
     }
 
     @Override
-    public Revision selectionnerRevision(Long idStation, Long idNavette) {
-        return gestionRevision.selectionnerRevision(idStation,idNavette);
+    public Revision selectionnerRevision(Long idStation, Long idNavette) throws StationInconnuException, NavetteInconnuException {
+        return gestionRevision.selectionnerRevision(idStation, idNavette);
     }
 
     @Override
-    public List<Navette> listerNavetteAReviser(Long idStation) {
+    public List<Navette> listerNavetteAReviser(Long idStation) throws StationInconnuException{
         return gestionRevision.listerNavetteAReviser(idStation);
     }
 
     @Override
-    public void finaliserRevision(Long idRevision) {
+    public void finaliserRevision(Long idRevision)throws RevisionInconnuException {
         gestionRevision.finaliserRevision(idRevision);
     }
 
     @Override
-    public List<Revision> getRevisionsEnCours(Long idStation) {
+    public List<Revision> getRevisionsEnCours(Long idStation) throws StationInconnuException{
         return gestionRevision.getRevisionsEnCours(idStation);
     }
 

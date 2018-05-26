@@ -20,7 +20,5 @@ public interface SpacelibAdminRemote {
     void supprimerQuai(long quai);
     void acheterNavette (long navette, long quai);
     void modifierNavette (long navette);
-    void supprimerNavette (long navette);
-    
-    
+    void supprimerNavette (long navette);  
 }
