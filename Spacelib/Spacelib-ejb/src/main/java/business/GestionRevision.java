@@ -9,19 +9,16 @@ import entities.Navette;
 import entities.Quai;
 import entities.Revision;
 import entities.Station;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import repositories.NavetteFacade;
-import repositories.QuaiFacade;
-import repositories.ReservationFacade;
-import repositories.RevisionFacade;
-import repositories.StationFacade;
+import repositories.NavetteFacadeLocal;
+import repositories.QuaiFacadeLocal;
+import repositories.RevisionFacadeLocal;
+import repositories.StationFacadeLocal;
 
 /**
  *
@@ -31,16 +28,16 @@ import repositories.StationFacade;
 public class GestionRevision implements GestionRevisionLocal {
 
     @EJB
-    private RevisionFacade revisionFacade;
+    private RevisionFacadeLocal revisionFacade;
     
     @EJB
-    private StationFacade stationFacade;
+    private StationFacadeLocal stationFacade;
     
     @EJB
-    private QuaiFacade quaiFacade;
+    private QuaiFacadeLocal quaiFacade;
     
     @EJB
-    private NavetteFacade navetteFacade;
+    private NavetteFacadeLocal navetteFacade;
 
 
     @Override
@@ -71,5 +68,19 @@ public class GestionRevision implements GestionRevisionLocal {
         r.setLibelle("Révision de la navette " + n.getId() + " sur " + s.getNom() + " le " + now.toString());
         Revision res = revisionFacade.debutRevision(r);
         return res;
+    }
+
+    @Override
+    public List<Revision> getRevisionsEnCours(Station s) {
+        List<Quai> quais = stationFacade.getQuais(s);
+        List<Revision> res = new ArrayList<>();
+        for (Quai q : quais) {
+            Navette n = quaiFacade.getNavette(q);
+            if (n != null && navetteFacade.isEnRevision(n)) {
+                // La navette est en cours de révision
+                res.add(revisionFacade.getCurrentRevisionByNavette(n));
+            }
+        }
+        return res; 
     }
 }

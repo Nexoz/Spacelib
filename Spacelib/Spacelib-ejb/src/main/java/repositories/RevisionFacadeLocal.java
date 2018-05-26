@@ -40,4 +40,6 @@ public interface RevisionFacadeLocal {
     boolean estTerminee(Revision r);
     
     Navette getNavette(Revision r);
+    
+    Revision getCurrentRevisionByNavette(Navette n);
 }

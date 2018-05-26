@@ -8,6 +8,8 @@ package repositories;
 import entities.Navette;
 import entities.Revision;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -75,6 +77,17 @@ public class RevisionFacade extends AbstractFacade<Revision> implements Revision
     @Override
     public Navette getNavette(Revision r) {
         return r.getNavette();
+    }
+
+    @Override
+    public Revision getCurrentRevisionByNavette(Navette n) {
+        List<Revision> revi = this.findAll();
+        for (Revision r : revi) {
+            if (Objects.equals(r.getNavette().getId(), n.getId()) && r.getDateFin() != null) {
+                return r;
+            }
+        }
+        return null;
     }
     
 }
