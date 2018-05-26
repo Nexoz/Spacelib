@@ -21,8 +21,8 @@ public interface ServiceMecanicienLocal {
     
     Mecanicien authentifierMecanicien(String login, String password);
     List<Station> getListStations();
-    Revision selectionnerRevision(Station s, Navette n);
-    List<Navette> listerNavetteAReviser(Station s);
-    void finaliserRevision(Revision r);
-    List<Revision> getRevisionsEnCours(Station s);
+    Revision selectionnerRevision(Long ids, Long idn);
+    List<Navette> listerNavetteAReviser(Long ids);
+    void finaliserRevision(Long idr);
+    List<Revision> getRevisionsEnCours(Long ids);
 }

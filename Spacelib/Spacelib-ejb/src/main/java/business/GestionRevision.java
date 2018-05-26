@@ -41,46 +41,62 @@ public class GestionRevision implements GestionRevisionLocal {
 
 
     @Override
-    public List<Navette> listerNavetteAReviser(Station s) {
-        List<Quai> quais = stationFacade.getQuais(s);
-        List<Navette> res = new ArrayList<>();
-        for(Quai q : quais){
-            Navette n = quaiFacade.getNavette(q);
-            if(n != null && navetteFacade.isWaitingRevision(n)){
-                res.add(n);
+    public List<Navette> listerNavetteAReviser(Long idStation) {
+        Station s = stationFacade.find(idStation);
+        if(s != null){
+            List<Quai> quais = stationFacade.getQuais(s);
+            List<Navette> res = new ArrayList<>();
+            for(Quai q : quais){
+                Navette n = quaiFacade.getNavette(q);
+                if(n != null && navetteFacade.isWaitingRevision(n)){
+                    res.add(n);
+                }
             }
+
+            return res;
         }
-        
-        return res;
+        return null;
     }
 
     @Override
-    public void finaliserRevision(Revision r) {
-        revisionFacade.finRevision(r);
-        navetteFacade.resetRevision(revisionFacade.getNavette(r));
+    public void finaliserRevision(Long idRevision) {
+        Revision r = revisionFacade.find(idRevision);
+        if (r != null) {
+            revisionFacade.finRevision(r);
+            navetteFacade.resetRevision(revisionFacade.getNavette(r)); 
+        }
     }
 
     @Override
-    public Revision selectionnerRevision(Station s, Navette n) {
-        Revision r = new Revision();
-        r.setNavette(n); 
-        Calendar now = Calendar.getInstance(Locale.FRENCH);
-        r.setLibelle("Révision de la navette " + n.getId() + " sur " + s.getNom() + " le " + now.toString());
-        Revision res = revisionFacade.debutRevision(r);
-        return res;
+    public Revision selectionnerRevision(Long idStation, Long idNavette) {
+        Station s = stationFacade.find(idStation);
+        Navette n = navetteFacade.find(idNavette);
+        if (s != null && n != null) {
+            Revision r = new Revision();
+            r.setNavette(n); 
+            Calendar now = Calendar.getInstance(Locale.FRENCH);
+            r.setLibelle("Révision de la navette " + n.getId() + " sur " + s.getNom() + " le " + now.toString());
+            Revision res = revisionFacade.debutRevision(r);
+            return res;
+        }
+        return null;
     }
 
     @Override
-    public List<Revision> getRevisionsEnCours(Station s) {
-        List<Quai> quais = stationFacade.getQuais(s);
-        List<Revision> res = new ArrayList<>();
-        for (Quai q : quais) {
-            Navette n = quaiFacade.getNavette(q);
-            if (n != null && navetteFacade.isEnRevision(n)) {
-                // La navette est en cours de révision
-                res.add(revisionFacade.getCurrentRevisionByNavette(n));
+    public List<Revision> getRevisionsEnCours(Long idStation) {
+        Station s = stationFacade.find(idStation);
+        if (s != null) {
+            List<Quai> quais = stationFacade.getQuais(s);
+            List<Revision> res = new ArrayList<>();
+            for (Quai q : quais) {
+                Navette n = quaiFacade.getNavette(q);
+                if (n != null && navetteFacade.isEnRevision(n)) {
+                    // La navette est en cours de révision
+                    res.add(revisionFacade.getCurrentRevisionByNavette(n));
+                }
             }
+            return res; 
         }
-        return res; 
+        return null;
     }
 }

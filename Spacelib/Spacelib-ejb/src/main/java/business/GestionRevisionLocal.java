@@ -18,8 +18,8 @@ import javax.ejb.Local;
 @Local
 public interface GestionRevisionLocal {
     
-    Revision selectionnerRevision(Station s, Navette n);
-    List<Navette> listerNavetteAReviser(Station s);
-    void finaliserRevision(Revision r);
-    List<Revision> getRevisionsEnCours(Station s);
+    Revision selectionnerRevision(Long idStation, Long idNavette);
+    List<Navette> listerNavetteAReviser(Long idStation);
+    void finaliserRevision(Long idRevision);
+    List<Revision> getRevisionsEnCours(Long idStation);
 }

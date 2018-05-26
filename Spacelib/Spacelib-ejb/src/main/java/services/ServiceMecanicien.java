@@ -50,23 +50,23 @@ public class ServiceMecanicien implements ServiceMecanicienLocal {
     }
 
     @Override
-    public Revision selectionnerRevision(Station s, Navette n) {
-        return gestionRevision.selectionnerRevision(s, n);
+    public Revision selectionnerRevision(Long idStation, Long idNavette) {
+        return gestionRevision.selectionnerRevision(idStation,idNavette);
     }
 
     @Override
-    public List<Navette> listerNavetteAReviser(Station s) {
-        return gestionRevision.listerNavetteAReviser(s);
+    public List<Navette> listerNavetteAReviser(Long idStation) {
+        return gestionRevision.listerNavetteAReviser(idStation);
     }
 
     @Override
-    public void finaliserRevision(Revision r) {
-        gestionRevision.finaliserRevision(r);
+    public void finaliserRevision(Long idRevision) {
+        gestionRevision.finaliserRevision(idRevision);
     }
 
     @Override
-    public List<Revision> getRevisionsEnCours(Station s) {
-        return gestionRevision.getRevisionsEnCours(s);
+    public List<Revision> getRevisionsEnCours(Long idStation) {
+        return gestionRevision.getRevisionsEnCours(idStation);
     }
 
     // Add business logic below. (Right-click in editor and choose
