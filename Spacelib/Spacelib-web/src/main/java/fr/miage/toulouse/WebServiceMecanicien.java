@@ -9,11 +9,13 @@ import entities.Mecanicien;
 import entities.Navette;
 import entities.Revision;
 import entities.Station;
+import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.RevisionInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.ejb.Stateless;
-import javax.jws.Oneway;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import services.ServiceMecanicienLocal;
@@ -41,23 +43,22 @@ public class WebServiceMecanicien {
     }
 
     @WebMethod(operationName = "selectionnerRevision")
-    public Revision selectionnerRevision(@WebParam(name = "ids") Long ids, @WebParam(name = "idn") Long idn) {
+    public Revision selectionnerRevision(@WebParam(name = "ids") Long ids, @WebParam(name = "idn") Long idn) throws StationInconnuException, NavetteInconnuException {
         return ejbRef.selectionnerRevision(ids, idn);
     }
 
     @WebMethod(operationName = "listerNavetteAReviser")
-    public List<Navette> listerNavetteAReviser(@WebParam(name = "ids") Long ids) {
+    public List<Navette> listerNavetteAReviser(@WebParam(name = "ids") Long ids) throws StationInconnuException {
         return ejbRef.listerNavetteAReviser(ids);
     }
 
     @WebMethod(operationName = "finaliserRevision")
-    @Oneway
-    public void finaliserRevision(@WebParam(name = "idr") Long idr) {
+    public void finaliserRevision(@WebParam(name = "idr") Long idr) throws RevisionInconnuException {
         ejbRef.finaliserRevision(idr);
     }
 
     @WebMethod(operationName = "getRevisionsEnCours")
-    public List<Revision> getRevisionsEnCours(@WebParam(name = "ids") Long ids) {
+    public List<Revision> getRevisionsEnCours(@WebParam(name = "ids") Long ids) throws StationInconnuException {
         return ejbRef.getRevisionsEnCours(ids);
     }
     
