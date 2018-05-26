@@ -44,4 +44,9 @@ public interface NavetteFacadeLocal {
     void desarrimer (Navette nanette);
     
     void incrementerVoyage (Navette navette);
+    
+    void passerEnRevision(Navette navette);
+    
+    boolean isEnRevision(Navette navette);
+
 }
