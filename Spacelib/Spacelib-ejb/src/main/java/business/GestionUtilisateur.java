@@ -5,7 +5,10 @@
  */
 package business;
 
+import entities.Utilisateur;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import repositories.UtilisateurFacadeLocal;
 
 /**
  *
@@ -14,6 +17,17 @@ import javax.ejb.Stateless;
 @Stateless
 public class GestionUtilisateur implements GestionUtilisateurLocal {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @EJB
+    private UtilisateurFacadeLocal ufl;
+    
+    @Override
+    public Utilisateur authentifier(String login, String password) {
+        return ufl.authentifier(login, password);
+    }
+
+    @Override
+    public long creerCompte(Utilisateur u) {
+        ufl.create(u);
+        return u.getId();
+    }
 }

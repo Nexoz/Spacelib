@@ -5,6 +5,7 @@
  */
 package business;
 
+import entities.Utilisateur;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +14,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface GestionUtilisateurLocal {
-    
+ 
+    Utilisateur authentifier(String login, String password);
+    long creerCompte(Utilisateur u);
 }
