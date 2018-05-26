@@ -3,20 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package business;
+package fr.miage.toulouse.spacelibshared.RMI;
 
-import entities.Navette;
-import entities.Quai;
-import entities.Station;
 import java.util.List;
-import javax.ejb.Local;
 
 /**
  *
- * @author jb
+ * @author Pierre
  */
-@Local
-public interface GestionStationLocal {
+public interface SpacelibAdminRemote {
     List<Station> consulterStation();
     void ajouterStation(Station station);
     void supprimerStation(Station station);
@@ -27,4 +22,6 @@ public interface GestionStationLocal {
     void acheterNavette (Navette navette, Quai quai);
     void modifierNavette (Navette navette);
     void supprimerNavette (Navette navette);
+    
+    
 }
