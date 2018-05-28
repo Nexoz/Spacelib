@@ -7,21 +7,24 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
   <nav class="blue darken-4" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">SpaceLib</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><i class="fas fa-rocket valign-wrapper"></i>SpaceLib</a>
       <ul class="right hide-on-med-and-down">
         <li><a href="#">Acceuil</a></li>
         <li><a href="#">Navettes</a></li>
         <li><a href="#">Révisions</a></li>
       </ul>
 
-      <ul id="nav-mobile" class="sidenav">
+      <ul id="nav-mobile" class="sidenav blue darken-4">
         <li><a href="#">Acceuil</a></li>
+        <li><div class="divider"></li>
         <li><a href="#">Navettes</a></li>
+        <li><div class="divider"></li>
         <li><a href="#">Révisions</a></li>
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -45,15 +48,16 @@
 
 
   <div class="container">
+    <div class="mainrow hide-on-small-only"></div>
     <div class="section">
-        <div class='row mainrow'>
+        <div class='row'>
             <div class='col m6 valign-center'>
               <h4>Bienvenue dans la station Monzbi</h4>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur volutpat odio dolor, vel faucibus massa ullamcorper at. Duis id malesuada tellus, a rhoncus nisi. Vivamus ornare ultrices laoreet. Praesent eros nisi, varius eget ligula vitae, consequat vestibulum diam. Phasellus nisi velit, egestas quis consequat sit amet, posuere id ligula. In malesuada ut lacus non consequat.</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur volutpat odio dolor, vel faucibus massa ullamcorper at. Duis id malesuada tellus, a rhoncus nisi. Vivamus ornare ultrices laoreet. Praesent eros nisi, varius eget ligula vitae, consequat vestibulum diam. Phasellus nisi velit, egestas quis consequat sit amet, posuere id ligula. In malesuada ut lacus non consequat.</p>
             </div>
             <div class='col s12 m5 valign-center offset-m1 buttoncol'>
-              <div class='row'><a class="waves-effect waves-light btn-large hoverable blue darken-4 fill">Choisir une navette à réviser</a></div>     
+              <div class='row'><a class="waves-effect waves-light btn-large hoverable blue darken-4 fill">Choisir une navette</a></div>     
               <div class='row'><a class='waves-effect waves-light btn-large hoverable blue darken-4 fill'>Terminer une révision</a></div>
             </div>
           </div>
@@ -94,18 +98,14 @@
   <footer class="page-footer blue-grey darken-4">
     <div class="container">
       <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">SpaceLib</h5>
+        <div class="col s12">
+          <h5 class="white-text"><i class="fas fa-rocket"></i> SpaceLib</h5>
           <p class="grey-text text-lighten-4">Projet d'Applications d'entreprise de M1 MIAGE réalisé par Pierre Liaubet, Fanny Montuy & Jean-Baptiste Roubelat</p>
-
-
-        </div>
-        
+        </div>     
       </div>
     </div>
     <div class="footer-copyright">
       <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
       </div>
     </div>
   </footer>

@@ -30,3 +30,7 @@ p {
 .buttoncol {
   margin-top: 13vh;
 }
+
+.sidenav li > a {
+  color : white;
+}
