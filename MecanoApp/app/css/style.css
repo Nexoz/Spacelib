@@ -12,3 +12,21 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+
+
+.fill {
+  width: -webkit-fill-available;
+}
+
+.mainrow {
+  margin-top: 10vh;
+}
+
+p {
+  margin-top: 5vh;
+}
+
+.buttoncol {
+  margin-top: 13vh;
+}
