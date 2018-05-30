@@ -9,12 +9,14 @@ import entities.Navette;
 import entities.Quai;
 import entities.Reservation;
 import entities.Station;
+import entities.Usager;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasNavetteDisponibleException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasQuaiDisponibleException;
 import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.ReservationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.UsagerInconnuException;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -23,6 +25,7 @@ import repositories.NavetteFacadeLocal;
 import repositories.QuaiFacadeLocal;
 import repositories.ReservationFacadeLocal;
 import repositories.StationFacadeLocal;
+import repositories.UsagerFacadeLocal;
 
 /**
  *
@@ -43,6 +46,8 @@ public class GestionVoyage implements GestionVoyageLocal {
     @EJB
     private StationFacadeLocal stationFacade;
     
+    @EJB
+    private UsagerFacadeLocal usagerFacade;
     
     @Override
     public void finaliserVoyage(long idNavette, long idReservation, long idQuai) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException{
@@ -64,31 +69,9 @@ public class GestionVoyage implements GestionVoyageLocal {
         navetteFacade.incrementerVoyage(navette);
     }
 
+    
     @Override
-    public void reserverNavette(long idNavette, long idQuaiDepart, long idQuaiArrive) throws NavetteInconnuException,QuaiInconnuException{
-        final Navette navette = this.navetteFacade.find(idNavette);
-        if (navette == null) {
-            throw new NavetteInconnuException();
-        }
-        final Quai quaiDepart = this.quaiFacade.find(idQuaiDepart);
-        if (quaiDepart == null) {
-            throw new QuaiInconnuException();
-        }
-        final Quai quaiArrive = this.quaiFacade.find(idQuaiArrive);
-        if (quaiArrive == null) {
-            throw new QuaiInconnuException();
-        }
-        final Reservation reservation = this.reservationFacade.creerReservation(quaiDepart, quaiArrive);
-        reservationFacade.quaiDepart(reservation, quaiDepart);
-        reservationFacade.voyageInitié(reservation);
-        navetteFacade.ajouterOperation(navette, reservation);
-    }
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-
-    @Override
-    public void realiserVoyage(long idStationD, long idStationA, long nbPassager, Date dateA) throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException {
+    public void reserverVoyage(long idStationD, long idStationA, long nbPassager, Date dateA, long idEmprunteur, Date dateOpe) throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException {
         //Tests d'existences
             final Station stationDepart = this.stationFacade.find(idStationD);
             if (stationDepart == null) {
@@ -98,16 +81,20 @@ public class GestionVoyage implements GestionVoyageLocal {
             if (stationA == null) {
                 throw new StationInconnuException();
             }
+            final Usager emprunteur = this.usagerFacade.find(idEmprunteur);
+            if (emprunteur == null) {
+                throw new UsagerInconnuException();
+            }
         //Tests de disponiblité de la navette
             List<Quai> listQuais = stationFacade.getQuais(stationDepart);
             Navette navDisponible=null;
-            long quaiD=0;
+            Quai quaiD=null;
             Navette nTempo=null;
             for(Quai q : listQuais ){
                 nTempo = q.getNavArrimée();
                 if(nTempo!=null && nTempo.getNbPlaces()>=nbPassager && navetteFacade.isDisponible(nTempo)){
                     navDisponible = q.getNavArrimée();
-                    quaiD = q.getId();
+                    quaiD = q;
                 }
             }
             if(navDisponible == null){
@@ -116,16 +103,25 @@ public class GestionVoyage implements GestionVoyageLocal {
         //Tests Quais Disponibles dans la station d'arrivée
         //////////////////Ajouter le test de la date
             List<Quai> listQuaisArr = stationFacade.getQuais(stationA);
-            long quaiA=0;
+            Quai quaiA=null;
             for(Quai q : listQuaisArr ){
                 if(quaiFacade.isDisponible(q,dateA)){
-                    quaiA = q.getId();
+                    quaiA = q;
                 }
             }
-            if(quaiA==0){
+            if(quaiA==null){
                 throw new PasQuaiDisponibleException();
             }
         //création de la réservation
-        //final Reservation reservation = this.reservationFacade.creerReservation(quaiD, quaiA);
+            final Reservation reservation = this.reservationFacade.creerReservation("voyage initié",quaiD, quaiA, dateA, emprunteur,nbPassager, navDisponible, dateOpe);
+            this.usagerFacade.ajouterReservation(emprunteur, reservation);
+            this.navetteFacade.ajouterOperation(navDisponible, reservation);
     }
+
+    @Override
+    public void demarrerVoyage(long idReservation) throws ReservationInconnuException {
+        //idReservation.
+    }
+    
+    
 }

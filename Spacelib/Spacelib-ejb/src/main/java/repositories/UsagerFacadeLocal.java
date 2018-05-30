@@ -5,6 +5,7 @@
  */
 package repositories;
 
+import entities.Reservation;
 import entities.Usager;
 import java.util.List;
 import javax.ejb.Local;
@@ -29,6 +30,8 @@ public interface UsagerFacadeLocal {
     List<Usager> findRange(int[] range);
 
     int count();
+    
+    void ajouterReservation(Usager usager,Reservation r);
     
    // Usager nouvelUsager( String nom,String prenom, String login, String password);
 }

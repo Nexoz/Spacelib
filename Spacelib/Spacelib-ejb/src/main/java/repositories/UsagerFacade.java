@@ -5,6 +5,7 @@
  */
 package repositories;
 
+import entities.Reservation;
 import entities.Usager;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -34,5 +35,10 @@ public class UsagerFacade extends AbstractFacade<Usager> implements UsagerFacade
         this.create(usager);
         return usager;
     }*/
+
+    @Override
+    public void ajouterReservation(Usager usager, Reservation r) {
+        usager.getListeReservations().add(r);
+    }
     
 }

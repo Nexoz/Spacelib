@@ -5,8 +5,10 @@
  */
 package repositories;
 
+import entities.Navette;
 import entities.Quai;
 import entities.Reservation;
+import entities.Usager;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -60,10 +62,11 @@ public class ReservationFacade extends AbstractFacade<Reservation> implements Re
     }
     
     @Override
-    public Reservation creerReservation(Quai quaiD, Quai quaiA) {
-        Reservation c = new Reservation(quaiD, quaiA);
+    public Reservation creerReservation(String texte, Quai quaiD, Quai quaiA, Date dateA, Usager emprunteur, long nbPassager, Navette navDisponible,Date dateOpe) {
+        Reservation c = new Reservation( texte,  quaiD,  quaiA,  dateA,  emprunteur,  nbPassager,  navDisponible, dateOpe);
         this.create(c);
         return c;
     }
+
     
 }

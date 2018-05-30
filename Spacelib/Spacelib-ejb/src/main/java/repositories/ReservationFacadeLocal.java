@@ -8,6 +8,8 @@ package repositories;
 import entities.Navette;
 import entities.Quai;
 import entities.Reservation;
+import entities.Usager;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -39,8 +41,8 @@ public interface ReservationFacadeLocal {
     void quaiDepart(Reservation r, Quai quai);
     
     void quaiArrivee(Reservation r, Quai quai);
-    
-    Reservation creerReservation(Quai quaiD, Quai quaiA);
+   
+    Reservation creerReservation(String voyage_initié, Quai quaiD, Quai quaiA, Date dateA, Usager idEmprunteur, long nbPassager, Navette navDisponible,Date dateOpe);
     
     
 }
