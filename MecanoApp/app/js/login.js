@@ -1,21 +1,50 @@
 $(document).ready(function() {
 
     var station_select = `
-    <div class='row'>
-        <div class="input-field col m10 offset-m1">
-            <select>
-                <option value="" disabled selected>Choose your option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-            </select>
-            <label>Materialize Select</label>
+    <form id="stationform" action="home.html" class="col m12" method="get">
+        <div class='row'>
+        <div class='col m12'>
+            <h5>Veuillez choisir votre station</h5>
         </div>
-    </div>`;
+        </div>
+
+
+        <div class='row'>
+            <div class="input-field col m10 offset-m1">
+                <select id="station_dropdown">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="1">Sard17</option>
+                    <option value="2">Monzbi</option>
+                    <option value="3">MVtuite</option>
+                </select>
+                <label>Materialize Select</label>
+            </div>
+        </div>
+
+
+        <br />
+        <center>
+        <div class='row'>
+            <button id='submit' name='btn_submit' class='col m10 offset-m1 btn btn-large waves-effect indigo' disabled>Choisir</a>
+        </div>
+        </center>
+    </form>`;
 
     $("#login").click(function (evt) {
         evt.preventDefault();
         $("#form_container").html(station_select);
-        $('select').formSelect();      
+        $('select').formSelect();   
+        $("#station_dropdown").change(function() {
+            console.log($(this).val())
+            if ($(this).val() !== "") {
+                $("#submit").prop("disabled", false);
+            } else {
+                $("#submit").prop("disabled", true);
+            }
+        })
+        $("#submit").click(function () {
+            sessionStorage.setItem('idstation', $("#station_dropdown").val());
+            sessionStorage.setItem('nomstation', $("#station_dropdown :selected").text());
+        })   
     })
 })

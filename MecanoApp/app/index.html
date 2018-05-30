@@ -24,14 +24,15 @@
       <div class="container">
         <div class="z-depth-1 grey lighten-4 row">
 
-          <form class="col m12" method="post">
-            <div class='row'>
-              <div class='col m12'>
-                <h5>Veuillez rentrer vos identifiants</h5>
+          <div id="form_container">
+            <form class="col m12" method="post">
+              <div class='row'>
+                <div class='col m12'>
+                  <h5>Veuillez rentrer vos identifiants</h5>
+                </div>
               </div>
-            </div>
 
-            <div id="form_container">
+
               <div class='row'>
                 <div class='input-field col m10 offset-m1'>
                   <input class='validate' type='email' name='email' id='email' />
@@ -45,15 +46,16 @@
                   <label for='password'>Mot de passe</label>
                 </div>
               </div>
-            </div>
 
-            <br />
-            <center>
-              <div class='row'>
-                <button type='submit' id='login' name='btn_login' class='col m10 offset-m1 btn btn-large waves-effect indigo'>Login</button>
-              </div>
-            </center>
-          </form>
+
+              <br />
+              <center>
+                <div class='row'>
+                  <button type='submit' id='login' name='btn_login' class='col m10 offset-m1 btn btn-large waves-effect indigo'>Login</button>
+                </div>
+              </center>
+            </form>
+          </div>
         </div>
       </div>
     </center>
