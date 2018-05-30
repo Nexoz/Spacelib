@@ -39,6 +39,14 @@ public class Quai implements Serializable {
     public void setNavArrimée(Navette navArrimée) {
         this.navArrimée = navArrimée;
     }
+
+    public Station getStation() {
+        return station;
+    }
+
+    public void setStation(Station station) {
+        this.station = station;
+    }
     
     public Long getId() {
         return id;

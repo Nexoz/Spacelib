@@ -59,4 +59,11 @@ public class ReservationFacade extends AbstractFacade<Reservation> implements Re
         r.setQuaiArrivee(quai);
     }
     
+    @Override
+    public Reservation creerReservation(Quai quaiD, Quai quaiA) {
+        Reservation c = new Reservation(quaiD, quaiA);
+        this.create(c);
+        return c;
+    }
+    
 }

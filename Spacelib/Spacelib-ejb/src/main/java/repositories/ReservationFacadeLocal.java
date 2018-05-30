@@ -40,5 +40,7 @@ public interface ReservationFacadeLocal {
     
     void quaiArrivee(Reservation r, Quai quai);
     
+    Reservation creerReservation(Quai quaiD, Quai quaiA);
+    
     
 }

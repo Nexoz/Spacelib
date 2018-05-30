@@ -23,8 +23,17 @@ public class Reservation extends Operation implements Serializable {
     private Quai quaiDepart;
     
     private Quai quaiArrivee;
+    
+    private Usager emprunteur;
 
-
+    public Reservation() {
+    }
+    
+    public Reservation(Quai quaiDepart, Quai quaiArrivee) {
+        this.quaiDepart = quaiDepart;
+        this.quaiArrivee = quaiArrivee;
+    }
+    
     @Override
     public String toString() {
         return "Réservation " + super.toString();

@@ -49,4 +49,5 @@ public interface NavetteFacadeLocal {
     
     boolean isEnRevision(Navette navette);
 
+    boolean isDisponible(Navette navette);
 }
