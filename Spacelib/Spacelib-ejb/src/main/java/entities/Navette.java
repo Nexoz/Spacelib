@@ -30,10 +30,10 @@ public class Navette implements Serializable {
     private int nbPlaces;
     private int prochaineRevision;
     
-    @OneToOne(fetch = LAZY, mappedBy = "quai")
+    @OneToOne(fetch = LAZY, mappedBy = "navArrimée")
     private Quai quaiArrimage;
     
-    @OneToMany(fetch = LAZY, mappedBy = "operation")
+    @OneToMany(fetch = LAZY, mappedBy = "navette")
     private List<Operation> listeOperations;
     
     public Long getId() {

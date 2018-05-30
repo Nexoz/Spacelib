@@ -1,0 +1,36 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+
+
+.fill {
+  width: -webkit-fill-available;
+}
+
+.mainrow {
+  margin-top: 10vh;
+}
+
+p {
+  margin-top: 5vh;
+}
+
+.buttoncol {
+  margin-top: 13vh;
+}
+
+.sidenav li > a {
+  color : white;
+}

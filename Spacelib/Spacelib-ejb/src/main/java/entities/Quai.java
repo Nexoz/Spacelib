@@ -11,6 +11,7 @@ import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -25,8 +26,11 @@ public class Quai implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @OneToOne(fetch = LAZY, mappedBy = "quai")
+    @OneToOne(fetch = LAZY)
     private Navette navArrimée;
+    
+    @ManyToOne(fetch = LAZY)
+    private Station station;
 
     public Navette getNavArrimée() {
         return navArrimée;
