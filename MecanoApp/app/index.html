@@ -3,34 +3,11 @@
 <head>
   <title>MecApp - SpaceLib</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/index.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/index.css" type="text/css" rel="stylesheet" media="screen,projection" />
   <style>
-    body {
-      display: flex;
-      min-height: 100vh;
-      flex-direction: column;
-    }
-
-    main {
-      flex: 1 0 auto;
-    }
-
-    .input-field input[type=date]:focus + label,
-    .input-field input[type=text]:focus + label,
-    .input-field input[type=email]:focus + label,
-    .input-field input[type=password]:focus + label {
-      color: #e91e63;
-    }
-
-    .input-field input[type=date]:focus,
-    .input-field input[type=text]:focus,
-    .input-field input[type=email]:focus,
-    .input-field input[type=password]:focus {
-      border-bottom: 2px solid #e91e63;
-      box-shadow: none;
-    }
   </style>
 </head>
 
@@ -40,7 +17,8 @@
     <center>
       <div class="section"></div>
 
-      <h5 class="white-text"><i class="fas fa-rocket"></i> SpaceLib - Application Technicien</h5>
+      <h5 class="white-text">
+        <i class="fas fa-rocket"></i> SpaceLib - Application Technicien</h5>
       <div class="section"></div>
 
       <div class="container">
@@ -53,24 +31,26 @@
               </div>
             </div>
 
-            <div class='row'>
-              <div class='input-field col m10 offset-m1'>
-                <input class='validate' type='email' name='email' id='email' />
-                <label for='email'>Identifiant</label>
+            <div id="form_container">
+              <div class='row'>
+                <div class='input-field col m10 offset-m1'>
+                  <input class='validate' type='email' name='email' id='email' />
+                  <label for='email'>Identifiant</label>
+                </div>
               </div>
-            </div>
 
-            <div class='row'>
-              <div class='input-field col m10 offset-m1'>
-                <input class='validate' type='password' name='password' id='password' />
-                <label for='password'>Mot de passe</label>
+              <div class='row'>
+                <div class='input-field col m10 offset-m1'>
+                  <input class='validate' type='password' name='password' id='password' />
+                  <label for='password'>Mot de passe</label>
+                </div>
               </div>
             </div>
 
             <br />
             <center>
               <div class='row'>
-                <button type='submit' name='btn_login' class='col m10 offset-m1 btn btn-large waves-effect indigo'>Login</button>
+                <button type='submit' id='login' name='btn_login' class='col m10 offset-m1 btn btn-large waves-effect indigo'>Login</button>
               </div>
             </center>
           </form>
@@ -84,6 +64,7 @@
 
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
+  <script src="js/login.js"></script>
 </body>
 
 </html>
