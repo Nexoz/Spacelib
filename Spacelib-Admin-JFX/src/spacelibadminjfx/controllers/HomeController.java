@@ -7,12 +7,14 @@ package spacelibadminjfx.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import spacelibadminjfx.SpacelibAdminJFX;
 
 /**
  * FXML Controller class
@@ -52,12 +54,20 @@ public class HomeController implements Initializable {
     @FXML
     private Button saveNavette;
 
-    /**
-     * Initializes the controller class.
-     */
+    private SpacelibAdminJFX mainApp;
+
+    public void setMainApp(SpacelibAdminJFX mainApp) {
+	this.mainApp = mainApp;
+    }
+
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    public void initialize(URL location, ResourceBundle resources) {
+    }
+    
+    @FXML
+    private void nouvelleStation(ActionEvent event) {
+        mainApp.showAjouterStation();
+    }
     
 }
