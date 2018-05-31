@@ -68,10 +68,14 @@ public class QuaiFacade extends AbstractFacade<Quai> implements QuaiFacadeLocal 
     }
 
     @Override
-    public boolean isDisponible(Quai quai,Date dateA) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isDisponible(Quai quai) {
+        return (!this.hasNavette(quai)) && quai.getDateReservation()==null;
     }
-    
+
+    @Override
+    public void reserverQuai(Quai quaiA, Date dateA) {
+       quaiA.setDateReservation(dateA);
+    }
     
     
 }

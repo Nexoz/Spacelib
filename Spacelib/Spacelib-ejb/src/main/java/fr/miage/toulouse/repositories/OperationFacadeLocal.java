@@ -5,7 +5,10 @@
  */
 package fr.miage.toulouse.repositories;
 
+import fr.miage.toulouse.entities.Navette;
 import fr.miage.toulouse.entities.Operation;
+import fr.miage.toulouse.entities.Quai;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -29,5 +32,7 @@ public interface OperationFacadeLocal {
     List<Operation> findRange(int[] range);
 
     int count();
+    
+    Operation creerOperation(String libelle,Quai quai, Navette nav);
     
 }

@@ -5,10 +5,14 @@
  */
 package fr.miage.toulouse.repositories;
 
+import fr.miage.toulouse.entities.Mecanicien;
 import fr.miage.toulouse.entities.Navette;
+import fr.miage.toulouse.entities.Quai;
 import fr.miage.toulouse.entities.Revision;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -90,4 +94,11 @@ public class RevisionFacade extends AbstractFacade<Revision> implements Revision
         return null;
     }
     
+    @Override
+    public Revision creerRevision(String texte, Quai quaiD, Navette navette, Mecanicien mecanicien) {
+        Calendar now = Calendar.getInstance(Locale.FRENCH);
+        Revision c = new Revision( texte,  quaiD, navette, now.getTime(), mecanicien);
+        this.create(c);
+        return c;
+    }
 }

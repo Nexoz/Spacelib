@@ -5,6 +5,7 @@
  */
 package fr.miage.toulouse.business;
 
+import fr.miage.toulouse.entities.Mecanicien;
 import fr.miage.toulouse.entities.Navette;
 import fr.miage.toulouse.entities.Quai;
 import fr.miage.toulouse.entities.Revision;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import fr.miage.toulouse.repositories.MecanicienFacadeLocal;
 import fr.miage.toulouse.repositories.NavetteFacadeLocal;
 import fr.miage.toulouse.repositories.QuaiFacadeLocal;
 import fr.miage.toulouse.repositories.RevisionFacadeLocal;
@@ -41,6 +43,9 @@ public class GestionRevision implements GestionRevisionLocal {
     
     @EJB
     private NavetteFacadeLocal navetteFacade;
+    
+    @EJB
+    private MecanicienFacadeLocal mecanicienFacade;
 
 
     @Override
@@ -72,20 +77,21 @@ public class GestionRevision implements GestionRevisionLocal {
     }
 
     @Override
-    public Revision selectionnerRevision(Long idStation, Long idNavette) throws StationInconnuException, NavetteInconnuException {
-        Station s = stationFacade.find(idStation);
-        if (s == null) {
+    public Revision selectionnerRevision(Long idStation, Long idNavette, Long idMecanicien) throws StationInconnuException, NavetteInconnuException {
+        Station station = stationFacade.find(idStation);
+        if (station == null) {
             throw new StationInconnuException();
         }
-        Navette n = navetteFacade.find(idNavette);
-        if (n == null) {
+        Navette navette = navetteFacade.find(idNavette);
+        if (navette == null) {
             throw new NavetteInconnuException();
         }
-        Revision r = new Revision();
-        r.setNavette(n); 
-        Calendar now = Calendar.getInstance(Locale.FRENCH);
-        r.setLibelle("Révision de la navette " + n.getId() + " sur " + s.getNom() + " le " + now.toString());
-        Revision res = revisionFacade.debutRevision(r);
+        Mecanicien mecanicien = mecanicienFacade.find(idMecanicien);
+        if (mecanicien == null) {
+            throw new NavetteInconnuException();
+        }
+        Revision res = revisionFacade.creerRevision("Révision de la navette " + navette.getId() + " sur " + station.getNom(), navette.getQuaiArrimage(), navette, mecanicien);
+        navetteFacade.ajouterOperation(navette, res);
         return res;
     }
 

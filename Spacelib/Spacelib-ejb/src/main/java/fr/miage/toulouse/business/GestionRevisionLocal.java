@@ -20,7 +20,7 @@ import javax.ejb.Local;
 @Local
 public interface GestionRevisionLocal {
     
-    Revision selectionnerRevision(Long idStation, Long idNavette) throws StationInconnuException, NavetteInconnuException;
+    Revision selectionnerRevision(Long idStation, Long idNavette, Long idMecanicien) throws StationInconnuException, NavetteInconnuException;
     List<Navette> listerNavetteAReviser(Long idStation) throws StationInconnuException;
     void finaliserRevision(Long idRevision) throws RevisionInconnuException;
     List<Revision> getRevisionsEnCours(Long idStation) throws StationInconnuException;

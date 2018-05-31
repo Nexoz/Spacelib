@@ -6,6 +6,7 @@
 package fr.miage.toulouse.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
@@ -36,6 +37,16 @@ public class Quai implements Serializable {
     
     public Quai() {}
 
+    private Date DateReservation =null;
+
+    public Date getDateReservation() {
+        return DateReservation;
+    }
+
+    public void setDateReservation(Date DateReservation) {
+        this.DateReservation = DateReservation;
+    }
+    
     public Navette getNavArrimée() {
         return navArrimée;
     }

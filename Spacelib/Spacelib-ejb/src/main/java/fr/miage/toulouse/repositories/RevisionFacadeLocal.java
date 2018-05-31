@@ -5,8 +5,11 @@
  */
 package fr.miage.toulouse.repositories;
 
+import fr.miage.toulouse.entities.Mecanicien;
 import fr.miage.toulouse.entities.Navette;
+import fr.miage.toulouse.entities.Quai;
 import fr.miage.toulouse.entities.Revision;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -42,4 +45,6 @@ public interface RevisionFacadeLocal {
     Navette getNavette(Revision r);
     
     Revision getCurrentRevisionByNavette(Navette n);
+    
+    Revision creerRevision(String texte, Quai quaiD, Navette navette,Mecanicien mecanicien);
 }

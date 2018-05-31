@@ -21,8 +21,7 @@ public class Reservation extends Operation implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    private Quai quaiDepart;
-    
+
     private Quai quaiArrivee;
     
     private Usager emprunteur;
@@ -30,8 +29,8 @@ public class Reservation extends Operation implements Serializable {
     public Reservation() {
     }
     
-    public Reservation(String texte, Quai quaiD, Quai quaiA, Date dateA, Usager emprunteur, long nbPassager, Navette navDisponible,Date dateOpe) {//String voyage_initié, Quai quaiD, Quai quaiA, Date dateA, long idEmprunteur, long nbPassager, Navette navDisponible
-        this.quaiDepart = quaiD;
+    public Reservation(String texte, Quai quaiDepart, Quai quaiA, Date dateA, Usager emprunteur, long nbPassager, Navette navDisponible,Date dateOpe) {//String voyage_initié, Quai quaiD, Quai quaiA, Date dateA, long idEmprunteur, long nbPassager, Navette navDisponible
+        super.setQuaiOperation(quaiDepart);
         this.quaiArrivee = quaiA;
         this.emprunteur=emprunteur;
         this.setDateOperation(dateOpe);
@@ -44,14 +43,6 @@ public class Reservation extends Operation implements Serializable {
     @Override
     public String toString() {
         return "Réservation " + super.toString();
-    }
-
-    public Quai getQuaiDepart() {
-        return quaiDepart;
-    }
-
-    public void setQuaiDepart(Quai quaiDepart) {
-        this.quaiDepart = quaiDepart;
     }
 
     public Quai getQuaiArrivee() {

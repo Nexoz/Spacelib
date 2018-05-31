@@ -5,10 +5,11 @@
  */
 package fr.miage.toulouse.repositories;
 
+
 import fr.miage.toulouse.entities.Navette;
 import fr.miage.toulouse.entities.Operation;
 import fr.miage.toulouse.entities.Quai;
-import fr.miage.toulouse.entities.Station;
+import fr.miage.toulouse.entities.Revision;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -73,6 +74,7 @@ public class NavetteFacade extends AbstractFacade<Navette> implements NavetteFac
 
     @Override
     public void desarrimer(Navette navette) {
+        navette.getQuaiArrimage().setDateReservation(null);
         navette.setQuaiArrimage(null);
     }
 
@@ -104,5 +106,6 @@ public class NavetteFacade extends AbstractFacade<Navette> implements NavetteFac
     public boolean isDisponible(Navette navette){
         return !isEnRevision(navette) && !isWaitingRevision(navette) && navette.getQuaiArrimage()!=null;
     }
+
     
 }

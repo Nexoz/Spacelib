@@ -40,10 +40,18 @@ public class Operation implements Serializable {
     
     @Temporal(TIMESTAMP)
     private Date dateOperation;
+    
+    private Quai quaiOperation;
 
-    public Operation() {
+    public Operation(){}
+    
+    public Operation(String libelleOp, Quai quai, Navette nav, Date dateope) {
+       this.dateOperation = dateope;
+       this.libelle = libelleOp;
+       this.navette = nav;
+       this.quaiOperation = quai;
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -92,6 +100,14 @@ public class Operation implements Serializable {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    public Quai getQuaiOperation() {
+        return quaiOperation;
+    }
+
+    public void setQuaiOperation(Quai quaiOperation) {
+        this.quaiOperation = quaiOperation;
     }
 
     @Override
