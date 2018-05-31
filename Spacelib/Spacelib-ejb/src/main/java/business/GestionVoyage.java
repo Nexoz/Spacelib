@@ -120,7 +120,14 @@ public class GestionVoyage implements GestionVoyageLocal {
 
     @Override
     public void demarrerVoyage(long idReservation) throws ReservationInconnuException {
-        //idReservation.
+        final Reservation reserv = this.reservationFacade.find(idReservation);
+        if (reserv == null) {
+            throw new ReservationInconnuException();
+        }
+        Navette navette = reserv.getNavette();
+        navetteFacade.desarrimer(navette);
+        Quai quai = reserv.getQuaiDepart();
+        quaiFacade.desarrimer(quai);
     }
     
     
