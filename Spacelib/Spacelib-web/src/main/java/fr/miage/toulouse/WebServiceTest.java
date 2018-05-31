@@ -26,9 +26,9 @@ public class WebServiceTest {
     // "Web Service > Add Operation"
 
     @WebMethod(operationName = "createStation")
-    @Oneway
-    public void createStation(@WebParam(name = "name") String name) {
+    public boolean createStation(@WebParam(name = "name") String name) {
         ejbRef.createStation(name);
+        return true;
     }
     
 }
