@@ -6,10 +6,13 @@
 package fr.miage.toulouse.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -20,12 +23,23 @@ public class Usager extends Utilisateur implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @OneToMany(fetch = LAZY, mappedBy = "emprunteur")
+    private List<Reservation> listeReservations;
+  
     public Usager() {
     }
-  
+    
     @Override
     public String toString() {
         return "entities.Client[ id=" + this.getId() + " ]";
+    }
+
+    public List<Reservation> getListeReservations() {
+        return listeReservations;
+    }
+
+    public void setListeReservations(List<Reservation> listeReservations) {
+        this.listeReservations = listeReservations;
     }
     
 }

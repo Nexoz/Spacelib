@@ -6,6 +6,7 @@
 package fr.miage.toulouse.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,10 +24,23 @@ public class Reservation extends Operation implements Serializable {
     private Quai quaiDepart;
     
     private Quai quaiArrivee;
+    
+    private Usager emprunteur;
 
     public Reservation() {
     }
-
+    
+    public Reservation(String texte, Quai quaiD, Quai quaiA, Date dateA, Usager emprunteur, long nbPassager, Navette navDisponible,Date dateOpe) {//String voyage_initié, Quai quaiD, Quai quaiA, Date dateA, long idEmprunteur, long nbPassager, Navette navDisponible
+        this.quaiDepart = quaiD;
+        this.quaiArrivee = quaiA;
+        this.emprunteur=emprunteur;
+        this.setDateOperation(dateOpe);
+        this.setNavette(navDisponible);
+        this.setLibelle(texte);
+        this.setDateDebut(dateOpe);
+        this.setDateFin(dateA);
+    }
+    
     @Override
     public String toString() {
         return "Réservation " + super.toString();

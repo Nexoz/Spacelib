@@ -7,6 +7,7 @@ package fr.miage.toulouse.repositories;
 
 import fr.miage.toulouse.entities.Navette;
 import fr.miage.toulouse.entities.Quai;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -64,6 +65,11 @@ public class QuaiFacade extends AbstractFacade<Quai> implements QuaiFacadeLocal 
     @Override
     public void desarrimer(Quai quai) {
         quai.setNavArrimée(null);
+    }
+
+    @Override
+    public boolean isDisponible(Quai quai,Date dateA) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

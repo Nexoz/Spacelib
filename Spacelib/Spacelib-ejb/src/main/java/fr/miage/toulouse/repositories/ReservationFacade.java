@@ -7,13 +7,17 @@ package fr.miage.toulouse.repositories;
 
 import fr.miage.toulouse.entities.Quai;
 import fr.miage.toulouse.entities.Reservation;
+import fr.miage.toulouse.entities.Navette;
+import fr.miage.toulouse.entities.Quai;
+import fr.miage.toulouse.entities.Reservation;
+import fr.miage.toulouse.entities.Usager;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
+ * 
  * @author jb
  */
 @Stateless
@@ -58,5 +62,13 @@ public class ReservationFacade extends AbstractFacade<Reservation> implements Re
     public void quaiArrivee(Reservation r, Quai quai) {
         r.setQuaiArrivee(quai);
     }
+    
+    @Override
+    public Reservation creerReservation(String texte, Quai quaiD, Quai quaiA, Date dateA, Usager emprunteur, long nbPassager, Navette navDisponible,Date dateOpe) {
+        Reservation c = new Reservation( texte,  quaiD,  quaiA,  dateA,  emprunteur,  nbPassager,  navDisponible, dateOpe);
+        this.create(c);
+        return c;
+    }
+
     
 }

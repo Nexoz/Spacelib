@@ -6,6 +6,8 @@
 package fr.miage.toulouse.repositories;
 
 import fr.miage.toulouse.entities.Usager;
+import fr.miage.toulouse.entities.Reservation;
+import fr.miage.toulouse.entities.Usager;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,5 +36,10 @@ public class UsagerFacade extends AbstractFacade<Usager> implements UsagerFacade
         this.create(usager);
         return usager;
     }*/
+
+    @Override
+    public void ajouterReservation(Usager usager, Reservation r) {
+        usager.getListeReservations().add(r);
+    }
     
 }

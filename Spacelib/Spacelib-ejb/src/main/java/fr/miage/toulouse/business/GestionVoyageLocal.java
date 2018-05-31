@@ -6,8 +6,13 @@
 package fr.miage.toulouse.business;
 
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.PasNavetteDisponibleException;
+import fr.miage.toulouse.spacelibshared.exceptions.PasQuaiDisponibleException;
 import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.ReservationInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.UsagerInconnuException;
+import java.util.Date;
 import javax.ejb.Local;
 
 /**
@@ -17,5 +22,6 @@ import javax.ejb.Local;
 @Local
 public interface GestionVoyageLocal {
     void finaliserVoyage(long idNavette, long idReservation, long idQuai) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException;
-    void reserverNavette (long idNavette, long idReservetion, long idQuaiDepart)throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException;
+    void reserverVoyage (long idStationD, long idStationA, long nbPassager, Date dateA, long idEmprunteur,Date dateOpe)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException;
+    void demarrerVoyage (long idReservation)throws ReservationInconnuException;
 }

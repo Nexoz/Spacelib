@@ -5,6 +5,7 @@
  */
 package fr.miage.toulouse.repositories;
 
+import fr.miage.toulouse.entities.Reservation;
 import fr.miage.toulouse.entities.Usager;
 import java.util.List;
 import javax.ejb.Local;
@@ -29,6 +30,8 @@ public interface UsagerFacadeLocal {
     List<Usager> findRange(int[] range);
 
     int count();
+    
+    void ajouterReservation(Usager usager,Reservation r);
     
    // Usager nouvelUsager( String nom,String prenom, String login, String password);
 }

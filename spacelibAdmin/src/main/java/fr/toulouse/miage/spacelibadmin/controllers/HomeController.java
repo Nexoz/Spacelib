@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spacelibadminjfx.controllers;
+package fr.toulouse.miage.spacelibadmin.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import fr.toulouse.miage.spacelibadmin.MainApp;
 
 /**
  * FXML Controller class
@@ -52,12 +54,41 @@ public class HomeController implements Initializable {
     @FXML
     private Button saveNavette;
 
-    /**
-     * Initializes the controller class.
-     */
+    private MainApp mainApp;
+
+    public void setMainApp(MainApp mainApp) {
+	this.mainApp = mainApp;
+    }
+
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    public void initialize(URL location, ResourceBundle resources) {
+    }
+    
+    @FXML
+    private void nouvelleStation(ActionEvent event) {
+        mainApp.showAjouterStation();
+    }
+    
+    @FXML
+    private void nouvelleNavette(ActionEvent event) {
+        mainApp.showAjouterNavette();
+    }
+    
+    @FXML
+    private void ajouterQuai(ActionEvent event) {
+        mainApp.showAjouterNavette();
+    }
+    
+    @FXML
+    private void supprimerQuai(ActionEvent event) {
+        mainApp.showAjouterNavette();
+    }
+    
+     @FXML
+    private void saveStation(ActionEvent event) {
+        mainApp.showAjouterNavette();
+    }
+    
     
 }

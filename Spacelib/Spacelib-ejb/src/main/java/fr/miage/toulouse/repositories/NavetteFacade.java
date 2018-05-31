@@ -95,4 +95,14 @@ public class NavetteFacade extends AbstractFacade<Navette> implements NavetteFac
         }
     }
     
+    /**
+     * Une navette est  disponible si elle est à quai dans une station et qu'elle n'est pas en révision
+     * @param navette
+     * @return 
+     */
+    @Override
+    public boolean isDisponible(Navette navette){
+        return !isEnRevision(navette) && !isWaitingRevision(navette) && navette.getQuaiArrimage()!=null;
+    }
+    
 }

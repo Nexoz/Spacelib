@@ -6,4 +6,11 @@
 /Spacelib-Admin-JFX/nbproject/private/
 /Spacelib/Spacelib-ejb/src/main/resources/META-INF/glassfish-resources.xml
 /MecanoApp/node_modules
+<<<<<<< HEAD
 /UserWebApp/node_modules
+=======
+/Spacelib-Admin-JFX/build/
+/Spacelib-Admin-JFX/dist/
+/MecanoApp/nbproject/private/
+/spacelibAdmin/target/
+>>>>>>> 6d6782be6888fb14746e3619577c1c0b79874818

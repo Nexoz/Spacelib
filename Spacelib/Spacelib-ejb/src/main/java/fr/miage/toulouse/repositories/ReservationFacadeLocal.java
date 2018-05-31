@@ -8,6 +8,11 @@ package fr.miage.toulouse.repositories;
 import fr.miage.toulouse.entities.Navette;
 import fr.miage.toulouse.entities.Quai;
 import fr.miage.toulouse.entities.Reservation;
+import fr.miage.toulouse.entities.Navette;
+import fr.miage.toulouse.entities.Quai;
+import fr.miage.toulouse.entities.Reservation;
+import fr.miage.toulouse.entities.Usager;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -39,6 +44,8 @@ public interface ReservationFacadeLocal {
     void quaiDepart(Reservation r, Quai quai);
     
     void quaiArrivee(Reservation r, Quai quai);
+   
+    Reservation creerReservation(String voyage_initié, Quai quaiD, Quai quaiA, Date dateA, Usager idEmprunteur, long nbPassager, Navette navDisponible,Date dateOpe);
     
     
 }

@@ -7,6 +7,7 @@ package fr.miage.toulouse.repositories;
 
 import fr.miage.toulouse.entities.Navette;
 import fr.miage.toulouse.entities.Quai;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -38,5 +39,7 @@ public interface QuaiFacadeLocal {
     boolean hasNavette(Quai quai);
     
     Navette getNavette(Quai quai);
+    
+    boolean isDisponible(Quai quai, Date dateA);
     
 }
