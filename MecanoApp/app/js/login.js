@@ -32,19 +32,27 @@ $(document).ready(function() {
 
     $("#login").click(function (evt) {
         evt.preventDefault();
-        $("#form_container").html(station_select);
-        $('select').formSelect();   
-        $("#station_dropdown").change(function() {
-            console.log($(this).val())
-            if ($(this).val() !== "") {
-                $("#submit").prop("disabled", false);
-            } else {
-                $("#submit").prop("disabled", true);
-            }
-        })
-        $("#submit").click(function () {
-            sessionStorage.setItem('idstation', $("#station_dropdown").val());
-            sessionStorage.setItem('nomstation', $("#station_dropdown :selected").text());
-        })   
+
+        // Call function login qui récupère l'id mecano
+        var login = true;
+        if(login){
+            var idmecano = 1;
+            sessionStorage.setItem('idmecanicien', idmecano);
+
+            $("#form_container").html(station_select);
+            $('select').formSelect();   
+            $("#station_dropdown").change(function() {
+                console.log($(this).val())
+                if ($(this).val() !== "") {
+                    $("#submit").prop("disabled", false);
+                } else {
+                    $("#submit").prop("disabled", true);
+                }
+            })
+            $("#submit").click(function () {
+                sessionStorage.setItem('idstation', $("#station_dropdown").val());
+                sessionStorage.setItem('nomstation', $("#station_dropdown :selected").text());
+            })   
+        }
     })
 })
