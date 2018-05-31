@@ -1,0 +1,59 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+#maincontainer {
+  position : relative;
+  top : -10vh;
+}
+
+.fill {
+  width: -webkit-fill-available;
+}
+
+.responsive-img {
+  margin-top: 2vh;
+}
+
+.mainrow {
+  margin-top: 10vh;
+}
+
+p {
+  margin-top: 5vh;
+}
+
+.buttoncol {
+  margin-top: 13vh;
+}
+
+.sidenav li > a {
+  color : white;
+}
+
+.reserver-form {
+  border-radius: 0.7vh;
+}
+
+.headerrow {
+  margin-top:1vh;
+}
+
+.darriveelabel {
+  margin-top:1vh;
+}
+
+h4 {
+  margin-bottom:4vh;
+}

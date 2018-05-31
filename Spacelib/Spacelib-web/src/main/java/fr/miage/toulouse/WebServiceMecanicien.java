@@ -5,10 +5,10 @@
  */
 package fr.miage.toulouse;
 
-import entities.Mecanicien;
-import entities.Navette;
-import entities.Revision;
-import entities.Station;
+import fr.miage.toulouse.entities.Mecanicien;
+import fr.miage.toulouse.entities.Navette;
+import fr.miage.toulouse.entities.Revision;
+import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.RevisionInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
@@ -18,7 +18,7 @@ import javax.jws.WebService;
 import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import services.ServiceMecanicienLocal;
+import fr.miage.toulouse.services.ServiceMecanicienLocal;
 
 /**
  *
@@ -43,8 +43,8 @@ public class WebServiceMecanicien {
     }
 
     @WebMethod(operationName = "selectionnerRevision")
-    public Revision selectionnerRevision(@WebParam(name = "ids") Long ids, @WebParam(name = "idn") Long idn) throws StationInconnuException, NavetteInconnuException {
-        return ejbRef.selectionnerRevision(ids, idn);
+    public Revision selectionnerRevision(@WebParam(name = "ids") Long ids, @WebParam(name = "idn") Long idn, @WebParam(name = "idm") Long idm) throws StationInconnuException, NavetteInconnuException {
+        return ejbRef.selectionnerRevision(ids, idn, idm);
     }
 
     @WebMethod(operationName = "listerNavetteAReviser")

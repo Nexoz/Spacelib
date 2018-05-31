@@ -2,7 +2,7 @@
   $(function(){
 
     $('.sidenav').sidenav();
-    $("h4").append(' ' + sessionStorage.getItem('nomstation'));
+    $('select').formSelect();
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
