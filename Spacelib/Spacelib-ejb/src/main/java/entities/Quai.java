@@ -26,6 +26,8 @@ public class Quai implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    private String codeQuai;
+    
     @OneToOne(fetch = LAZY)
     private Navette navArrimée;
     
@@ -55,7 +57,16 @@ public class Quai implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getCodeQuai() {
+        return codeQuai;
+    }
+
+    public void setCodeQuai(String codeQuai) {
+        this.codeQuai = codeQuai;
+    }
     
+   
     @Override
     public int hashCode() {
         int hash = 0;
