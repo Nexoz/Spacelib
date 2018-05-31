@@ -5,7 +5,10 @@
  */
 package repositories;
 
+import entities.Navette;
 import entities.Operation;
+import entities.Quai;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -29,5 +32,7 @@ public interface OperationFacadeLocal {
     List<Operation> findRange(int[] range);
 
     int count();
+    
+    Operation creerOperation(String libelle,Quai quai, Navette nav);
     
 }

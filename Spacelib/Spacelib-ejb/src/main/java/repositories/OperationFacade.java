@@ -5,7 +5,12 @@
  */
 package repositories;
 
+import entities.Navette;
 import entities.Operation;
+import entities.Quai;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +34,10 @@ public class OperationFacade extends AbstractFacade<Operation> implements Operat
         super(Operation.class);
     }
     
+    public Operation creerOperation(String libelle,Quai quai,Navette nav){
+        Calendar now = Calendar.getInstance(Locale.FRENCH);
+        Operation operation = new Operation("Révision nécessaire",quai,nav, now.getTime());
+        this.create(operation);
+        return operation;
+    }
 }

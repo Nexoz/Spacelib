@@ -24,7 +24,7 @@ public interface ServiceMecanicienLocal {
     
     Mecanicien authentifierMecanicien(String login, String password);
     List<Station> getListStations();
-    Revision selectionnerRevision(Long ids, Long idn) throws StationInconnuException, NavetteInconnuException ;
+    Revision selectionnerRevision(Long ids, Long idn, Long idm) throws StationInconnuException, NavetteInconnuException ;
     List<Navette> listerNavetteAReviser(Long ids) throws StationInconnuException;
     void finaliserRevision(Long idr) throws RevisionInconnuException;
     List<Revision> getRevisionsEnCours(Long ids)throws StationInconnuException;

@@ -5,8 +5,11 @@
  */
 package repositories;
 
+import entities.Mecanicien;
 import entities.Navette;
+import entities.Quai;
 import entities.Revision;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -42,4 +45,6 @@ public interface RevisionFacadeLocal {
     Navette getNavette(Revision r);
     
     Revision getCurrentRevisionByNavette(Navette n);
+    
+    Revision creerRevision(String texte, Quai quaiD, Navette navette,Mecanicien mecanicien);
 }

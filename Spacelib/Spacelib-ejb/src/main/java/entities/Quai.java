@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
@@ -34,6 +35,16 @@ public class Quai implements Serializable {
     @ManyToOne(fetch = LAZY)
     private Station station;
 
+    private Date DateReservation =null;
+
+    public Date getDateReservation() {
+        return DateReservation;
+    }
+
+    public void setDateReservation(Date DateReservation) {
+        this.DateReservation = DateReservation;
+    }
+    
     public Navette getNavArrimée() {
         return navArrimée;
     }

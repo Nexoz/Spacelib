@@ -8,8 +8,7 @@ package repositories;
 import entities.Navette;
 import entities.Operation;
 import entities.Quai;
-import entities.Station;
-import java.util.List;
+import entities.Revision;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -73,6 +72,7 @@ public class NavetteFacade extends AbstractFacade<Navette> implements NavetteFac
 
     @Override
     public void desarrimer(Navette navette) {
+        navette.getQuaiArrimage().setDateReservation(null);
         navette.setQuaiArrimage(null);
     }
 
@@ -104,5 +104,6 @@ public class NavetteFacade extends AbstractFacade<Navette> implements NavetteFac
     public boolean isDisponible(Navette navette){
         return !isEnRevision(navette) && !isWaitingRevision(navette) && navette.getQuaiArrimage()!=null;
     }
+
     
 }

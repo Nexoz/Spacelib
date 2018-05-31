@@ -53,8 +53,8 @@ public class ServiceMecanicien implements ServiceMecanicienLocal {
     }
 
     @Override
-    public Revision selectionnerRevision(Long idStation, Long idNavette) throws StationInconnuException, NavetteInconnuException {
-        return gestionRevision.selectionnerRevision(idStation, idNavette);
+    public Revision selectionnerRevision(Long idStation, Long idNavette, Long idMecanicien) throws StationInconnuException, NavetteInconnuException {
+        return gestionRevision.selectionnerRevision(idStation, idNavette,idMecanicien);
     }
 
     @Override

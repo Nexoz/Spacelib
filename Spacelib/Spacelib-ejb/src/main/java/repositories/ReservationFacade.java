@@ -40,6 +40,7 @@ public class ReservationFacade extends AbstractFacade<Reservation> implements Re
     @Override
     public void voyageAchevé(Reservation r) {
         r.setDateFin(new Date());
+        r.setLibelle("Voyage achevé");
     }
 
     /**
@@ -53,7 +54,7 @@ public class ReservationFacade extends AbstractFacade<Reservation> implements Re
 
     @Override
     public void quaiDepart(Reservation r,Quai quai) {
-        r.setQuaiDepart(quai);
+        r.setQuaiOperation(quai);
     }
 
     @Override

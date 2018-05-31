@@ -22,6 +22,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import repositories.NavetteFacadeLocal;
+import repositories.OperationFacadeLocal;
 import repositories.QuaiFacadeLocal;
 import repositories.ReservationFacadeLocal;
 import repositories.StationFacadeLocal;
@@ -48,6 +49,9 @@ public class GestionVoyage implements GestionVoyageLocal {
     
     @EJB
     private UsagerFacadeLocal usagerFacade;
+    
+    @EJB
+    private OperationFacadeLocal operationFacade;
     
     /***
      * Effectue les taches necessaires à l'arrivée d'une navette 
@@ -76,6 +80,11 @@ public class GestionVoyage implements GestionVoyageLocal {
         reservationFacade.voyageAchevé(reservation);
         navetteFacade.arrimer(navette, quai);
         navetteFacade.incrementerVoyage(navette);
+        
+        if(navette.getProchaineRevision()==0){
+            navetteFacade.ajouterOperation(navette, operationFacade.creerOperation("Révision nécessaire", quai, navette));
+        }
+        
     }
 
     /***
@@ -127,7 +136,7 @@ public class GestionVoyage implements GestionVoyageLocal {
             List<Quai> listQuaisArr = stationFacade.getQuais(stationA);
             Quai quaiA=null;
             for(Quai q : listQuaisArr ){
-                if(quaiFacade.isDisponible(q,dateA)){
+                if(quaiFacade.isDisponible(q)){
                     quaiA = q;
                 }
             }
@@ -138,6 +147,7 @@ public class GestionVoyage implements GestionVoyageLocal {
             Reservation reservation = this.reservationFacade.creerReservation("Voyage enregistré",quaiD, quaiA, dateA, emprunteur,nbPassager, navDisponible, dateOpe);
             this.usagerFacade.ajouterReservation(emprunteur, reservation);
             this.navetteFacade.ajouterOperation(navDisponible, reservation);
+            this.quaiFacade.reserverQuai(quaiA,dateA);
     }
 
     /***
@@ -147,7 +157,6 @@ public class GestionVoyage implements GestionVoyageLocal {
      */
     @Override
     public void demarrerVoyage(long idReservation) throws ReservationInconnuException {
-
         final Reservation reserv = this.reservationFacade.find(idReservation);
         if (reserv == null) {
             throw new ReservationInconnuException();
@@ -155,8 +164,8 @@ public class GestionVoyage implements GestionVoyageLocal {
         Navette navette = navetteFacade.find(reserv.getNavette());
         navetteFacade.desarrimer(navette);
         Quai quai = quaiFacade.find(navette.getQuaiArrimage());
+        quaiFacade.desarrimer(quai);
         reservationFacade.voyageInitié(reserv);
-
     }
     
     

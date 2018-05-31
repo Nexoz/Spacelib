@@ -40,6 +40,8 @@ public interface QuaiFacadeLocal {
     
     Navette getNavette(Quai quai);
     
-    boolean isDisponible(Quai quai, Date dateA);
+    boolean isDisponible(Quai quai);
+
+    public void reserverQuai(Quai quaiA, Date dateA);
     
 }
