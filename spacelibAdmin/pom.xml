@@ -104,5 +104,16 @@
             </plugin>
         </plugins>
     </build>
-
+    <dependencies>
+        <dependency>
+            <groupId>fr.miage.toulouse</groupId>
+            <artifactId>SpacelibShared</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.main.appclient</groupId>
+            <artifactId>gf-client</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+    </dependencies>
 </project>
