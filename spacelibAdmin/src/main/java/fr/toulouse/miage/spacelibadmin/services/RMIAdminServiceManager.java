@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.toulouse.miage.spacelibadmin;
+package fr.toulouse.miage.spacelibadmin.services;
 
 import fr.miage.toulouse.spacelibshared.RMI.SpacelibAdminRemote;
 import java.util.Properties;
@@ -24,7 +24,7 @@ public class RMIAdminServiceManager {
 
     public RMIAdminServiceManager() throws NamingException {
         this.initJndi();
-        this.retrieveRemoteServicesCollaborateurs();
+        this.retrieveRemoteServicesAdmin();
     }
 
     private void initJndi() throws NamingException {
@@ -35,11 +35,11 @@ public class RMIAdminServiceManager {
         this.namingContext = new InitialContext(jNDIProperties);
     }
 
-    private void retrieveRemoteServicesCollaborateurs() throws NamingException {
+    private void retrieveRemoteServicesAdmin() throws NamingException {
         this.splacelibAdmin = (SpacelibAdminRemote) this.namingContext.lookup(SERVICES_ADMIN_EJB_URI);
     }
 
-    public SpacelibAdminRemote getCollabRemoteSvc() {
+    public SpacelibAdminRemote getAdminRemoteSvc() {
         return splacelibAdmin;
     }
 }

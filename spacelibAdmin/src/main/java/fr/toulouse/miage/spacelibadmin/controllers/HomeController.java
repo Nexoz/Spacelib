@@ -15,6 +15,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import fr.toulouse.miage.spacelibadmin.MainApp;
+import fr.toulouse.miage.spacelibadmin.services.RMIAdminServiceManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.ObservableList;
+import javax.naming.NamingException;
 
 /**
  * FXML Controller class
@@ -23,6 +28,8 @@ import fr.toulouse.miage.spacelibadmin.MainApp;
  */
 public class HomeController implements Initializable {
 
+    RMIAdminServiceManager manager;
+    
     @FXML
     private Button addStation;
     @FXML
@@ -63,6 +70,12 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            manager = new RMIAdminServiceManager();
+        } catch (NamingException ex) {
+            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        lesStations.setItems((ObservableList) manager.getAdminRemoteSvc().consulterStation());
     }
     
     @FXML
