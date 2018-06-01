@@ -5,7 +5,9 @@
  */
 package fr.miage.toulouse.business;
 
+import fr.miage.toulouse.entities.Mecanicien;
 import fr.miage.toulouse.entities.Utilisateur;
+import fr.miage.toulouse.repositories.MecanicienFacadeLocal;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import fr.miage.toulouse.repositories.UtilisateurFacadeLocal;
@@ -20,6 +22,9 @@ public class GestionUtilisateur implements GestionUtilisateurLocal {
     @EJB
     private UtilisateurFacadeLocal ufl;
     
+    @EJB
+    private MecanicienFacadeLocal mfl;
+    
     @Override
     public Utilisateur authentifier(String login, String password) {
         return ufl.authentifier(login, password);
@@ -33,5 +38,12 @@ public class GestionUtilisateur implements GestionUtilisateurLocal {
             return u.getId();
         }
         return -1;
+    }
+
+    @Override
+    public long creerMecanicien(String nom, String prenom, String login, String password) {
+        Mecanicien m = new Mecanicien(nom, prenom, login, password);
+        mfl.create(m);
+        return m.getId();
     }
 }

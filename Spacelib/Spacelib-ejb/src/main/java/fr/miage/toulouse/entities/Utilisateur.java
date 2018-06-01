@@ -23,10 +23,10 @@ public class Utilisateur implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String nom;
-    private String prenom;
-    private String login;
-    private String password;
+    protected String nom;
+    protected String prenom;
+    protected String login;
+    protected String password;
 
     public Utilisateur() {
     }
