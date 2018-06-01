@@ -23,6 +23,13 @@ public class Mecanicien extends Utilisateur implements Serializable {
     public Mecanicien() {
     }
     
+    public Mecanicien(String nom, String prenom, String login, String password) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.login = login;
+        this.password = password;
+    }
+    
     @Override
     public String toString() {
         return "entities.Mechanician[ id=" + this.getId() + " ]";
