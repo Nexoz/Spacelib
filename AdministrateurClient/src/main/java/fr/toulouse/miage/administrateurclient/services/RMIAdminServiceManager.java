@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.toulouse.miage.spacelibadmin.services;
+package fr.toulouse.miage.administrateurclient.services;
 
 import fr.miage.toulouse.spacelibshared.RMI.SpacelibAdminRemote;
 import java.util.Properties;
