@@ -34,6 +34,38 @@ $(document).ready(function() {
         evt.preventDefault();
 
         // Call function login qui récupère l'id mecano
+        $.soap({
+            beforeSend: function(SOAPEnvelope) {
+                console.log(SOAPEnvelope.toString());
+            },
+            HTTPHeaders: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            envAttributes: {
+                'xmlns:toul': "http://toulouse.miage.fr/"
+            },
+            url : "http://localhost:8080/WebServiceMecanicien/WebServiceMecanicien?WSDL",
+            noPrefix : false,
+            appendMethodToURL : false,
+            method : "toul:authentifierMecanicien",
+            data : {
+                login : "mistermv",
+                password : "monzbi"
+            },
+
+            success: function (soapResponse) {
+                console.log(soapResponse.toJSON())
+                // do stuff with soapResponse
+                // if you want to have the response as JSON use soapResponse.toJSON();
+                // or soapResponse.toString() to get XML string
+                // or soapResponse.toXML() to get XML DOM
+            },
+            error: function (SOAPResponse) {
+                // show error
+            }
+        })
+
+        /*
         var login = true;
         if(login){
             var idmecano = 1;
@@ -53,6 +85,6 @@ $(document).ready(function() {
                 sessionStorage.setItem('idstation', $("#station_dropdown").val());
                 sessionStorage.setItem('nomstation', $("#station_dropdown :selected").text());
             })   
-        }
+        }*/
     })
 })
