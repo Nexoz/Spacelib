@@ -7,6 +7,7 @@ package fr.miage.toulouse.services;
 
 import fr.miage.toulouse.business.GestionStation;
 import fr.miage.toulouse.business.GestionStationLocal;
+import fr.miage.toulouse.entities.Station;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -23,5 +24,12 @@ public class ServiceTest implements ServiceTestLocal {
     @Override
     public void createStation(String name) {
         gestStation.ajouterStation(name, "");
+    } 
+    
+    @Override
+    public Station getStationById(Long ids) {
+        return gestStation.getStationById(ids);
     }
+    
+    
 }

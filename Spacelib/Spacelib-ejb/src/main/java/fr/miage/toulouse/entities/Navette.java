@@ -6,6 +6,7 @@
 package fr.miage.toulouse.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
@@ -14,12 +15,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author jb
  */
 @Entity
+@XmlRootElement(name="navette")
 public class Navette implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,6 +76,7 @@ public class Navette implements Serializable {
         this.quaiArrimage = quaiArrimage;
     }
 
+    @XmlElement(name="operations")
     public List<Operation> getListeOperations() {
         return listeOperations;
     }

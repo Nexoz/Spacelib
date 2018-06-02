@@ -5,6 +5,7 @@
  */
 package fr.miage.toulouse.services;
 
+import fr.miage.toulouse.entities.Station;
 import javax.ejb.Local;
 
 /**
@@ -15,4 +16,5 @@ import javax.ejb.Local;
 public interface ServiceTestLocal {
     
     void createStation(String name);
+    Station getStationById(Long ids);
 }

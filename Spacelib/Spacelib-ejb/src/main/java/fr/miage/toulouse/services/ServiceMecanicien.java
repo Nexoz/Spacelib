@@ -16,6 +16,8 @@ import fr.miage.toulouse.entities.Utilisateur;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.RevisionInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

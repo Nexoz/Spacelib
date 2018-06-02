@@ -14,12 +14,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author jb
  */
 @Entity
+@XmlRootElement(name="station")
 public class Station implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,6 +69,7 @@ public class Station implements Serializable {
         this.nom = nom;
     }
 
+    @XmlElement(name="quais")
     public List<Quai> getListeQuais() {
         return listeQuais;
     }

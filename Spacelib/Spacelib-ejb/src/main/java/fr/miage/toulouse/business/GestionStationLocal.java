@@ -28,4 +28,5 @@ public interface GestionStationLocal {
     void acheterNavette (long idNavette, long idQuai)throws NavetteInconnuException, QuaiInconnuException;
     void modifierNavette (long idNavette)throws NavetteInconnuException;
     void supprimerNavette (long idNavette)throws NavetteInconnuException;
+    Station getStationById(long idStation);
 }

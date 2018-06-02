@@ -128,5 +128,10 @@ public class GestionStation implements GestionStationLocal {
         }
         navetteFacade.remove(navette);
     }
+    
+    @Override
+    public Station getStationById(long idStation) {
+        return stationfacade.find(idStation);
+    }
 
 }

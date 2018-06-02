@@ -19,12 +19,17 @@ import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import fr.miage.toulouse.services.ServiceMecanicienLocal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.jws.soap.SOAPBinding;
+import javax.jws.soap.SOAPBinding.Style;
 
 /**
  *
  * @author jb
  */
 @WebService(serviceName = "WebServiceMecanicien")
+@SOAPBinding(style = Style.RPC) 
 @Stateless()
 public class WebServiceMecanicien {
 
@@ -38,8 +43,11 @@ public class WebServiceMecanicien {
     }
 
     @WebMethod(operationName = "getListStations")
-    public List<Station> getListStations() {
-        return ejbRef.getListStations();
+    public ListWrapper<Station> getListStations() {
+        List<Station> a = ejbRef.getListStations();
+        ListWrapper<Station> w = new ListWrapper<>();
+        w.setList(a);
+        return w;
     }
 
     @WebMethod(operationName = "selectionnerRevision")
@@ -47,9 +55,13 @@ public class WebServiceMecanicien {
         return ejbRef.selectionnerRevision(ids, idn, idm);
     }
 
+    
     @WebMethod(operationName = "listerNavetteAReviser")
-    public List<Navette> listerNavetteAReviser(@WebParam(name = "ids") Long ids) throws StationInconnuException {
-        return ejbRef.listerNavetteAReviser(ids);
+    public ListWrapper<Navette> listerNavetteAReviser(@WebParam(name = "ids") Long ids) throws StationInconnuException {
+        List<Navette> a = ejbRef.listerNavetteAReviser(ids);
+        ListWrapper<Navette> w = new ListWrapper<>();
+        w.setList(a);
+        return w;
     }
 
     @WebMethod(operationName = "finaliserRevision")
@@ -58,8 +70,11 @@ public class WebServiceMecanicien {
     }
 
     @WebMethod(operationName = "getRevisionsEnCours")
-    public List<Revision> getRevisionsEnCours(@WebParam(name = "ids") Long ids) throws StationInconnuException {
-        return ejbRef.getRevisionsEnCours(ids);
+    public ListWrapper<Revision> getRevisionsEnCours(@WebParam(name = "ids") Long ids) throws StationInconnuException {
+        List<Revision> a = ejbRef.getRevisionsEnCours(ids);
+        ListWrapper<Revision> w = new ListWrapper<>();
+        w.setList(a);
+        return w;
     }
     
 }

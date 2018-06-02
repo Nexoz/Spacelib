@@ -12,6 +12,7 @@ import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.RevisionInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Local;
 
