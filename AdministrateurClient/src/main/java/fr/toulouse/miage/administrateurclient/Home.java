@@ -6,6 +6,7 @@
 package fr.toulouse.miage.administrateurclient;
 
 import fr.toulouse.miage.administrateurclient.services.RMIAdminServiceManager;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -23,8 +24,17 @@ public class Home extends javax.swing.JPanel {
      * Creates new form Home
      */
     public Home() {
-        
+        try {
+            manager = new RMIAdminServiceManager();
+        } catch (NamingException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
+        listeStations.removeAll();
+        List stations = manager.getAdminRemoteSvc().consulterStation();
+        for (Object station : stations) {
+            listeStations.add("" + station);
+        }
     }
 
     /**
@@ -383,7 +393,6 @@ public class Home extends javax.swing.JPanel {
         jLabel8.setText("Password : ");
 
         TFPassword.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        TFPassword.setText("jPasswordField1");
         TFPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TFPasswordActionPerformed(evt);
