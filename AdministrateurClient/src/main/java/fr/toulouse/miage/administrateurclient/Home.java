@@ -33,7 +33,7 @@ public class Home extends javax.swing.JPanel {
         listeStations.removeAll();
         List stations = manager.getAdminRemoteSvc().consulterStation();
         for (Object station : stations) {
-            listeStations.add("" + station);
+            //listeStations.add("" + station);
         }
     }
 

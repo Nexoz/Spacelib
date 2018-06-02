@@ -57,10 +57,5 @@ public class ServiceBorneRMI implements SpacelibBorneRemote{
     public List consulterStation() {
         return gestionStation.consulterStation();
     }
-
-    @Override
-    public Utilisateur authentifier(String login, String password) {
-       return gestionUtilisateur.authentifier(login, password);
-    }
     
 }
