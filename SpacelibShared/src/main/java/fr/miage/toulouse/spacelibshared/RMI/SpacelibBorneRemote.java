@@ -5,7 +5,6 @@
  */
 package fr.miage.toulouse.spacelibshared.RMI;
 
-import fr.miage.toulouse.entities.Utilisateur;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasNavetteDisponibleException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasQuaiDisponibleException;
@@ -27,5 +26,5 @@ public interface SpacelibBorneRemote {
     void reserverVoyage (long idStationD, long idStationA, long nbPassager, Date dateA, long idEmprunteur,Date dateOpe)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException;
     void demarrerVoyage (long idReservation)throws ReservationInconnuException;
     List consulterStation() ;
-    Utilisateur authentifier(String login, String password);
+    //Utilisateur authentifier(String login, String password);
 }

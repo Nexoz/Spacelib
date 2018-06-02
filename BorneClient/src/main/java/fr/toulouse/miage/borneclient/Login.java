@@ -165,13 +165,7 @@ public class Login extends javax.swing.JPanel {
 
     private void jButtonValiderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValiderMouseClicked
         
-        Utilisateur utilisateur = manager.getBorneRemoteSvc().authentifier(jTextFieldlogin.getText(),jPasswordField.getText());
-        if(utilisateur==null){
-            jLabelErreur.setText("Erreur : Vos identifiants sont incorrects !");
-            this.repaint();
-        } else {
-            jframeAccueil.changerJpanel(this, new ReserverNavette(jframeAccueil));
-        }
+       
       
     }//GEN-LAST:event_jButtonValiderMouseClicked
 
