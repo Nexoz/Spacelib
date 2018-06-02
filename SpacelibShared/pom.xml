@@ -7,6 +7,12 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
+            <groupId>fr.miage.toulouse</groupId>
+            <artifactId>Spacelib-ejb</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>

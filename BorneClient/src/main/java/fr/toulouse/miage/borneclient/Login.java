@@ -5,17 +5,25 @@
  */
 package fr.toulouse.miage.borneclient;
 
+import fr.miage.toulouse.entities.Utilisateur;
+import fr.toulouse.miage.borneclient.services.RMIBorneServiceManager;
+
 /**
  *
  * @author pierreliaubet
  */
 public class Login extends javax.swing.JPanel {
 
+    BorneClient jframeAccueil;
+    private RMIBorneServiceManager manager;
+    
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Login(BorneClient j, RMIBorneServiceManager m) {
         initComponents();
+        jframeAccueil = j;
+        manager = m;
     }
 
     /**
@@ -27,19 +35,158 @@ public class Login extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jPanel5 = new javax.swing.JPanel();
+        jPanelTop = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanelCenter = new javax.swing.JPanel();
+        jLabellogin = new javax.swing.JLabel();
+        jTextFieldlogin = new javax.swing.JTextField();
+        jLabelPassword = new javax.swing.JLabel();
+        jPasswordField = new javax.swing.JPasswordField();
+        jButtonValider = new javax.swing.JButton();
+        jLabelErreur = new javax.swing.JLabel();
+        jPanelBot = new javax.swing.JPanel();
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(700, 700));
+        setLayout(new java.awt.BorderLayout());
+
+        jPanelTop.setBackground(new java.awt.Color(0, 0, 51));
+        jPanelTop.setMinimumSize(new java.awt.Dimension(168, 60));
+        jPanelTop.setPreferredSize(new java.awt.Dimension(241, 90));
+
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("WELCOME to Spacelib");
+        jLabel1.setToolTipText("");
+        jPanelTop.add(jLabel1);
+
+        add(jPanelTop, java.awt.BorderLayout.PAGE_START);
+
+        jPanelCenter.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabellogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabellogin.setText("Login");
+
+        jTextFieldlogin.setText("Login");
+        jTextFieldlogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldloginActionPerformed(evt);
+            }
+        });
+
+        jLabelPassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelPassword.setText("Password");
+
+        jPasswordField.setText("jPasswordField1");
+
+        jButtonValider.setBackground(new java.awt.Color(0, 0, 51));
+        jButtonValider.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonValider.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonValider.setText("Valider");
+        jButtonValider.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButtonValider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonValiderMouseClicked(evt);
+            }
+        });
+        jButtonValider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValiderActionPerformed(evt);
+            }
+        });
+
+        jLabelErreur.setForeground(new java.awt.Color(255, 0, 0));
+
+        javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
+        jPanelCenter.setLayout(jPanelCenterLayout);
+        jPanelCenterLayout.setHorizontalGroup(
+            jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                        .addComponent(jLabelErreur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelPassword)
+                            .addComponent(jLabellogin))
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldlogin)
+                            .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(119, Short.MAX_VALUE))
+        );
+        jPanelCenterLayout.setVerticalGroup(
+            jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabellogin)
+                    .addComponent(jTextFieldlogin, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelPassword))
+                .addGap(33, 33, 33)
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonValider, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jLabelErreur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
+        );
+
+        add(jPanelCenter, java.awt.BorderLayout.CENTER);
+
+        jPanelBot.setBackground(new java.awt.Color(255, 255, 255));
+        add(jPanelBot, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextFieldloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldloginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldloginActionPerformed
+
+    private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed
+        
+    }//GEN-LAST:event_jButtonValiderActionPerformed
+
+    private void jButtonValiderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValiderMouseClicked
+        
+        Utilisateur utilisateur = manager.getBorneRemoteSvc().authentifier(jTextFieldlogin.getText(),jPasswordField.getText());
+        if(utilisateur==null){
+            jLabelErreur.setText("Erreur : Vos identifiants sont incorrects !");
+            this.repaint();
+        } else {
+            jframeAccueil.changerJpanel(this, new ReserverNavette(jframeAccueil));
+        }
+      
+    }//GEN-LAST:event_jButtonValiderMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonValider;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelErreur;
+    private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JLabel jLabellogin;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanelBot;
+    private javax.swing.JPanel jPanelCenter;
+    private javax.swing.JPanel jPanelTop;
+    private javax.swing.JPasswordField jPasswordField;
+    private javax.swing.JTextField jTextFieldlogin;
     // End of variables declaration//GEN-END:variables
 }
