@@ -17,7 +17,7 @@ import javax.naming.NamingException;
 public class RMIBorneServiceManager {
     private final static String GLASSFISH_ORB_HOST = "localhost";
     private final static String GLASSFISH_ORB_PORT = "3700";
-    private final static String SERVICES_BORNE_EJB_URI = "java:global/Spacelib-ear/Spacelib-ejb-1.0-SNAPSHOT/ServiceBorneRMI, java:global/Spacelib-ear/Spacelib-ejb-1.0-SNAPSHOT/ServiceBorneRMI!fr.miage.toulouse.spacelibshared.RMI.SpacelibBorneRemote";
+    private final static String SERVICES_BORNE_EJB_URI = "java:global/Spacelib-ear/Spacelib-ejb-1.0-SNAPSHOT/ServiceBorneRMI!fr.miage.toulouse.spacelibshared.RMI.SpacelibBorneRemote";
 
     private InitialContext namingContext;
     private SpacelibBorneRemote splacelibBorne;
