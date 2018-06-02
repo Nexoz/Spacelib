@@ -9,6 +9,7 @@ import fr.toulouse.miage.administrateurclient.services.RMIAdminServiceManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.swing.JFrame;
 
 /**
  *
@@ -22,11 +23,7 @@ public class Home extends javax.swing.JPanel {
      * Creates new form Home
      */
     public Home() {
-        try {
-            manager = new RMIAdminServiceManager();
-        } catch (NamingException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         initComponents();
     }
 
@@ -129,6 +126,11 @@ public class Home extends javax.swing.JPanel {
         btnDelStation.setText("-");
 
         btnAddQuai.setText("+");
+        btnAddQuai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddQuaiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -467,15 +469,24 @@ public class Home extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStationActionPerformed
-        // TODO add your handling code here:
+        JFrame newStation = new JFrame();
+        newStation.add(new NewStation(newStation));
+        newStation.pack();
+        newStation.setVisible(true);
     }//GEN-LAST:event_btnAddStationActionPerformed
 
     private void btnAddNavetteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNavetteActionPerformed
-        // TODO add your handling code here:
+        JFrame newNavette = new JFrame();
+        newNavette.add(new NewNavette(newNavette));
+        newNavette.pack();
+        newNavette.setVisible(true);
     }//GEN-LAST:event_btnAddNavetteActionPerformed
 
     private void btnAddMecanicienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMecanicienActionPerformed
-        // TODO add your handling code here:
+        JFrame newMecano = new JFrame();
+        newMecano.add(new NewMecano(newMecano));
+        newMecano.pack();
+        newMecano.setVisible(true);
     }//GEN-LAST:event_btnAddMecanicienActionPerformed
 
     private void TFPositionStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFPositionStationActionPerformed
@@ -505,6 +516,13 @@ public class Home extends javax.swing.JPanel {
     private void btnEnregistrerMecanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerMecanoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEnregistrerMecanoActionPerformed
+
+    private void btnAddQuaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddQuaiActionPerformed
+        JFrame newQuai = new JFrame();
+        newQuai.add(new NewQuai((newQuai)));
+        newQuai.pack();
+        newQuai.setVisible(true);
+    }//GEN-LAST:event_btnAddQuaiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

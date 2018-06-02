@@ -5,16 +5,21 @@
  */
 package fr.toulouse.miage.administrateurclient;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author pierreliaubet
  */
 public class NewQuai extends javax.swing.JPanel {
 
+    private JFrame main;
+    
     /**
      * Creates new form NewQuai
      */
-    public NewQuai() {
+    public NewQuai(JFrame main) {
+        this.main = main;
         initComponents();
     }
 
@@ -56,6 +61,11 @@ public class NewQuai extends javax.swing.JPanel {
         btnEnregistrer.setText("ENREGISTRER");
 
         btnAnnuler.setText("ANNULER");
+        btnAnnuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnnulerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -103,6 +113,10 @@ public class NewQuai extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed
+        main.dispose();
+    }//GEN-LAST:event_btnAnnulerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

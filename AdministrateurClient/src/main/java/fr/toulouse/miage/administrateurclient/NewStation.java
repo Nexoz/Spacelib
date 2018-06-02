@@ -5,16 +5,21 @@
  */
 package fr.toulouse.miage.administrateurclient;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author pierreliaubet
  */
 public class NewStation extends javax.swing.JPanel {
 
+    private JFrame main;
+    
     /**
      * Creates new form NewStation
      */
-    public NewStation() {
+    public NewStation(JFrame main) {
+        this.main = main;
         initComponents();
     }
 
@@ -79,8 +84,18 @@ public class NewStation extends javax.swing.JPanel {
         });
 
         btnAnnuler.setText("ANNULER");
+        btnAnnuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnnulerActionPerformed(evt);
+            }
+        });
 
         btnAddQuai.setText("+");
+        btnAddQuai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddQuaiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -154,6 +169,17 @@ public class NewStation extends javax.swing.JPanel {
     private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEnregistrerActionPerformed
+
+    private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed
+        main.dispose();
+    }//GEN-LAST:event_btnAnnulerActionPerformed
+
+    private void btnAddQuaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddQuaiActionPerformed
+        JFrame newQuai = new JFrame();
+        newQuai.add(new NewQuai(newQuai));
+        newQuai.pack();
+        newQuai.setVisible(true);
+    }//GEN-LAST:event_btnAddQuaiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

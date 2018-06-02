@@ -5,16 +5,21 @@
  */
 package fr.toulouse.miage.administrateurclient;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author pierreliaubet
  */
 public class NewNavette extends javax.swing.JPanel {
 
+    private JFrame main;
+    
     /**
      * Creates new form NewNavette
      */
-    public NewNavette() {
+    public NewNavette(JFrame main) {
+        this.main = main;
         initComponents();
     }
 
@@ -126,7 +131,7 @@ public class NewNavette extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed
-        // TODO add your handling code here:
+        main.dispose();
     }//GEN-LAST:event_btnAnnulerActionPerformed
 
 
