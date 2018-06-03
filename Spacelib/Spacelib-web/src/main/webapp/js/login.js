@@ -27,12 +27,9 @@ $(document).ready(function() {
         <div class='row'>
             <div class="input-field col m10 offset-m1">
                 <select id="station_dropdown">
-                    <option value="" disabled selected>Choose your option</option>
-                    <option value="1">Sard17</option>
-                    <option value="2">Monzbi</option>
-                    <option value="3">MVtuite</option>
+                    <option value="" disabled selected>Choisir une station</option>
                 </select>
-                <label>Materialize Select</label>
+                <label>Station de rattachement</label>
             </div>
         </div>
 
@@ -53,7 +50,6 @@ $(document).ready(function() {
 
         if(login !== "" && password !== "") {
             $.soap({
-                appendMethodToURL : false,
                 method : "toul:authentifierMecanicien",
                 data : {
                     login : login,
@@ -64,21 +60,37 @@ $(document).ready(function() {
                     var xmlDoc = soapResponse.toXML()
                     console.log(soapResponse.toXML())
 
-                    sessionStorage.setItem('idmecanicien', xmlDoc.getElementsByTagName("login")[0].childNodes[0].nodeValue);
+                    sessionStorage.setItem('idmecanicien', xmlDoc.getElementsByTagName("id")[0].childNodes[0].nodeValue);
 
-                    $("#form_container").html(station_select);
-                    $('select').formSelect();   
-                    $("#station_dropdown").change(function() {
-                        console.log($(this).val())
-                        if ($(this).val() !== "") {
-                            $("#submit").prop("disabled", false);
-                        } else {
-                            $("#submit").prop("disabled", true);
+                    $.soap({
+                        method : "toul:getListStations",
+                        data : {},
+                        success : function(soapResponse) {
+                            $("#form_container").html(station_select);
+                            $("#form_container").hide()
+                            var sel = $(station_select).find("#station_dropdown");
+                            var root = soapResponse.toXML().getElementsByTagName("list");
+                            for (var i=0; i < root.length; i++) {
+                                console.log(root[i])
+                                $("#station_dropdown").append($('<option>', {
+                                    value : root[i].getElementsByTagName("id")[0].childNodes[0].nodeValue,
+                                    text : root[i].getElementsByTagName("nom")[0].childNodes[0].nodeValue
+                                }))
+                            }
+                            $("#form_container").show();
+                            $('select').formSelect();   
+                            $("#station_dropdown").change(function() {
+                                if ($(this).val() !== "") {
+                                    $("#submit").prop("disabled", false);
+                                } else {
+                                    $("#submit").prop("disabled", true);
+                                }
+                            })
+                            $("#submit").click(function () {
+                                sessionStorage.setItem('idstation', $("#station_dropdown").val());
+                                sessionStorage.setItem('nomstation', $("#station_dropdown :selected").text());
+                            })
                         }
-                    })
-                    $("#submit").click(function () {
-                        sessionStorage.setItem('idstation', $("#station_dropdown").val());
-                        sessionStorage.setItem('nomstation', $("#station_dropdown :selected").text());
                     })
                 }
             })
