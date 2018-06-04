@@ -15,20 +15,13 @@ import javax.ejb.Stateless;
  * @author jb
  */
 @Stateless
-public class ServiceAdminComptes implements ServiceAdminComptesLocal {
+public class ServiceReservationUsager implements ServiceReservationUsagerLocal {
 
     @EJB
     private GestionUtilisateurLocal gestUtilisateur; 
-
-    @Override
-    public long addMecano(String nom, String prenom, String login, String password) {
-        return gestUtilisateur.creerMecanicien(nom, prenom, login, password);
-    }
     
     @Override
     public Utilisateur authentifier(String login, String password) {
         return gestUtilisateur.authentifier(login, password);
     }
-    
-    
 }

@@ -13,8 +13,8 @@ import javax.ejb.Local;
  * @author jb
  */
 @Local
-public interface ServiceAdminComptesLocal {
+public interface ServiceReservationUsagerLocal {
+
+    public Utilisateur authentifier(String login, String password);
     
-    long addMecano(String nom, String prenom, String login, String password);
-    Utilisateur authentifier(String login, String password);
 }
