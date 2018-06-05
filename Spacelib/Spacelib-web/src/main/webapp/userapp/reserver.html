@@ -51,7 +51,7 @@
       <a href="#" data-target="nav-mobile" class="sidenav-trigger">
         <i class="material-icons">menu</i>
       </a>
-    </div>
+      </div>
   </nav>
 
   <div class="container">
@@ -66,63 +66,61 @@
         <!--<div class='col s12 m5 valign-center'>
           <img class="responsive-img" src="space.jpg" />
         </div>-->
-        <div class='col s12 reserver-form'>
-          <div class='row headerrow'>
-            <div class='col s12 m12 l12 xl6'>
-              <select>
-                <option value="" disabled selected>Station de départ</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </select>
-              <label>Station de départ</label>
+        <form>
+          <div class='col s12 reserver-form'>
+            <div class='row headerrow'>
+              <div class='col s12 m12 l12 xl6'>
+                <select id="station_dep" name="station_dep">
+                  <option value="" disabled selected>Station de départ</option>
+                </select>
+                <label>Station de départ</label>
+              </div>
+              <div class='col s12 m12 l12 xl6'>
+                <select id="station_arr" name="station_arr">
+                  <option value="" disabled selected>Station d'arrivée</option>
+                </select>
+                <label>Station d'arrivée</label>
+              </div>
             </div>
-            <div class='col s12 m12 l12 xl6'>
-              <select>
-                <option value="" disabled selected>Station d'arrivée</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </select>
-              <label>Station d'arrivée</label>
+            <div class='row'>
+              <div class='col s12 m12 l12 xl6'>
+                <select>
+                  <option value="" disabled selected>Date de départ</option>
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                  <option value="3">Option 3</option>
+                </select>
+                <label>Date de départ</label>
+              </div>
+              <div class='col s12 m12 l12 xl6 darrivelabel'>
+                <label>Date d'arrivée estimée :
+                  <div id="datearrivee"></div>
+                </label>
+              </div>
             </div>
+            <div class='row'>
+              <div class='col s12 m12 l12 xl6'>
+                <select>
+                  <option value="" disabled selected>Nombre de passagers</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                </select>
+                <label>Nombre de passagers</label>
+              </div>
+            </div>
+            <center>
+              <div class='col s12 valign-center'>
+                <input type='submit' class="waves-effect waves-light btn-large hoverable blue darken-4" value='Valider' />
+              </div>
+            </center>
           </div>
-          <div class='row'>
-            <div class='col s12 m12 l12 xl6'>
-              <select>
-                <option value="" disabled selected>Date de départ</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </select>
-              <label>Date de départ</label>
-            </div>
-            <div class='col s12 m12 l12 xl6 darrivelabel'>
-              <label>Date d'arrivée estimée : <div id="datearrivee"></div></label>
-            </div>
-          </div>
-          <div class='row'>
-            <div class='col s12 m12 l12 xl6'>
-              <select>
-                <option value="" disabled selected>Nombre de passagers</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-              </select>
-              <label>Nombre de passagers</label>
-            </div>
-          </div>
-          <center>
-            <div class='col s12 valign-center'>
-              <input type='submit' class="waves-effect waves-light btn-large hoverable blue darken-4" value='Valider' />
-            </div>
-          </center>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -148,8 +146,11 @@
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
+  <script src="lib/materialize.js"></script>
+  <script src="lib/xml2json.js"></script>
+  <script src="lib/jquery.soap.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/reserver.js"></script>
 
 </body>
 

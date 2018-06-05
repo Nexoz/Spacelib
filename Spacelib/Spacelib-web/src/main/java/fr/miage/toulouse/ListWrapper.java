@@ -5,15 +5,26 @@
  */
 package fr.miage.toulouse;
 
+import java.io.Serializable;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author jb
  */
-public class ListWrapper<T> {
+@XmlRootElement
+public class ListWrapper<T> implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
     
     private List<T> list;
+    
+    public ListWrapper(){}
+    
+    public ListWrapper(List<T> list) {
+        this.list = list;
+    }
 
     public List<T> getList() {
         return list;

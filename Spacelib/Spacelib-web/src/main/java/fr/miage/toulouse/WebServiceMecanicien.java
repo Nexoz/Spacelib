@@ -45,8 +45,7 @@ public class WebServiceMecanicien {
     @WebMethod(operationName = "getListStations")
     public ListWrapper<Station> getListStations() {
         List<Station> a = ejbRef.getListStations();
-        ListWrapper<Station> w = new ListWrapper<>();
-        w.setList(a);
+        ListWrapper<Station> w = new ListWrapper<>(a);
         return w;
     }
 
@@ -59,8 +58,7 @@ public class WebServiceMecanicien {
     @WebMethod(operationName = "listerNavetteAReviser")
     public ListWrapper<Navette> listerNavetteAReviser(@WebParam(name = "ids") Long ids) throws StationInconnuException {
         List<Navette> a = ejbRef.listerNavetteAReviser(ids);
-        ListWrapper<Navette> w = new ListWrapper<>();
-        w.setList(a);
+        ListWrapper<Navette> w = new ListWrapper<>(a);
         return w;
     }
 
@@ -72,8 +70,7 @@ public class WebServiceMecanicien {
     @WebMethod(operationName = "getRevisionsEnCours")
     public ListWrapper<Revision> getRevisionsEnCours(@WebParam(name = "ids") Long ids) throws StationInconnuException {
         List<Revision> a = ejbRef.getRevisionsEnCours(ids);
-        ListWrapper<Revision> w = new ListWrapper<>();
-        w.setList(a);
+        ListWrapper<Revision> w = new ListWrapper<>(a);
         return w;
     }
     

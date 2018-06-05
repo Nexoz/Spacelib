@@ -5,8 +5,10 @@
  */
 package fr.miage.toulouse;
 
+import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.entities.Utilisateur;
 import fr.miage.toulouse.services.ServiceReservationUsagerLocal;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.ejb.Stateless;
