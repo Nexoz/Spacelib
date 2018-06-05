@@ -16,5 +16,6 @@ import javax.ejb.Local;
 public interface ServiceReservationUsagerLocal {
 
     public Utilisateur authentifier(String login, String password);
+    public Integer calculerDistance(String nomStationD, String nomStationA);
     
 }

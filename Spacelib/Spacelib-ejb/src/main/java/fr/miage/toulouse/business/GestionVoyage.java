@@ -27,6 +27,7 @@ import fr.miage.toulouse.repositories.QuaiFacadeLocal;
 import fr.miage.toulouse.repositories.ReservationFacadeLocal;
 import fr.miage.toulouse.repositories.StationFacadeLocal;
 import fr.miage.toulouse.repositories.UsagerFacadeLocal;
+import fr.miage.toulouse.spacelibshared.DistancesCalculator;
 /**
  *
  * @author jb
@@ -165,6 +166,11 @@ public class GestionVoyage implements GestionVoyageLocal {
         Quai quai = quaiFacade.find(navette.getQuaiArrimage());
         quaiFacade.desarrimer(quai);
         reservationFacade.voyageInitié(reserv);
+    }
+
+    @Override
+    public Integer calculerDistance(String nomStationD, String nomStationA) {
+        return DistancesCalculator.getInstance().calculerDistance(nomStationD, nomStationA);
     }
     
     
