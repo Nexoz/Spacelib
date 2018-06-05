@@ -18,6 +18,7 @@ import javax.ejb.Stateless;
 import fr.miage.toulouse.repositories.NavetteFacadeLocal;
 import fr.miage.toulouse.repositories.QuaiFacadeLocal;
 import fr.miage.toulouse.repositories.StationFacadeLocal;
+import java.util.ArrayList;
 
 /**
  *
