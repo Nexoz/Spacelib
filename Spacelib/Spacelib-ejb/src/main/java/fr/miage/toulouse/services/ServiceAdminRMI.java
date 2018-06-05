@@ -6,10 +6,16 @@
 package fr.miage.toulouse.services;
 
 import fr.miage.toulouse.business.GestionStationLocal;
+import fr.miage.toulouse.entities.Quai;
+import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.spacelibshared.RMI.SpacelibAdminRemote;
+import fr.miage.toulouse.spacelibshared.admin.ObjNavette;
+import fr.miage.toulouse.spacelibshared.admin.ObjQuai;
+import fr.miage.toulouse.spacelibshared.admin.ObjStation;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -25,54 +31,65 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
     GestionStationLocal gestionStation;
 
     @Override
-    public List consulterStation() {
-        return gestionStation.consulterStation();
+    public List<ObjStation> consulterStation() {
+        List<Station> stations = gestionStation.consulterStation();
+        List<ObjStation> objStations = new ArrayList<>();
+        for(Station s : stations){
+            ObjStation tmp = new ObjStation(s.getId(), s.getNom(), s.getPosition(), new ArrayList<ObjQuai>());
+            for (Quai q : s.getListeQuais()){
+                tmp.getQuais().add(new ObjQuai(q.getId(), q.getCodeQuai(),null));
+            }
+            objStations.add(tmp);
+        }
+        return objStations;
     }
 
     @Override
-    public void ajouterStation(long idStation) throws StationInconnuException {
-        gestionStation.ajouterStation("","");
+    public void ajouterStation(ObjStation station) throws StationInconnuException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void supprimerStation(long idStation) throws StationInconnuException {
-        gestionStation.supprimerStation(idStation);
+    public void supprimerStation(ObjStation station) throws StationInconnuException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void ModifierStation(long idStation) throws StationInconnuException {
-        gestionStation.ModifierStation(idStation);
+    public void modifierStation(ObjStation station) throws StationInconnuException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void ajouterQuai(long idStation, long idQuai) throws StationInconnuException, QuaiInconnuException {
-        gestionStation.ajouterQuai(idStation, idQuai);
+    public void ajouterQuai(ObjStation station, ObjQuai quai) throws StationInconnuException, QuaiInconnuException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void modifierQuai(long idQuai) throws QuaiInconnuException {
-        gestionStation.modifierQuai(idQuai);
+    public void modifierQuai(ObjQuai quai) throws QuaiInconnuException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void supprimerQuai(long idQuai) throws QuaiInconnuException {
-        gestionStation.supprimerQuai(idQuai);
+    public void supprimerQuai(ObjQuai quai) throws QuaiInconnuException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void acheterNavette(long idNavette, long idQuai) throws NavetteInconnuException, QuaiInconnuException {
-        gestionStation.acheterNavette(idNavette, idQuai);
+    public void acheterNavette(ObjNavette navette, ObjQuai quai) throws NavetteInconnuException, QuaiInconnuException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void modifierNavette(long idNavette) throws NavetteInconnuException {
-        gestionStation.modifierNavette(idNavette);
+    public void modifierNavette(ObjNavette navette) throws NavetteInconnuException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void supprimerNavette(long idNavette) throws NavetteInconnuException {
-        gestionStation.supprimerNavette(idNavette);
+    public void supprimerNavette(ObjNavette navette) throws NavetteInconnuException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
     
     

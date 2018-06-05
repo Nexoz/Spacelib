@@ -80,7 +80,7 @@ public class Station implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Station[ id=" + id + " ]";
+        return id + " - " + nom + " (" + position + ")";
     }
     
 }

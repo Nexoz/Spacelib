@@ -5,11 +5,13 @@
  */
 package fr.toulouse.miage.administrateurclient;
 
+import fr.miage.toulouse.spacelibshared.admin.ObjStation;
 import fr.toulouse.miage.administrateurclient.services.RMIAdminServiceManager;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
 /**
@@ -31,10 +33,12 @@ public class Home extends javax.swing.JPanel {
         }
         initComponents();
         listeStations.removeAll();
-        List stations = manager.getAdminRemoteSvc().consulterStation();
-        for (Object station : stations) {
-            //listeStations.add("" + station);
+        List<ObjStation> stations = manager.getAdminRemoteSvc().consulterStation();
+        DefaultListModel<String> modelStations = new DefaultListModel<>();
+        for (ObjStation station : stations) {
+            modelStations.addElement(station.toString());
         }
+        lesStations.setModel(modelStations);
     }
 
     /**
@@ -49,7 +53,7 @@ public class Home extends javax.swing.JPanel {
         tabs = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         listeStations = new javax.swing.JScrollPane();
-        lsiteStations = new javax.swing.JList<>();
+        lesStations = new javax.swing.JList<>();
         btnAddStation = new javax.swing.JButton();
         labelNomStation = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -90,12 +94,12 @@ public class Home extends javax.swing.JPanel {
         TFPassword = new javax.swing.JPasswordField();
         btnEnregistrerMecano = new javax.swing.JButton();
 
-        lsiteStations.setModel(new javax.swing.AbstractListModel<String>() {
+        lesStations.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        listeStations.setViewportView(lsiteStations);
+        listeStations.setViewportView(lesStations);
 
         btnAddStation.setText("+");
         btnAddStation.addActionListener(new java.awt.event.ActionListener() {
@@ -571,12 +575,12 @@ public class Home extends javax.swing.JPanel {
     private javax.swing.JLabel labelNumNavette;
     private javax.swing.JLabel labelPrenomMecano;
     private javax.swing.JLabel labelQuaiNavette;
+    private javax.swing.JList<String> lesStations;
     private javax.swing.JList<String> listOperations;
     private javax.swing.JList<String> listeMecaniciens;
     private javax.swing.JList<String> listeNavettes;
     private javax.swing.JList<String> listeQuaiStation;
     private javax.swing.JScrollPane listeStations;
-    private javax.swing.JList<String> lsiteStations;
     private javax.swing.JTabbedPane tabs;
     // End of variables declaration//GEN-END:variables
 }
