@@ -39,4 +39,6 @@ public interface StationFacadeLocal {
     
     List<Quai> getQuais(Station station);
     
+    List<Quai> getQuaisDispo(long station);
+    
 }

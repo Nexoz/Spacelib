@@ -149,4 +149,9 @@ public class GestionStation implements GestionStationLocal {
         return mecanoFacade.findAll();
     }
 
+    @Override
+    public List<Quai> getQuaiDispos(long station) {
+        return stationfacade.getQuaisDispo(station);
+    }
+
 }

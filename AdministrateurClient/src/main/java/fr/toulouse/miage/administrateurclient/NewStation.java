@@ -11,7 +11,9 @@ import fr.toulouse.miage.administrateurclient.services.RMIAdminServiceManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -21,6 +23,8 @@ public class NewStation extends javax.swing.JPanel {
 
     private JFrame main;
     
+    private Home origin;
+    
     private RMIAdminServiceManager manager;
     
     private ObjStation newStation = new ObjStation();
@@ -28,15 +32,16 @@ public class NewStation extends javax.swing.JPanel {
     /**
      * Creates new form NewStation
      */
-    public NewStation(JFrame main) {
+    public NewStation(JFrame main, Home origin) {
         this.main = main;
+        this.origin = origin;
         initComponents();
         try {
             manager = new RMIAdminServiceManager();
         } catch (NamingException ex) {
             Logger.getLogger(NewStation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        listeQuai.removeAll();
+        listeQuai.setModel(new DefaultListModel<>());
     }
 
     /**
@@ -190,6 +195,11 @@ public class NewStation extends javax.swing.JPanel {
         } catch (StationInconnuException ex) {
             Logger.getLogger(NewStation.class.getName()).log(Level.SEVERE, null, ex);
         }
+        origin.chargerDonnees();
+        TFNomStation.setText("");
+        TFPosition.setText("");
+        listeQuai.setModel(new DefaultListModel<>());
+        newStation = new ObjStation();
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed
@@ -198,7 +208,7 @@ public class NewStation extends javax.swing.JPanel {
 
     private void btnAddQuaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddQuaiActionPerformed
         JFrame newQuai = new JFrame();
-        newQuai.add(new NewQuai(newQuai));
+        newQuai.add(new NewQuai(newQuai, origin));
         newQuai.pack();
         newQuai.setVisible(true);
     }//GEN-LAST:event_btnAddQuaiActionPerformed

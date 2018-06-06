@@ -7,7 +7,9 @@ package fr.toulouse.miage.administrateurclient;
 
 import fr.miage.toulouse.spacelibshared.admin.ObjMecanicien;
 import fr.miage.toulouse.spacelibshared.admin.ObjNavette;
+import fr.miage.toulouse.spacelibshared.admin.ObjQuai;
 import fr.miage.toulouse.spacelibshared.admin.ObjStation;
+import fr.toulouse.miage.administrateurclient.renderer.StationRenderer;
 import fr.toulouse.miage.administrateurclient.services.RMIAdminServiceManager;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,6 +26,8 @@ public class Home extends javax.swing.JPanel {
 
     private RMIAdminServiceManager manager;
     
+    private ObjStation selectedStation = null;
+    
     /**
      * Creates new form Home
      */
@@ -35,33 +39,51 @@ public class Home extends javax.swing.JPanel {
         }
         initComponents();
         
-        listeStations.removeAll();
-        listeNavettes.removeAll();
-        
         chargerDonnees();
     }
     
-    private void chargerDonnees(){
-        List<ObjStation> stations = manager.getAdminRemoteSvc().consulterStation();
-        DefaultListModel<String> modelStations = new DefaultListModel<>();
-        for (ObjStation station : stations) {
-            modelStations.addElement(station.toString());
+    public void afficherStation(){
+        labelNomStation.setText(selectedStation.getNom());
+        TFPositionStation.setText(selectedStation.getPosition());
+        DefaultListModel quaiStationModel = new DefaultListModel();
+        for (ObjQuai quai : selectedStation.getQuais()){
+            quaiStationModel.addElement(quai);
         }
-        lesStations.setModel(modelStations);
+        listeQuaiStation.setModel(quaiStationModel);
+    }
+    
+    public void chargerDonnees(){
+        
+        listeStations.removeAll();
+        listeNavettes.removeAll();
+        listeMecaniciens.removeAll();
+        
+        listeQuaiStation.setModel(new DefaultListModel());
+        listOperations.setModel(new DefaultListModel());
+        
+        List<ObjStation> stations = manager.getAdminRemoteSvc().consulterStation();
+        DefaultListModel modelStations = new DefaultListModel<>();
+        for (ObjStation station : stations) {
+            modelStations.addElement(station);
+        }
+        listeStations.setModel(modelStations);
+        listeStations.setCellRenderer(new StationRenderer());
         
         List<ObjNavette> navettes = manager.getAdminRemoteSvc().getLesNavettes();
-        DefaultListModel<String> modelNavettes = new DefaultListModel<>();
+        DefaultListModel modelNavettes = new DefaultListModel();
         for (ObjNavette navette : navettes){
-            modelNavettes.addElement(navette.toString());
+            modelNavettes.addElement(navette);
         }
         listeNavettes.setModel(modelNavettes);
+        listeNavettes.setCellRenderer(new StationRenderer());
         
         List<ObjMecanicien> mecanos = manager.getAdminRemoteSvc().getlesMecanos();
-        DefaultListModel<String> modelMecanos = new DefaultListModel<>();
+        DefaultListModel modelMecanos = new DefaultListModel();
         for (ObjMecanicien mecano : mecanos){
-            modelMecanos.addElement(mecano.toString());
+            modelMecanos.addElement(mecano);
         }
         listeMecaniciens.setModel(modelMecanos);
+        listeMecaniciens.setCellRenderer(new StationRenderer());
     }
 
     /**
@@ -75,21 +97,21 @@ public class Home extends javax.swing.JPanel {
 
         tabs = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        listeStations = new javax.swing.JScrollPane();
-        lesStations = new javax.swing.JList<>();
         btnAddStation = new javax.swing.JButton();
         labelNomStation = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         TFPositionStation = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        listeQuaiStation = new javax.swing.JList<>();
+        listeQuaiStation = new javax.swing.JList();
         btnDelQuai = new javax.swing.JButton();
         btnEnregistrerStation = new javax.swing.JButton();
         btnDelStation = new javax.swing.JButton();
         btnAddQuai = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        listeStations = new javax.swing.JList();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listeNavettes = new javax.swing.JList<>();
+        listeNavettes = new javax.swing.JList();
         btnAddNavette = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         labelNumNavette = new javax.swing.JLabel();
@@ -102,12 +124,12 @@ public class Home extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         labelQuaiNavette = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        listOperations = new javax.swing.JList<>();
+        listOperations = new javax.swing.JList();
         btnEnregistrerNavette = new javax.swing.JButton();
         btnDelNavette = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listeMecaniciens = new javax.swing.JList<>();
+        listeMecaniciens = new javax.swing.JList();
         btnAddMecanicien = new javax.swing.JButton();
         labelPrenomMecano = new javax.swing.JLabel();
         labelNomMecano = new javax.swing.JLabel();
@@ -117,12 +139,11 @@ public class Home extends javax.swing.JPanel {
         TFPassword = new javax.swing.JPasswordField();
         btnEnregistrerMecano = new javax.swing.JButton();
 
-        lesStations.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        tabs.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tabsFocusGained(evt);
+            }
         });
-        listeStations.setViewportView(lesStations);
 
         btnAddStation.setText("+");
         btnAddStation.addActionListener(new java.awt.event.ActionListener() {
@@ -144,10 +165,10 @@ public class Home extends javax.swing.JPanel {
             }
         });
 
-        listeQuaiStation.setModel(new javax.swing.AbstractListModel<String>() {
+        listeQuaiStation.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane3.setViewportView(listeQuaiStation);
 
@@ -169,6 +190,18 @@ public class Home extends javax.swing.JPanel {
             }
         });
 
+        listeStations.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        listeStations.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listeStationsValueChanged(evt);
+            }
+        });
+        jScrollPane5.setViewportView(listeStations);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -176,39 +209,37 @@ public class Home extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(listeStations, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnAddStation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEnregistrerStation))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addGap(73, 73, 73)
+                                .addComponent(btnAddQuai)
+                                .addGap(31, 31, 31)
+                                .addComponent(btnDelQuai))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
                                 .addComponent(labelNomStation)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
                                 .addComponent(btnDelStation))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
+                                .addGap(30, 30, 30)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addGap(18, 18, 18)
-                                        .addComponent(TFPositionStation, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(69, 69, 69)
-                                .addComponent(btnAddQuai)
-                                .addGap(31, 31, 31)
-                                .addComponent(btnDelQuai))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(btnAddStation)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEnregistrerStation)))
+                                        .addComponent(TFPositionStation, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(listeStations, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -218,25 +249,26 @@ public class Home extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(TFPositionStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
+                        .addGap(33, 33, 33)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDelQuai)
-                            .addComponent(btnAddQuai))))
-                .addGap(18, 18, 18)
+                            .addComponent(btnAddQuai)))
+                    .addComponent(jScrollPane5))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddStation)
                     .addComponent(btnEnregistrerStation))
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
 
         tabs.addTab("Stations", jPanel1);
 
-        listeNavettes.setModel(new javax.swing.AbstractListModel<String>() {
+        listeNavettes.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane2.setViewportView(listeNavettes);
 
@@ -276,10 +308,10 @@ public class Home extends javax.swing.JPanel {
         labelQuaiNavette.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         labelQuaiNavette.setText("AZ-1254");
 
-        listOperations.setModel(new javax.swing.AbstractListModel<String>() {
+        listOperations.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane4.setViewportView(listOperations);
 
@@ -385,10 +417,10 @@ public class Home extends javax.swing.JPanel {
 
         tabs.addTab("Navettes", jPanel2);
 
-        listeMecaniciens.setModel(new javax.swing.AbstractListModel<String>() {
+        listeMecaniciens.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(listeMecaniciens);
 
@@ -504,16 +536,9 @@ public class Home extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStationActionPerformed
-        JFrame newStation = new JFrame();
-        newStation.add(new NewStation(newStation));
-        newStation.pack();
-        newStation.setVisible(true);
-    }//GEN-LAST:event_btnAddStationActionPerformed
-
     private void btnAddNavetteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNavetteActionPerformed
         JFrame newNavette = new JFrame();
-        newNavette.add(new NewNavette(newNavette));
+        newNavette.add(new NewNavette(newNavette,this));
         newNavette.pack();
         newNavette.setVisible(true);
     }//GEN-LAST:event_btnAddNavetteActionPerformed
@@ -524,14 +549,6 @@ public class Home extends javax.swing.JPanel {
         newMecano.pack();
         newMecano.setVisible(true);
     }//GEN-LAST:event_btnAddMecanicienActionPerformed
-
-    private void TFPositionStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFPositionStationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TFPositionStationActionPerformed
-
-    private void btnEnregistrerStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerStationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEnregistrerStationActionPerformed
 
     private void btnEnregistrerNavetteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerNavetteActionPerformed
         // TODO add your handling code here:
@@ -555,10 +572,34 @@ public class Home extends javax.swing.JPanel {
 
     private void btnAddQuaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddQuaiActionPerformed
         JFrame newQuai = new JFrame();
-        newQuai.add(new NewQuai((newQuai)));
+        newQuai.add(new NewQuai(newQuai,this));
         newQuai.pack();
         newQuai.setVisible(true);
     }//GEN-LAST:event_btnAddQuaiActionPerformed
+
+    private void btnEnregistrerStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerStationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEnregistrerStationActionPerformed
+
+    private void TFPositionStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFPositionStationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TFPositionStationActionPerformed
+
+    private void btnAddStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStationActionPerformed
+        JFrame newStation = new JFrame();
+        newStation.add(new NewStation(newStation,this));
+        newStation.pack();
+        newStation.setVisible(true);
+    }//GEN-LAST:event_btnAddStationActionPerformed
+
+    private void tabsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tabsFocusGained
+
+    }//GEN-LAST:event_tabsFocusGained
+
+    private void listeStationsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listeStationsValueChanged
+        selectedStation = (ObjStation) listeStations.getSelectedValue();
+        afficherStation();
+    }//GEN-LAST:event_listeStationsValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -590,6 +631,7 @@ public class Home extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel labelEtatRevision;
     private javax.swing.JLabel labelNomMecano;
@@ -598,12 +640,11 @@ public class Home extends javax.swing.JPanel {
     private javax.swing.JLabel labelNumNavette;
     private javax.swing.JLabel labelPrenomMecano;
     private javax.swing.JLabel labelQuaiNavette;
-    private javax.swing.JList<String> lesStations;
-    private javax.swing.JList<String> listOperations;
-    private javax.swing.JList<String> listeMecaniciens;
-    private javax.swing.JList<String> listeNavettes;
-    private javax.swing.JList<String> listeQuaiStation;
-    private javax.swing.JScrollPane listeStations;
+    private javax.swing.JList listOperations;
+    private javax.swing.JList listeMecaniciens;
+    private javax.swing.JList listeNavettes;
+    private javax.swing.JList listeQuaiStation;
+    private javax.swing.JList listeStations;
     private javax.swing.JTabbedPane tabs;
     // End of variables declaration//GEN-END:variables
 }

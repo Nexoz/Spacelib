@@ -5,6 +5,18 @@
  */
 package fr.toulouse.miage.administrateurclient;
 
+import fr.miage.toulouse.spacelibshared.admin.ObjNavette;
+import fr.miage.toulouse.spacelibshared.admin.ObjQuai;
+import fr.miage.toulouse.spacelibshared.admin.ObjStation;
+import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
+import fr.toulouse.miage.administrateurclient.renderer.StationRenderer;
+import fr.toulouse.miage.administrateurclient.services.RMIAdminServiceManager;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
 /**
@@ -15,12 +27,43 @@ public class NewNavette extends javax.swing.JPanel {
 
     private JFrame main;
     
+    private Home origin;
+    
+    private ObjStation selectedStation;
+    
+    private ObjQuai selectedQuai;
+    
+    private RMIAdminServiceManager manager;
+    
     /**
      * Creates new form NewNavette
      */
-    public NewNavette(JFrame main) {
+    public NewNavette(JFrame main, Home origin) {
         this.main = main;
+        this.origin = origin;
+        try {
+            manager = new RMIAdminServiceManager();
+        } catch (NamingException ex) {
+            Logger.getLogger(NewNavette.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
+        List<ObjStation> stations = manager.getAdminRemoteSvc().consulterStation();
+        DefaultListModel modelSations = new DefaultListModel();
+        for (ObjStation station : stations){
+            modelSations.addElement(station);
+        }
+        listeStations.setModel(modelSations);
+        listeStations.setCellRenderer(new StationRenderer());
+    }
+    
+    private void chargerQuaiDispo(){
+        List<ObjQuai> lesQuais = manager.getAdminRemoteSvc().getLesQuaisDispo(selectedStation.getId());
+        DefaultListModel modelQuai = new DefaultListModel();
+        for (ObjQuai quai : lesQuais){
+            modelQuai.addElement(quai);
+        }
+        listeQuai.setModel(modelQuai);
+        listeQuai.setCellRenderer(new StationRenderer());
     }
 
     /**
@@ -59,11 +102,21 @@ public class NewNavette extends javax.swing.JPanel {
         });
 
         btnEnregister.setText("ENREGISTRER");
+        btnEnregister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnregisterActionPerformed(evt);
+            }
+        });
 
         listeStations.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        listeStations.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listeStationsValueChanged(evt);
+            }
         });
         jScrollPane1.setViewportView(listeStations);
 
@@ -133,6 +186,28 @@ public class NewNavette extends javax.swing.JPanel {
     private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed
         main.dispose();
     }//GEN-LAST:event_btnAnnulerActionPerformed
+
+    private void btnEnregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregisterActionPerformed
+        ObjNavette navette = new ObjNavette();
+        navette.setNbPlaces(Integer.parseInt(spinnerNbPlaces.getValue().toString()));
+        if (selectedQuai != null){
+            navette.setQuai(selectedQuai);
+        }
+        try {
+            manager.getAdminRemoteSvc().acheterNavette(navette, selectedQuai);
+        } catch (NavetteInconnuException ex) {
+            Logger.getLogger(NewNavette.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (QuaiInconnuException ex) {
+            Logger.getLogger(NewNavette.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        origin.chargerDonnees();
+        spinnerNbPlaces.setValue(0);
+        chargerQuaiDispo();
+    }//GEN-LAST:event_btnEnregisterActionPerformed
+
+    private void listeStationsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listeStationsValueChanged
+        chargerQuaiDispo();
+    }//GEN-LAST:event_listeStationsValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

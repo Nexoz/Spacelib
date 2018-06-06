@@ -26,7 +26,7 @@ public interface SpacelibAdminRemote {
     void supprimerStation(ObjStation station) throws StationInconnuException;
     void modifierStation(ObjStation station) throws StationInconnuException;
     List<ObjQuai> getLesQuais();
-    List<ObjQuai> getLesQuais(ObjStation station);
+    List<ObjQuai> getLesQuaisDispo(long station);
     void ajouterQuai(ObjStation station, ObjQuai quai) throws StationInconnuException, QuaiInconnuException;
     void modifierQuai(ObjQuai quai) throws QuaiInconnuException;
     void supprimerQuai(ObjQuai quai)throws QuaiInconnuException;

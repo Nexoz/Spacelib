@@ -72,6 +72,12 @@ public class ObjNavette implements Serializable {
         this.quai = quai;
         this.operations = operations;
     }
+
+    @Override
+    public String toString() {
+        return id + " : " + nbPlaces + " pl";
+    }
+    
     
     
 }
