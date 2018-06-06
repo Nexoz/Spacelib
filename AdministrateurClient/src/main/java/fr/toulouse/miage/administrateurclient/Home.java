@@ -5,6 +5,8 @@
  */
 package fr.toulouse.miage.administrateurclient;
 
+import fr.miage.toulouse.spacelibshared.admin.ObjMecanicien;
+import fr.miage.toulouse.spacelibshared.admin.ObjNavette;
 import fr.miage.toulouse.spacelibshared.admin.ObjStation;
 import fr.toulouse.miage.administrateurclient.services.RMIAdminServiceManager;
 import java.util.List;
@@ -32,13 +34,34 @@ public class Home extends javax.swing.JPanel {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
+        
         listeStations.removeAll();
+        listeNavettes.removeAll();
+        
+        chargerDonnees();
+    }
+    
+    private void chargerDonnees(){
         List<ObjStation> stations = manager.getAdminRemoteSvc().consulterStation();
         DefaultListModel<String> modelStations = new DefaultListModel<>();
         for (ObjStation station : stations) {
             modelStations.addElement(station.toString());
         }
         lesStations.setModel(modelStations);
+        
+        List<ObjNavette> navettes = manager.getAdminRemoteSvc().getLesNavettes();
+        DefaultListModel<String> modelNavettes = new DefaultListModel<>();
+        for (ObjNavette navette : navettes){
+            modelNavettes.addElement(navette.toString());
+        }
+        listeNavettes.setModel(modelNavettes);
+        
+        List<ObjMecanicien> mecanos = manager.getAdminRemoteSvc().getlesMecanos();
+        DefaultListModel<String> modelMecanos = new DefaultListModel<>();
+        for (ObjMecanicien mecano : mecanos){
+            modelMecanos.addElement(mecano.toString());
+        }
+        listeMecaniciens.setModel(modelMecanos);
     }
 
     /**

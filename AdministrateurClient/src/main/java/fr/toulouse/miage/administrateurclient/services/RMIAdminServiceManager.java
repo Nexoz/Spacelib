@@ -17,7 +17,7 @@ import javax.naming.NamingException;
 public class RMIAdminServiceManager {
     private final static String GLASSFISH_ORB_HOST = "localhost";
     private final static String GLASSFISH_ORB_PORT = "3700";
-    private final static String SERVICES_ADMIN_EJB_URI = "java:global/Spacelib-ejb/ServiceAdminRMI!fr.miage.toulouse.spacelibshared.RMI.SpacelibAdminRemote";
+    private final static String SERVICES_ADMIN_EJB_URI = "java:global/Spacelib-ear/Spacelib-ejb-1.0-SNAPSHOT/ServiceAdminRMI!fr.miage.toulouse.spacelibshared.RMI.SpacelibAdminRemote";
 
     private InitialContext namingContext;
     private SpacelibAdminRemote splacelibAdmin;

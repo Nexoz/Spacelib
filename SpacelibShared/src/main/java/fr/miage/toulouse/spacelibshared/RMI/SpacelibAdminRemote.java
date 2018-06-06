@@ -5,6 +5,7 @@
  */
 package fr.miage.toulouse.spacelibshared.RMI;
 
+import fr.miage.toulouse.spacelibshared.admin.ObjMecanicien;
 import fr.miage.toulouse.spacelibshared.admin.ObjNavette;
 import fr.miage.toulouse.spacelibshared.admin.ObjQuai;
 import fr.miage.toulouse.spacelibshared.admin.ObjStation;
@@ -24,10 +25,15 @@ public interface SpacelibAdminRemote {
     void ajouterStation(ObjStation station) throws StationInconnuException;
     void supprimerStation(ObjStation station) throws StationInconnuException;
     void modifierStation(ObjStation station) throws StationInconnuException;
+    List<ObjQuai> getLesQuais();
+    List<ObjQuai> getLesQuais(ObjStation station);
     void ajouterQuai(ObjStation station, ObjQuai quai) throws StationInconnuException, QuaiInconnuException;
     void modifierQuai(ObjQuai quai) throws QuaiInconnuException;
     void supprimerQuai(ObjQuai quai)throws QuaiInconnuException;
+    List<ObjNavette> getLesNavettes();
     void acheterNavette (ObjNavette navette, ObjQuai quai)throws NavetteInconnuException, QuaiInconnuException;
     void modifierNavette (ObjNavette navette)throws NavetteInconnuException;
     void supprimerNavette (ObjNavette navette)throws NavetteInconnuException;
+    List<ObjMecanicien> getlesMecanos();
+    
 }

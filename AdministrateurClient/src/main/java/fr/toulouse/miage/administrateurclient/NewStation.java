@@ -5,6 +5,12 @@
  */
 package fr.toulouse.miage.administrateurclient;
 
+import fr.miage.toulouse.spacelibshared.admin.ObjStation;
+import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
+import fr.toulouse.miage.administrateurclient.services.RMIAdminServiceManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.swing.JFrame;
 
 /**
@@ -15,12 +21,22 @@ public class NewStation extends javax.swing.JPanel {
 
     private JFrame main;
     
+    private RMIAdminServiceManager manager;
+    
+    private ObjStation newStation = new ObjStation();
+    
     /**
      * Creates new form NewStation
      */
     public NewStation(JFrame main) {
         this.main = main;
         initComponents();
+        try {
+            manager = new RMIAdminServiceManager();
+        } catch (NamingException ex) {
+            Logger.getLogger(NewStation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        listeQuai.removeAll();
     }
 
     /**
@@ -167,7 +183,13 @@ public class NewStation extends javax.swing.JPanel {
     }//GEN-LAST:event_TFPositionActionPerformed
 
     private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
-        // TODO add your handling code here:
+        newStation.setNom(TFNomStation.getText());
+        newStation.setPosition(TFPosition.getText());
+        try {
+            manager.getAdminRemoteSvc().ajouterStation(newStation);
+        } catch (StationInconnuException ex) {
+            Logger.getLogger(NewStation.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed

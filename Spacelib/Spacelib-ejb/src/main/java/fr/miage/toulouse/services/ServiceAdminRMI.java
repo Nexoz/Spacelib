@@ -6,10 +6,15 @@
 package fr.miage.toulouse.services;
 
 import fr.miage.toulouse.business.GestionStationLocal;
+import fr.miage.toulouse.entities.Mecanicien;
+import fr.miage.toulouse.entities.Navette;
+import fr.miage.toulouse.entities.Operation;
 import fr.miage.toulouse.entities.Quai;
 import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.spacelibshared.RMI.SpacelibAdminRemote;
+import fr.miage.toulouse.spacelibshared.admin.ObjMecanicien;
 import fr.miage.toulouse.spacelibshared.admin.ObjNavette;
+import fr.miage.toulouse.spacelibshared.admin.ObjOperation;
 import fr.miage.toulouse.spacelibshared.admin.ObjQuai;
 import fr.miage.toulouse.spacelibshared.admin.ObjStation;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
@@ -29,7 +34,7 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
 
     @EJB
     GestionStationLocal gestionStation;
-
+    
     @Override
     public List<ObjStation> consulterStation() {
         List<Station> stations = gestionStation.consulterStation();
@@ -46,7 +51,7 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
 
     @Override
     public void ajouterStation(ObjStation station) throws StationInconnuException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        gestionStation.ajouterStation(station.getNom(), station.getPosition());
     }
 
     @Override
@@ -87,6 +92,46 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
     @Override
     public void supprimerNavette(ObjNavette navette) throws NavetteInconnuException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<ObjQuai> getLesQuais() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<ObjNavette> getLesNavettes() {
+        List<Navette> lesNavettes = gestionStation.getLesNavettes();
+        List<ObjNavette> lesObjNavette = new ArrayList<>();
+        for (Navette n : lesNavettes){
+            ObjQuai q = new ObjQuai();
+            if (n.getQuaiArrimage() != null){
+                Quai tmp = n.getQuaiArrimage();
+                q = new ObjQuai(tmp.getId(), tmp.getCodeQuai(), null);
+            }
+            List<ObjOperation> ope = new ArrayList<ObjOperation>();
+            for (Operation o : n.getListeOperations()){
+                ope.add(new ObjOperation(o.getId(), null, o.getDateDebut(), o.getDateFin(), o.getDateOperation(), null));
+            }
+            ObjNavette navette = new ObjNavette(n.getId(), n.getNbPlaces(), n.getProchaineRevision(), q, ope);
+            lesObjNavette.add(navette);
+        }
+        return lesObjNavette;
+    }
+
+    @Override
+    public List<ObjQuai> getLesQuais(ObjStation station) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<ObjMecanicien> getlesMecanos() {
+        List<Mecanicien> lesMecanos = gestionStation.getLesMecanos();
+        List<ObjMecanicien> lesObjMecano = new ArrayList<>();
+        for (Mecanicien mecano : lesMecanos){
+            lesObjMecano.add(new ObjMecanicien(mecano.getId(), mecano.getNom(), mecano.getPrenom(), mecano.getLogin(), mecano.getPassword()));
+        }
+        return lesObjMecano;
     }
 
     

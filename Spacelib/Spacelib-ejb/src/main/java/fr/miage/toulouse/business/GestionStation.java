@@ -6,9 +6,11 @@
 package fr.miage.toulouse.business;
 
 
+import fr.miage.toulouse.entities.Mecanicien;
 import fr.miage.toulouse.entities.Navette;
 import fr.miage.toulouse.entities.Quai;
 import fr.miage.toulouse.entities.Station;
+import fr.miage.toulouse.repositories.MecanicienFacadeLocal;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
@@ -18,7 +20,6 @@ import javax.ejb.Stateless;
 import fr.miage.toulouse.repositories.NavetteFacadeLocal;
 import fr.miage.toulouse.repositories.QuaiFacadeLocal;
 import fr.miage.toulouse.repositories.StationFacadeLocal;
-import java.util.ArrayList;
 
 /**
  *
@@ -35,6 +36,9 @@ public class GestionStation implements GestionStationLocal {
     
     @EJB
     private NavetteFacadeLocal navetteFacade;
+    
+    @EJB
+    private MecanicienFacadeLocal mecanoFacade;
     
     @Override
     public List<Station> consulterStation() {
@@ -133,6 +137,16 @@ public class GestionStation implements GestionStationLocal {
     @Override
     public Station getStationById(long idStation) {
         return stationfacade.find(idStation);
+    }
+
+    @Override
+    public List<Navette> getLesNavettes() {
+        return navetteFacade.findAll();
+    }
+
+    @Override
+    public List<Mecanicien> getLesMecanos() {
+        return mecanoFacade.findAll();
     }
 
 }

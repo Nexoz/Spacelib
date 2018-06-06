@@ -5,6 +5,8 @@
  */
 package fr.miage.toulouse.business;
 
+import fr.miage.toulouse.entities.Mecanicien;
+import fr.miage.toulouse.entities.Navette;
 import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
@@ -19,6 +21,8 @@ import javax.ejb.Local;
 @Local
 public interface GestionStationLocal {
     List<Station> consulterStation();
+    List<Navette> getLesNavettes();
+    List<Mecanicien> getLesMecanos();
     void ajouterStation(String nom, String position);
     void supprimerStation(long idStation) throws StationInconnuException;
     void ModifierStation(long idStation) throws StationInconnuException;
