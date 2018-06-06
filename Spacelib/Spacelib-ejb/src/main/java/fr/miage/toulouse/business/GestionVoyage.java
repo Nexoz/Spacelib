@@ -27,6 +27,7 @@ import fr.miage.toulouse.repositories.QuaiFacadeLocal;
 import fr.miage.toulouse.repositories.ReservationFacadeLocal;
 import fr.miage.toulouse.repositories.StationFacadeLocal;
 import fr.miage.toulouse.repositories.UsagerFacadeLocal;
+import fr.miage.toulouse.spacelibshared.DistancesCalculator;
 /**
  *
  * @author jb
@@ -165,6 +166,18 @@ public class GestionVoyage implements GestionVoyageLocal {
         Quai quai = quaiFacade.find(navette.getQuaiArrimage());
         quaiFacade.desarrimer(quai);
         reservationFacade.voyageInitié(reserv);
+    }
+
+    /**
+     * Permet de calculer la distance en jours entre deux stations
+     * Il est obligatoire de passer des noms en paramètre car nous connaissons uniquement la distance entre 2 stations grâce à leur nom
+     * @param nomStationD Nom de la station de départ
+     * @param nomStationA Nom de la station d'arrivée
+     * @return Nombre de jours nécessaires
+     */
+    @Override
+    public Integer calculerDistance(String nomStationD, String nomStationA) {
+        return DistancesCalculator.getInstance().calculerDistance(nomStationD, nomStationA);
     }
     
     

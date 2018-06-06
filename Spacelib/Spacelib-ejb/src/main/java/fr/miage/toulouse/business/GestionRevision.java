@@ -47,7 +47,12 @@ public class GestionRevision implements GestionRevisionLocal {
     @EJB
     private MecanicienFacadeLocal mecanicienFacade;
 
-
+    /**
+     * Liste les différentes navettes d'un station ayant besoin d'une révision
+     * @param idStation Identifiant de la station souhaitée
+     * @return Liste de Navette à réviser (peut être vide)
+     * @throws StationInconnuException Si la station est inconnue
+     */
     @Override
     public List<Navette> listerNavetteAReviser(Long idStation) throws StationInconnuException{
         Station s = stationFacade.find(idStation);
@@ -66,6 +71,11 @@ public class GestionRevision implements GestionRevisionLocal {
         return res;
     }
 
+    /**
+     * Terminer une révision et rendre la navette à nouveau disponible
+     * @param idRevision
+     * @throws RevisionInconnuException 
+     */
     @Override
     public void finaliserRevision(Long idRevision) throws RevisionInconnuException {
         Revision r = revisionFacade.find(idRevision);
@@ -76,6 +86,15 @@ public class GestionRevision implements GestionRevisionLocal {
         navetteFacade.resetRevision(revisionFacade.getNavette(r)); 
     }
 
+    /**
+     * Démarre la révision d'une navette
+     * @param idStation Station concernée
+     * @param idNavette Navette concernée
+     * @param idMecanicien Mécanicien qui réalise la révision
+     * @return
+     * @throws StationInconnuException
+     * @throws NavetteInconnuException 
+     */
     @Override
     public Revision selectionnerRevision(Long idStation, Long idNavette, Long idMecanicien) throws StationInconnuException, NavetteInconnuException {
         Station station = stationFacade.find(idStation);
@@ -95,6 +114,12 @@ public class GestionRevision implements GestionRevisionLocal {
         return res;
     }
 
+    /**
+     * Permet d'avoir les révisions en cours dans une station
+     * @param idStation Station concernée
+     * @return Liste de révision (peut être vide)
+     * @throws StationInconnuException Si la station est inconnue
+     */
     @Override
     public List<Revision> getRevisionsEnCours(Long idStation) throws StationInconnuException{
         Station s = stationFacade.find(idStation);

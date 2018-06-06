@@ -24,4 +24,5 @@ public interface GestionVoyageLocal {
     void finaliserVoyage(long idNavette, long idReservation, long idQuai) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException;
     void reserverVoyage (long idStationD, long idStationA, long nbPassager, Date dateA, long idEmprunteur,Date dateOpe)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException;
     void demarrerVoyage (long idReservation)throws ReservationInconnuException;
+    Integer calculerDistance(String nomStationD, String nomStationA);
 }

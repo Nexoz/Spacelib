@@ -32,4 +32,9 @@ public class WebServiceReservationUsager {
         return ejbRef.authentifier(login, password);
     }
     
+    @WebMethod(operationName = "calculerDistance")
+    public Integer calculerDistance(@WebParam(name = "nomStationD") String nomStationD, @WebParam(name = "nomStationA") String nomStationA) {
+        return ejbRef.calculerDistance(nomStationD, nomStationA);
+    }
+    
 }
