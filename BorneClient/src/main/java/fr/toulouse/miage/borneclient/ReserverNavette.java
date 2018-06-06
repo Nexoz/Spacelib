@@ -5,7 +5,7 @@
  */
 package fr.toulouse.miage.borneclient;
 
-import fr.miage.toulouse.spacelibshared.Station;
+import fr.miage.toulouse.spacelibshared.admin.ObjStation;
 
 /**
  *
@@ -14,7 +14,7 @@ import fr.miage.toulouse.spacelibshared.Station;
 public class ReserverNavette extends javax.swing.JPanel {
 
     BorneClient jframeAccueil;
-    Station s;
+    ObjStation s;
     
     /**
      * Creates new form ReserverNavette

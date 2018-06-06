@@ -8,8 +8,12 @@ package fr.miage.toulouse.services;
 import fr.miage.toulouse.business.GestionStationLocal;
 import fr.miage.toulouse.business.GestionUtilisateurLocal;
 import fr.miage.toulouse.business.GestionVoyageLocal;
+import fr.miage.toulouse.entities.Station;
+import fr.miage.toulouse.entities.Usager;
 import fr.miage.toulouse.entities.Utilisateur;
 import fr.miage.toulouse.spacelibshared.RMI.SpacelibBorneRemote;
+import fr.miage.toulouse.spacelibshared.admin.ObjStation;
+import fr.miage.toulouse.spacelibshared.admin.ObjUsager;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasNavetteDisponibleException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasQuaiDisponibleException;
@@ -17,6 +21,7 @@ import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.ReservationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.UsagerInconnuException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -54,8 +59,22 @@ public class ServiceBorneRMI implements SpacelibBorneRemote{
     }
     
     @Override
-    public List consulterStation() {
-        return gestionStation.consulterStation();
+    public List<ObjStation> consulterStation() {
+        List<Station> stations = gestionStation.consulterStation();
+        List<ObjStation> res = new ArrayList<>();
+        for(Station s : stations) {
+            res.add(new ObjStation(s.getId(), s.getNom(), s.getPosition(), null));
+        }
+        return res;
+    }
+
+    @Override
+    public ObjUsager authentifier(String login, String password) throws UsagerInconnuException {
+        Utilisateur u = gestionUtilisateur.authentifier(login, password);
+        if(u instanceof Usager){
+            return new ObjUsager(null, u.getId(), u.getNom(), u.getPrenom(), u.getLogin(), u.getPassword());
+        }
+        throw new UsagerInconnuException();
     }
     
 }

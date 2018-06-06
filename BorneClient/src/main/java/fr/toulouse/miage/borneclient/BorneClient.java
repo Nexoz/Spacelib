@@ -5,10 +5,12 @@
  */
 package fr.toulouse.miage.borneclient;
 
+
 import fr.toulouse.miage.borneclient.services.RMIBorneServiceManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -24,16 +26,21 @@ public class BorneClient extends javax.swing.JFrame {
      */
     public BorneClient() {
         initComponents();
+        this.setSize(700, 600);
         this.setTitle("Borne Client");
-        this.setSize(600, 700);
-        try {
-            this.manager = new RMIBorneServiceManager();
-        } catch (NamingException ex) {
+        
+        try{
+            manager = new RMIBorneServiceManager();
+            Login jPanLogin =new Login(this,manager.getBorneRemoteSvc());
+            this.setContentPane(jPanLogin);
+            this.pack();
+            this.setVisible(true);
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }catch(NamingException ex){
+            System.err.println("Erreur d'initialisation RMI : " + ex.getMessage());
             Logger.getLogger(BorneClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Login jPanLogin =new Login(this,manager);
-        this.setContentPane(jPanLogin);
-        this.setVisible(true);
+
     }
 
     /**
@@ -46,19 +53,20 @@ public class BorneClient extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(700, 700));
-        setPreferredSize(new java.awt.Dimension(700, 700));
+        setMaximumSize(new java.awt.Dimension(600, 600));
+        setMinimumSize(new java.awt.Dimension(300, 300));
+        setPreferredSize(new java.awt.Dimension(600, 600));
         setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 416, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 381, Short.MAX_VALUE)
         );
 
         getAccessibleContext().setAccessibleParent(this);
