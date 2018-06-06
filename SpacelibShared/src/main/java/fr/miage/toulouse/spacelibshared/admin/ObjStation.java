@@ -62,6 +62,11 @@ public class ObjStation implements Serializable{
     public void setQuais(List<ObjQuai> quais) {
         this.quais = quais;
     }
+
+    @Override
+    public String toString() {
+        return id + " - " + nom + " (" + position + ")";
+    }
     
     
     

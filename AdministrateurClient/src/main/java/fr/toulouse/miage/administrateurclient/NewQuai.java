@@ -15,11 +15,15 @@ public class NewQuai extends javax.swing.JPanel {
 
     private JFrame main;
     
+    private Home origin;
+    
+    
     /**
      * Creates new form NewQuai
      */
-    public NewQuai(JFrame main) {
+    public NewQuai(JFrame main, Home origin) {
         this.main = main;
+        this.origin = origin;
         initComponents();
     }
 

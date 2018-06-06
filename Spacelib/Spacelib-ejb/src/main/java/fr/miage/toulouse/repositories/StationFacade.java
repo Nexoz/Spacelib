@@ -67,5 +67,18 @@ public class StationFacade extends AbstractFacade<Station> implements StationFac
         }     
         return navProblem;
     }*/
+
+    @Override
+    public List<Quai> getQuaisDispo(long station) {
+        Station s = find(station);
+        List<Quai> quais = s.getListeQuais();
+        List<Quai> quaiDispo = new ArrayList<>();
+        for (Quai q : quais){
+            if (q.getNavArrimée() == null){
+                quaiDispo.add(q);
+            }
+        }
+        return quaiDispo;
+    }
     
 }

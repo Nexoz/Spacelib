@@ -120,8 +120,14 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
     }
 
     @Override
-    public List<ObjQuai> getLesQuais(ObjStation station) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<ObjQuai> getLesQuaisDispo(long station) {
+        
+        List<Quai> lesQuais = gestionStation.getQuaiDispos(station);
+        List<ObjQuai> quaisDispos = new ArrayList<>();
+        for (Quai quai : lesQuais){
+            quaisDispos.add(new ObjQuai(quai.getId(), quai.getCodeQuai(), null));
+        }
+        return quaisDispos;
     }
 
     @Override

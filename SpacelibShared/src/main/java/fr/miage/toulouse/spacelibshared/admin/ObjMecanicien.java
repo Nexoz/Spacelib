@@ -19,5 +19,12 @@ public class ObjMecanicien extends ObjUtilisateur implements Serializable{
     public ObjMecanicien(long id, String nom, String prenom, String login, String password) {
         super(id, nom, prenom, login, password);
     }
+
+    @Override
+    public String toString() {
+        return getLogin() + " - " + getPrenom() + " " + getNom();
+    }
+    
+    
     
 }

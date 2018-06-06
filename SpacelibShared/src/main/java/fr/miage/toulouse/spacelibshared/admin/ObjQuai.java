@@ -51,6 +51,11 @@ public class ObjQuai implements Serializable {
     public void setNavette(ObjNavette navette) {
         this.navette = navette;
     }
+
+    @Override
+    public String toString() {
+        return "SL" + id + " - " + code ;
+    }
     
     
 }
