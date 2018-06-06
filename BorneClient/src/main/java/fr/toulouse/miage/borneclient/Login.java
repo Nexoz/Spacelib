@@ -93,7 +93,6 @@ public class Login extends javax.swing.JPanel{
         jLabellogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabellogin.setText("Login");
 
-        jTextFieldlogin.setText("Login");
         jTextFieldlogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldloginActionPerformed(evt);
@@ -214,7 +213,8 @@ public class Login extends javax.swing.JPanel{
     }//GEN-LAST:event_jButtonValiderMouseClicked
 
     private void jButtonInscriptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonInscriptionMouseClicked
-       jframeAccueil.changerJpanel(this, new Inscription(jframeAccueil,services));
+        System.out.println("inscrption");
+        jframeAccueil.changerJpanel(this, new Inscription(jframeAccueil,services));
     }//GEN-LAST:event_jButtonInscriptionMouseClicked
 
     private void jButtonInscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscriptionActionPerformed

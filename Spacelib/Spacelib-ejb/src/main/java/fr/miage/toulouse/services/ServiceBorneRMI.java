@@ -77,4 +77,9 @@ public class ServiceBorneRMI implements SpacelibBorneRemote{
         throw new UsagerInconnuException();
     }
     
+    @Override
+    public long creerUsager(String nom, String prenom, String login, String password) {
+        return gestionUtilisateur.creerUsager(nom, prenom, login, password);
+    }
+    
 }

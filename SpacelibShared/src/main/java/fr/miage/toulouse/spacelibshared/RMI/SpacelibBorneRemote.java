@@ -29,4 +29,5 @@ public interface SpacelibBorneRemote {
     void demarrerVoyage (long idReservation)throws ReservationInconnuException;
     List<ObjStation> consulterStation() ;
     ObjUsager authentifier(String login, String password) throws UsagerInconnuException;
+    long creerUsager(String nom, String prenom, String login, String password);
 }
