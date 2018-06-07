@@ -33,7 +33,7 @@ Le projet est composé de plusieurs projets NetBeans :
 
 #### Borne
 
-- ???
+- Vérifier que le login est unique (et pas uniquement avec les usagers, inclure mécanos et admins)
 
 #### Application Mécanicien
 
