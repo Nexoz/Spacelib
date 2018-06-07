@@ -192,12 +192,13 @@ public class NewNavette extends javax.swing.JPanel {
         navette.setNbPlaces(Integer.parseInt(spinnerNbPlaces.getValue().toString()));
         if (selectedQuai != null){
             navette.setQuai(selectedQuai);
+            
         }
         try {
-            manager.getAdminRemoteSvc().acheterNavette(navette, selectedQuai.getId());
-        } catch (QuaiInconnuException ex) {
-            Logger.getLogger(NewNavette.class.getName()).log(Level.SEVERE, null, ex);
+            manager.getAdminRemoteSvc().acheterNavette(navette);
         } catch (NavetteInconnuException ex) {
+            Logger.getLogger(NewNavette.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (QuaiInconnuException ex) {
             Logger.getLogger(NewNavette.class.getName()).log(Level.SEVERE, null, ex);
         }
         origin.chargerDonnees();

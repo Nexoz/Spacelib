@@ -102,10 +102,10 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
     }
 
     @Override
-    public void acheterNavette(ObjNavette navette, long idQuai) throws NavetteInconnuException, QuaiInconnuException {
+    public void acheterNavette(ObjNavette navette) throws NavetteInconnuException, QuaiInconnuException {
         Navette eNavette = new Navette();
         eNavette.setNbPlaces(navette.getNbPlaces());
-        gestionStation.acheterNavette(eNavette,idQuai);
+        gestionStation.acheterNavette(eNavette);
     }
 
     @Override
