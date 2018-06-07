@@ -8,6 +8,7 @@ package fr.miage.toulouse.services;
 import fr.miage.toulouse.business.GestionStationLocal;
 import fr.miage.toulouse.business.GestionUtilisateurLocal;
 import fr.miage.toulouse.business.GestionVoyageLocal;
+import fr.miage.toulouse.entities.Reservation;
 import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.entities.Usager;
 import fr.miage.toulouse.entities.Utilisateur;
@@ -49,8 +50,8 @@ public class ServiceBorneRMI implements SpacelibBorneRemote{
     }
     
     @Override
-    public long reserverVoyage (long idStationD, long idStationA, int nbPassager, Date dateA, long idEmprunteur,Date dateOpe)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException{
-        return gestionVoyage.reserverVoyage(idStationD, idStationA, nbPassager, dateA, idEmprunteur, dateOpe);
+    public long reserverVoyage (long idStationD, long idStationA, int nbPassager, long idEmprunteur,Date dateOpe)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException{
+        return gestionVoyage.reserverVoyage(idStationD, idStationA, nbPassager, idEmprunteur, dateOpe);
     }
     
     @Override
@@ -80,6 +81,16 @@ public class ServiceBorneRMI implements SpacelibBorneRemote{
     @Override
     public long creerUsager(String nom, String prenom, String login, String password) {
         return gestionUtilisateur.creerUsager(nom, prenom, login, password);
+    }
+
+    @Override
+    public Long derniereReservation(long idUsager) throws UsagerInconnuException {
+        Reservation r = gestionVoyage.derniereReservation(idUsager);
+        if(r!=null){
+            return r.getId();
+        }else {
+            return null;
+        }
     }
     
 }

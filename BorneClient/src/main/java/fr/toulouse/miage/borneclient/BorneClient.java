@@ -23,6 +23,9 @@ public class BorneClient extends javax.swing.JFrame {
     private Long idStation;
     private Long IdClient;
     private Long IdReservation;
+    private String nomStation;
+    private String nomUsager;
+    private String prenomUsager;
     
     /**
      * Creates new form BorneClient
@@ -117,6 +120,30 @@ public class BorneClient extends javax.swing.JFrame {
 
     public void setIdReservation(Long IdReservation) {
         this.IdReservation = IdReservation;
+    }
+
+    public void setNomStation(String nomStation) {
+        this.nomStation = nomStation;
+    }
+
+    public String getNomStation() {
+        return nomStation;
+    }
+
+    public String getNomUsager() {
+        return nomUsager;
+    }
+
+    public void setNomUsager(String nomUsager) {
+        this.nomUsager = nomUsager;
+    }
+
+    public String getPrenomUsager() {
+        return prenomUsager;
+    }
+
+    public void setPrenomUsager(String prenomUsager) {
+        this.prenomUsager = prenomUsager;
     }
     
     

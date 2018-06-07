@@ -5,6 +5,7 @@
  */
 package fr.miage.toulouse.business;
 
+import fr.miage.toulouse.entities.Reservation;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasNavetteDisponibleException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasQuaiDisponibleException;
@@ -22,7 +23,8 @@ import javax.ejb.Local;
 @Local
 public interface GestionVoyageLocal {
     void finaliserVoyage(long idReservation) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException;
-    long reserverVoyage (long idStationD, long idStationA, int nbPassager, Date dateA, long idEmprunteur,Date dateOpe)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException;
+    long reserverVoyage (long idStationD, long idStationA, int nbPassager, long idEmprunteur,Date dateOpe)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException;
     void demarrerVoyage (long idReservation)throws ReservationInconnuException;
     Integer calculerDistance(String nomStationD, String nomStationA);
+    Reservation derniereReservation(long idUsager) throws UsagerInconnuException;
 }

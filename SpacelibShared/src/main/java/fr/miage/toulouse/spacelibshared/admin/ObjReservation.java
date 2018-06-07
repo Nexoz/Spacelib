@@ -22,8 +22,8 @@ public class ObjReservation extends ObjOperation implements Serializable{
         
     }
 
-    public ObjReservation(ObjQuai quaiArrivee, ObjUsager emprunteur, long id, ObjNavette navette, Date dateDebut, Date dateFin, Date dateOperation, ObjQuai quaiOperation) {
-        super(id, navette, dateDebut, dateFin, dateOperation, quaiOperation);
+    public ObjReservation(ObjQuai quaiArrivee, ObjUsager emprunteur, long id, ObjNavette navette, Date dateDebut, Date dateOperation, ObjQuai quaiOperation) {
+        super(id, navette, dateDebut,null, dateOperation, quaiOperation);
         this.quaiArrivee = quaiArrivee;
         this.emprunteur = emprunteur;
     }
