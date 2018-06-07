@@ -66,7 +66,7 @@
         <!--<div class='col s12 m5 valign-center'>
           <img class="responsive-img" src="space.jpg" />
         </div>-->
-        <form>
+        <form id="reserverform">
           <div class='col s12 reserver-form'>
             <div class='row headerrow'>
               <div class='col s12 m12 l12 xl6'>
@@ -84,45 +84,43 @@
             </div>
             <div class='row'>
               <div class='col s12 m12 l12 xl6'>
-                <select>
-                  <option value="" disabled selected>Date de départ</option>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                  <option value="3">Option 3</option>
-                </select>
                 <label>Date de départ</label>
+                <input id="datedepart" type="text" class="datepicker">
+
               </div>
               <div class='col s12 m12 l12 xl6 darrivelabel'>
-                <label>Date d'arrivée estimée :
-                  <div id="datearrivee"></div>
-                </label>
+                <label>Date d'arrivée estimée</label>
+                <input type="text" id="datearrivee" disabled>
               </div>
+
             </div>
-            <div class='row'>
-              <div class='col s12 m12 l12 xl6'>
-                <select>
-                  <option value="" disabled selected>Nombre de passagers</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                </select>
-                <label>Nombre de passagers</label>
-              </div>
-            </div>
-            <center>
-              <div class='col s12 valign-center'>
-                <input type='submit' class="waves-effect waves-light btn-large hoverable blue darken-4" value='Valider' />
-              </div>
-            </center>
           </div>
-        </form>
+          <div class='row'>
+            <div class='col s12 m12 l12 xl6'>
+              <select>
+                <option value="" disabled selected>Nombre de passagers</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+              <label>Nombre de passagers</label>
+            </div>
+          </div>
+          <center>
+            <div class='col s12 valign-center'>
+              <input id="submit" type='submit' class="waves-effect waves-light btn-large hoverable blue darken-4" value='Valider' disabled
+              />
+            </div>
+          </center>
       </div>
+      </form>
     </div>
+  </div>
   </div>
 
   <div class='hide-on-small-only placeholder'></div>
@@ -145,7 +143,8 @@
 
 
   <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <script src="lib/materialize.js"></script>
   <script src="lib/xml2json.js"></script>
   <script src="lib/jquery.soap.js"></script>
