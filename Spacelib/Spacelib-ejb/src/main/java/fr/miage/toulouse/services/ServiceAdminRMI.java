@@ -42,8 +42,7 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         for(Station s : stations){
             ObjStation tmp = new ObjStation(s.getId(), s.getNom(), s.getPosition(), new ArrayList<ObjQuai>());
             for (Quai q : s.getListeQuais()){
-                System.out.println(q.getId());
-                tmp.getQuais().add(new ObjQuai(q.getId(), q.getCodeQuai(),null));
+                tmp.getQuais().add(new ObjQuai(q.getId(), q.getCodeQuai(),null, new ObjStation(0, q.getStation().getNom(), "", null)));
             }
             objStations.add(tmp);
         }
@@ -134,7 +133,7 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
             ObjQuai q = new ObjQuai();
             if (n.getQuaiArrimage() != null){
                 Quai tmp = n.getQuaiArrimage();
-                q = new ObjQuai(tmp.getId(), tmp.getCodeQuai(), null);
+                q = new ObjQuai(tmp.getId(), tmp.getCodeQuai(), null, new ObjStation(0, tmp.getStation().getNom(), "", null));
             }
             List<ObjOperation> ope = new ArrayList<ObjOperation>();
             //for (Operation o : n.getListeOperations()){
@@ -152,7 +151,7 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         List<Quai> lesQuais = gestionStation.getQuaiDispos(station);
         List<ObjQuai> quaisDispos = new ArrayList<>();
         for (Quai quai : lesQuais){
-            quaisDispos.add(new ObjQuai(quai.getId(), quai.getCodeQuai(), null));
+            quaisDispos.add(new ObjQuai(quai.getId(), quai.getCodeQuai(), null,null));
         }
         return quaisDispos;
     }

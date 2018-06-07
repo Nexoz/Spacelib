@@ -23,10 +23,11 @@ public class ObjQuai implements Serializable {
         
     }
 
-    public ObjQuai(long id, String code, ObjNavette navette) {
+    public ObjQuai(long id, String code, ObjNavette navette, ObjStation station) {
         this.id = id;
         this.code = code;
         this.navette = navette;
+        this.station = station;
     }
 
     public long getId() {

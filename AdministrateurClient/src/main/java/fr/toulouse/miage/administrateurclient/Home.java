@@ -32,6 +32,8 @@ public class Home extends javax.swing.JPanel {
     private RMIAdminServiceManager manager;
     
     private ObjStation selectedStation = new ObjStation();
+    private ObjNavette selectedNavette = new ObjNavette();
+    private ObjMecanicien selectedMecano = new ObjMecanicien();
     
     private DefaultListModel modelStations = new DefaultListModel<>();
     private DefaultListModel modelNavettes = new DefaultListModel();
@@ -65,6 +67,26 @@ public class Home extends javax.swing.JPanel {
             quaiStationModel.addElement(quai);
         }
         listeQuaiStation.setModel(quaiStationModel);
+    }
+    
+    public void afficherNavette(){
+        labelNumNavette.setText("" + selectedNavette.getId());
+        spinnerPlaces.setValue(selectedNavette.getNbPlaces());
+        if (selectedNavette.getQuai().getCode() != null){
+            labelNomStationNavette.setText(selectedNavette.getQuai().getStation().getNom());
+            labelQuaiNavette.setText(selectedNavette.getQuai().getCode());
+        }else{
+            labelNomStationNavette.setText("Navette non arrimée");
+            labelQuaiNavette.setText("Pas de quai disponible");
+        }
+        
+    }
+    
+    public void afficherMecano(){
+        TFLogin.setText(selectedMecano.getLogin());
+        TFPassword.setText(selectedMecano.getPassword());
+        labelNomMecano.setText(selectedMecano.getNom());
+        labelPrenomMecano.setText(selectedMecano.getPrenom());
     }
     
     public void chargerDonnees(){
@@ -132,7 +154,7 @@ public class Home extends javax.swing.JPanel {
         labelNumNavette = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spinnerPlaces = new javax.swing.JSpinner();
         labelEtatRevision = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         labelNomStationNavette = new javax.swing.JLabel();
@@ -285,6 +307,11 @@ public class Home extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        listeNavettes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listeNavettesValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(listeNavettes);
 
         btnAddNavette.setText("+");
@@ -306,7 +333,7 @@ public class Home extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel4.setText("Prochaine révision dans : ");
 
-        jSpinner1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        spinnerPlaces.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
 
         labelEtatRevision.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         labelEtatRevision.setText("EtatRevision");
@@ -360,7 +387,7 @@ public class Home extends javax.swing.JPanel {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(spinnerPlaces, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -407,7 +434,7 @@ public class Home extends javax.swing.JPanel {
                         .addGap(45, 45, 45)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(spinnerPlaces, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -436,6 +463,11 @@ public class Home extends javax.swing.JPanel {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        listeMecaniciens.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listeMecaniciensValueChanged(evt);
+            }
         });
         jScrollPane1.setViewportView(listeMecaniciens);
 
@@ -616,6 +648,16 @@ public class Home extends javax.swing.JPanel {
         afficherStation();
     }//GEN-LAST:event_listeStationsValueChanged
 
+    private void listeNavettesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listeNavettesValueChanged
+        selectedNavette = (ObjNavette) listeNavettes.getSelectedValue();
+        afficherNavette();
+    }//GEN-LAST:event_listeNavettesValueChanged
+
+    private void listeMecaniciensValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listeMecaniciensValueChanged
+        selectedMecano = (ObjMecanicien) listeMecaniciens.getSelectedValue();
+        afficherMecano();
+    }//GEN-LAST:event_listeMecaniciensValueChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TFLogin;
@@ -647,7 +689,6 @@ public class Home extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel labelEtatRevision;
     private javax.swing.JLabel labelNomMecano;
     private javax.swing.JLabel labelNomStation;
@@ -660,6 +701,7 @@ public class Home extends javax.swing.JPanel {
     private javax.swing.JList listeNavettes;
     private javax.swing.JList listeQuaiStation;
     private javax.swing.JList listeStations;
+    private javax.swing.JSpinner spinnerPlaces;
     private javax.swing.JTabbedPane tabs;
     // End of variables declaration//GEN-END:variables
 }
