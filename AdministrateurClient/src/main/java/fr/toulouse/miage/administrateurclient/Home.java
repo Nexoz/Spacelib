@@ -586,17 +586,10 @@ public class Home extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEnregistrerMecanoActionPerformed
 
     private void btnAddQuaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddQuaiActionPerformed
-        final JFrame f = new JFrame("Nouveau quai");
-        ObjQuai quai = NewQuai.openForm(f);
-        quaiStationModel.addElement(quai);
-        try {
-            manager.getAdminRemoteSvc().ajouterQuai(selectedStation, quai);
-        } catch (StationInconnuException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (QuaiInconnuException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        listeQuaiStation.setModel(quaiStationModel);
+        JFrame newQuai = new JFrame();
+        newQuai.add(new NewQuai(newQuai, this, selectedStation));
+        newQuai.pack();
+        newQuai.setVisible(true);
     }//GEN-LAST:event_btnAddQuaiActionPerformed
 
     private void btnEnregistrerStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerStationActionPerformed

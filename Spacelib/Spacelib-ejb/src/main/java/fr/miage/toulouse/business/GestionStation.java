@@ -46,8 +46,8 @@ public class GestionStation implements GestionStationLocal {
     }
 
     @Override
-    public void ajouterStation(String nom, String position) {
-        Station s = new Station(nom, position);
+    public void ajouterStation(String nom, String position, List<Quai> quais) {
+        Station s = new Station(nom, position, quais);
         stationfacade.create(s);
         System.out.println(s.getId());
     }

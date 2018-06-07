@@ -17,6 +17,7 @@ public class ObjQuai implements Serializable {
     private long id;
     private String code;
     private ObjNavette navette;
+    private ObjStation station;
     
     public ObjQuai(){
         
@@ -55,6 +56,14 @@ public class ObjQuai implements Serializable {
     @Override
     public String toString() {
         return "SL" + id + " - " + code ;
+    }
+
+    public ObjStation getStation() {
+        return station;
+    }
+
+    public void setStation(ObjStation station) {
+        this.station = station;
     }
     
     
