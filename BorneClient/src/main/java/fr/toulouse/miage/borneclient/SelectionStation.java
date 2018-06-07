@@ -133,6 +133,7 @@ public class SelectionStation extends javax.swing.JPanel {
 
     private void jButtonSélectionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSélectionMouseClicked
         ObjStation selectedStation = (ObjStation) jListStation.getSelectedValue();
+        jframeAccueil.setNomStation(selectedStation.getNom());
         jframeAccueil.setIdStation(selectedStation.getId());
         jframeAccueil.changerJpanel(this, new Login(jframeAccueil,""));
     }//GEN-LAST:event_jButtonSélectionMouseClicked

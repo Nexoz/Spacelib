@@ -28,6 +28,8 @@ public class FinaliserVoyage extends javax.swing.JPanel {
         initComponents();
         this.jframeAccueil = j;
         this.manager = j.getManager();
+        this.jLabelUsager.setText(j.getNomUsager() + " " + j.getPrenomUsager()+"    ");
+        this.jLabelNomStation.setText("     Station " + j.getNomStation());
     }
 
     /**
@@ -39,8 +41,6 @@ public class FinaliserVoyage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelTop = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanelBot = new javax.swing.JPanel();
         jPanelCenter = new javax.swing.JPanel();
         jLabelStationA = new javax.swing.JLabel();
@@ -49,21 +49,14 @@ public class FinaliserVoyage extends javax.swing.JPanel {
         jLabelTitre = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        DecoButton = new javax.swing.JButton();
+        jPanelTop = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelNomStation = new javax.swing.JLabel();
+        jLabelUsager = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
-
-        jPanelTop.setBackground(new java.awt.Color(0, 0, 51));
-        jPanelTop.setMinimumSize(new java.awt.Dimension(168, 60));
-        jPanelTop.setPreferredSize(new java.awt.Dimension(241, 90));
-
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("WELCOME to Spacelib");
-        jLabel1.setToolTipText("");
-        jPanelTop.add(jLabel1);
-
-        add(jPanelTop, java.awt.BorderLayout.PAGE_START);
 
         jPanelBot.setBackground(new java.awt.Color(255, 255, 255));
         add(jPanelBot, java.awt.BorderLayout.PAGE_END);
@@ -99,6 +92,22 @@ public class FinaliserVoyage extends javax.swing.JPanel {
 
         jLabel3.setText("Arrivée le :");
 
+        DecoButton.setBackground(new java.awt.Color(0, 0, 51));
+        DecoButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        DecoButton.setForeground(new java.awt.Color(255, 255, 255));
+        DecoButton.setText("Déconnexion");
+        DecoButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        DecoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DecoButtonMouseClicked(evt);
+            }
+        });
+        DecoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DecoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
@@ -114,14 +123,19 @@ public class FinaliserVoyage extends javax.swing.JPanel {
                             .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelStationD)
-                            .addComponent(jLabelTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                .addComponent(jLabelTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(DecoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabelStationA))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelCenterLayout.setVerticalGroup(
             jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCenterLayout.createSequentialGroup()
-                .addComponent(jLabelTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DecoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
@@ -139,6 +153,30 @@ public class FinaliserVoyage extends javax.swing.JPanel {
         );
 
         add(jPanelCenter, java.awt.BorderLayout.CENTER);
+
+        jPanelTop.setBackground(new java.awt.Color(0, 0, 51));
+        jPanelTop.setMinimumSize(new java.awt.Dimension(168, 60));
+        jPanelTop.setPreferredSize(new java.awt.Dimension(241, 90));
+        jPanelTop.setLayout(new java.awt.GridLayout(2, 1));
+
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("    WELCOME to Spacelib");
+        jLabel1.setToolTipText("");
+        jPanelTop.add(jLabel1);
+        jPanelTop.add(jLabel5);
+
+        jLabelNomStation.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelNomStation.setForeground(new java.awt.Color(255, 255, 255));
+        jPanelTop.add(jLabelNomStation);
+
+        jLabelUsager.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelUsager.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelUsager.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanelTop.add(jLabelUsager);
+
+        add(jPanelTop, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonValiderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValiderMouseClicked
@@ -158,15 +196,35 @@ public class FinaliserVoyage extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButtonValiderActionPerformed
 
+    private void DecoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DecoButtonMouseClicked
+        jframeAccueil.setIdClient(null);
+        jframeAccueil.setIdReservation(null);
+        jframeAccueil.setIdStation(null);
+        jframeAccueil.changerJpanel(this, new SelectionStation(jframeAccueil));
+        jframeAccueil.setNomUsager(null);
+        jframeAccueil.setPrenomUsager(null);
+        jframeAccueil.setNomStation(null);
+        jLabelNomStation.setText("");
+        jLabelUsager.setText("");
+    }//GEN-LAST:event_DecoButtonMouseClicked
+
+    private void DecoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DecoButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DecoButton;
     private javax.swing.JButton jButtonValider;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelNomStation;
     private javax.swing.JLabel jLabelStationA;
     private javax.swing.JLabel jLabelStationD;
     private javax.swing.JLabel jLabelTitre;
+    private javax.swing.JLabel jLabelUsager;
     private javax.swing.JPanel jPanelBot;
     private javax.swing.JPanel jPanelCenter;
     private javax.swing.JPanel jPanelTop;

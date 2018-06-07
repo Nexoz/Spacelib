@@ -55,9 +55,7 @@ public class GestionVoyage implements GestionVoyageLocal {
     
     /***
      * Effectue les taches necessaires à l'arrivée d'une navette 
-     * @param idNavette identifiant de la navette qui arrive 
      * @param idReservation identifiant du voyage qui se termine
-     * @param idQuai identitfiant du quai sur lequel la nevette va s'arrimer
      * @throws NavetteInconnuException
      * @throws ReservationInconnuException
      * @throws QuaiInconnuException 
@@ -94,7 +92,6 @@ public class GestionVoyage implements GestionVoyageLocal {
      * @param idStationD identifiant de la station de départ 
      * @param idStationA identifiant de la station d'arrivée
      * @param nbPassager nombre de passagers pour le voyage 
-     * @param dateA date d'arrivée 
      * @param idEmprunteur identifiant de l'usager qui réserve le voyage 
      * @param dateOpe date de l'enregistrement de la réservation
      * @throws NavetteInconnuException
@@ -104,7 +101,7 @@ public class GestionVoyage implements GestionVoyageLocal {
      * @throws UsagerInconnuException 
      */
     @Override
-    public long reserverVoyage(long idStationD, long idStationA, int nbPassager, Date dateA, long idEmprunteur, Date dateOpe) throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException {
+    public long reserverVoyage(long idStationD, long idStationA, int nbPassager, long idEmprunteur, Date dateOpe) throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException {
         //Tests d'existences
             Station stationDepart = this.stationFacade.find(idStationD);
             if (stationDepart == null) {
@@ -134,7 +131,6 @@ public class GestionVoyage implements GestionVoyageLocal {
                 throw new PasNavetteDisponibleException();
             }
         //Tests Quais Disponibles dans la station d'arrivée
-        //////////////////Ajouter le test de la date
             List<Quai> listQuaisArr = stationFacade.getQuais(stationA);
             Quai quaiA=null;
             for(Quai q : listQuaisArr ){
@@ -146,9 +142,11 @@ public class GestionVoyage implements GestionVoyageLocal {
                 throw new PasQuaiDisponibleException();
             }
         //création de la réservation
-            Reservation reservation = this.reservationFacade.creerReservation("Voyage enregistré",quaiD, quaiA, dateA, emprunteur,nbPassager, navDisponible, dateOpe);
+            Reservation reservation = this.reservationFacade.creerReservation("Voyage enregistré",quaiD, quaiA, emprunteur,nbPassager, navDisponible, dateOpe);
             this.usagerFacade.ajouterReservation(emprunteur, reservation);
             this.navetteFacade.ajouterOperation(navDisponible, reservation);
+            Date dateA = new Date();
+            dateA.setDate(dateOpe.getDate()+DistancesCalculator.getInstance().calculerDistance(stationA.getNom(),stationDepart.getNom()));
             this.quaiFacade.reserverQuai(quaiA,dateA);
             
         return reservation.getId();
@@ -183,6 +181,25 @@ public class GestionVoyage implements GestionVoyageLocal {
     public Integer calculerDistance(String nomStationD, String nomStationA) {
         return DistancesCalculator.getInstance().calculerDistance(nomStationD, nomStationA);
     }
+
+    @Override
+    public Reservation derniereReservation(long idUsager) throws UsagerInconnuException{
+        Usager usager = this.usagerFacade.find(idUsager);
+            if (usager == null) {
+                throw new UsagerInconnuException();
+            }
+        if(usagerFacade.reservationsUsager(usager)!=null){
+            for(Reservation r : usagerFacade.reservationsUsager(usager)){
+                if(r.getDateFin()!=null){
+                    return r;
+                }
+            }
+            return null;
+        }
+        return null;
+    }
+    
+    
     
     
 }

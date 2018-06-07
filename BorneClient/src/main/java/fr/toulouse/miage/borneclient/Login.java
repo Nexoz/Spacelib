@@ -28,6 +28,7 @@ public class Login extends javax.swing.JPanel{
         this.manager=j.getManager();
         this.jLabelSuccès.setText(message);
         this.idStation = j.getIdStation();
+        this.jLabelNomStation.setText("     Station " + j.getNomStation());
     }
 
     /**
@@ -42,6 +43,9 @@ public class Login extends javax.swing.JPanel{
         jPanel5 = new javax.swing.JPanel();
         jPanelTop = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelNomStation = new javax.swing.JLabel();
+        jLabelUsager = new javax.swing.JLabel();
         jPanelCenter = new javax.swing.JPanel();
         jLabellogin = new javax.swing.JLabel();
         jTextFieldlogin = new javax.swing.JTextField();
@@ -71,13 +75,20 @@ public class Login extends javax.swing.JPanel{
         jPanelTop.setBackground(new java.awt.Color(0, 0, 51));
         jPanelTop.setMinimumSize(new java.awt.Dimension(168, 60));
         jPanelTop.setPreferredSize(new java.awt.Dimension(241, 90));
+        jPanelTop.setLayout(new java.awt.GridLayout(2, 1));
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("WELCOME to Spacelib");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("    WELCOME to Spacelib");
         jLabel1.setToolTipText("");
         jPanelTop.add(jLabel1);
+        jPanelTop.add(jLabel2);
+
+        jLabelNomStation.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelNomStation.setForeground(new java.awt.Color(255, 255, 255));
+        jPanelTop.add(jLabelNomStation);
+        jPanelTop.add(jLabelUsager);
 
         add(jPanelTop, java.awt.BorderLayout.PAGE_START);
 
@@ -206,13 +217,16 @@ public class Login extends javax.swing.JPanel{
         try {
             u = manager.getBorneRemoteSvc().authentifier(jTextFieldlogin.getText(),jPasswordField.getText());
             jframeAccueil.setIdClient(u.getId());
+            jframeAccueil.setNomUsager(u.getNom());
+            jframeAccueil.setPrenomUsager(u.getPrenom());
             ///////Vérifier si réservation en cours
-            ////Si non
+            Long idres = manager.getBorneRemoteSvc().derniereReservation(u.getId());
+            if(idres==null){
                 jframeAccueil.changerJpanel(this, new ReserverNavette(jframeAccueil,""));
-            ////si oui
-                //récupérer id réservation en cours
-                /*jframeAccueil.setIdReservation(idRésa);
-                jframeAccueil.changerJpanel(this, new FinaliserVoyage(jframeAccueil));*/
+            } else {
+                jframeAccueil.setIdReservation(idres);
+                jframeAccueil.changerJpanel(this, new FinaliserVoyage(jframeAccueil));
+            }
         } catch (UsagerInconnuException ex) {
             jLabelErreur.setText("Erreur : Vos identifiants sont incorrects");
             jLabelSuccès.setText("");
@@ -238,9 +252,12 @@ public class Login extends javax.swing.JPanel{
     private javax.swing.JButton jButtonInscription;
     private javax.swing.JButton jButtonValider;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelErreur;
+    private javax.swing.JLabel jLabelNomStation;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelSuccès;
+    private javax.swing.JLabel jLabelUsager;
     private javax.swing.JLabel jLabellogin;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanelBot;

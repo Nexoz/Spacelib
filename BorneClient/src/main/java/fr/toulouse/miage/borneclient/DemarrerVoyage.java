@@ -31,6 +31,8 @@ public class DemarrerVoyage extends javax.swing.JPanel {
         initComponents();
         this.manager = j.getManager();
         this.jframeAccueil = j;
+        this.jLabelUsager.setText(j.getNomUsager() + " " + j.getPrenomUsager()+"    ");
+        this.jLabelNomStation.setText("     Station " + j.getNomStation());
 
     }
 
@@ -46,9 +48,12 @@ public class DemarrerVoyage extends javax.swing.JPanel {
         jPanelCenter = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jButtonDeco = new javax.swing.JButton();
+        jPanelBot = new javax.swing.JPanel();
         jPanelTop = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanelBot = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelNomStation = new javax.swing.JLabel();
+        jLabelUsager = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(700, 700));
@@ -100,21 +105,32 @@ public class DemarrerVoyage extends javax.swing.JPanel {
 
         add(jPanelCenter, java.awt.BorderLayout.CENTER);
 
+        jPanelBot.setBackground(new java.awt.Color(255, 255, 255));
+        add(jPanelBot, java.awt.BorderLayout.PAGE_END);
+
         jPanelTop.setBackground(new java.awt.Color(0, 0, 51));
         jPanelTop.setMinimumSize(new java.awt.Dimension(168, 60));
         jPanelTop.setPreferredSize(new java.awt.Dimension(241, 90));
+        jPanelTop.setLayout(new java.awt.GridLayout(2, 1));
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("WELCOME to Spacelib");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("    WELCOME to Spacelib");
         jLabel1.setToolTipText("");
         jPanelTop.add(jLabel1);
+        jPanelTop.add(jLabel5);
+
+        jLabelNomStation.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelNomStation.setForeground(new java.awt.Color(255, 255, 255));
+        jPanelTop.add(jLabelNomStation);
+
+        jLabelUsager.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelUsager.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelUsager.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanelTop.add(jLabelUsager);
 
         add(jPanelTop, java.awt.BorderLayout.PAGE_START);
-
-        jPanelBot.setBackground(new java.awt.Color(255, 255, 255));
-        add(jPanelBot, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonDecoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDecoMouseClicked
@@ -124,12 +140,14 @@ public class DemarrerVoyage extends javax.swing.JPanel {
             jframeAccueil.setIdReservation(null);
             jframeAccueil.setIdStation(null);
             jframeAccueil.changerJpanel(this, new SelectionStation(jframeAccueil));
-            
+            jframeAccueil.setNomUsager(null);
+            jframeAccueil.setPrenomUsager(null);
+            jframeAccueil.setNomStation(null);
+            jLabelNomStation.setText("");
+            jLabelUsager.setText("");
         } catch (ReservationInconnuException ex) {
             Logger.getLogger(DemarrerVoyage.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
     }//GEN-LAST:event_jButtonDecoMouseClicked
 
     private void jButtonDecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDecoActionPerformed
@@ -142,6 +160,9 @@ public class DemarrerVoyage extends javax.swing.JPanel {
     private javax.swing.JButton jButtonDeco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelNomStation;
+    private javax.swing.JLabel jLabelUsager;
     private javax.swing.JPanel jPanelBot;
     private javax.swing.JPanel jPanelCenter;
     private javax.swing.JPanel jPanelTop;

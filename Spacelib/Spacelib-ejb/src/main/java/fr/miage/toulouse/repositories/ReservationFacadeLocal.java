@@ -45,7 +45,7 @@ public interface ReservationFacadeLocal {
     
     void quaiArrivee(Reservation r, Quai quai);
    
-    Reservation creerReservation(String voyage_initié, Quai quaiD, Quai quaiA, Date dateA, Usager idEmprunteur, int nbPassager, Navette navDisponible,Date dateOpe);
+    Reservation creerReservation(String voyage_initié, Quai quaiD, Quai quaiA, Usager idEmprunteur, int nbPassager, Navette navDisponible,Date dateOpe);
     
     
 }

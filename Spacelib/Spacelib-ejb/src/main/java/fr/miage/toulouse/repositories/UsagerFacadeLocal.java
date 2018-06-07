@@ -33,5 +33,7 @@ public interface UsagerFacadeLocal {
     
     void ajouterReservation(Usager usager,Reservation r);
     
+    List<Reservation> reservationsUsager(Usager usager);
+    
    // Usager nouvelUsager( String nom,String prenom, String login, String password);
 }

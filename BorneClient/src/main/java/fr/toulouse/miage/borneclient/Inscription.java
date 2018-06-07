@@ -25,6 +25,7 @@ public class Inscription extends javax.swing.JPanel{
      */
     public Inscription(BorneClient j) {
         initComponents();
+        this.jLabelNomStation.setText("     Station " + j.getNomStation());
         jframeAccueil = j;
         try {
             manager = new RMIBorneServiceManager();
@@ -43,8 +44,6 @@ public class Inscription extends javax.swing.JPanel{
     private void initComponents() {
 
         jPanel5 = new javax.swing.JPanel();
-        jPanelTop = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanelCenter = new javax.swing.JPanel();
         jLabellogin = new javax.swing.JLabel();
         jTextFieldPrenom = new javax.swing.JTextField();
@@ -57,7 +56,13 @@ public class Inscription extends javax.swing.JPanel{
         jTextFieldLogin = new javax.swing.JTextField();
         jTextFieldPassword = new javax.swing.JTextField();
         jLabellogin3 = new javax.swing.JLabel();
+        jButtonRetour = new javax.swing.JButton();
         jPanelBot = new javax.swing.JPanel();
+        jPanelTop = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelNomStation = new javax.swing.JLabel();
+        jLabelUsager = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -73,19 +78,6 @@ public class Inscription extends javax.swing.JPanel{
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(700, 700));
         setLayout(new java.awt.BorderLayout());
-
-        jPanelTop.setBackground(new java.awt.Color(0, 0, 51));
-        jPanelTop.setMinimumSize(new java.awt.Dimension(168, 60));
-        jPanelTop.setPreferredSize(new java.awt.Dimension(241, 90));
-
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("WELCOME to Spacelib");
-        jLabel1.setToolTipText("");
-        jPanelTop.add(jLabel1);
-
-        add(jPanelTop, java.awt.BorderLayout.PAGE_START);
 
         jPanelCenter.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -147,6 +139,22 @@ public class Inscription extends javax.swing.JPanel{
         jLabellogin3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabellogin3.setText("Veuillez saisir toutes les informations");
 
+        jButtonRetour.setBackground(new java.awt.Color(0, 0, 51));
+        jButtonRetour.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonRetour.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonRetour.setText("Retour");
+        jButtonRetour.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButtonRetour.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonRetourMouseClicked(evt);
+            }
+        });
+        jButtonRetour.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRetourActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
@@ -176,7 +184,9 @@ public class Inscription extends javax.swing.JPanel{
                                     .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(jButtonRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         jPanelCenterLayout.setVerticalGroup(
             jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +194,9 @@ public class Inscription extends javax.swing.JPanel{
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabellogin3)
+                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabellogin3)
+                            .addComponent(jButtonRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,7 +215,7 @@ public class Inscription extends javax.swing.JPanel{
                             .addComponent(jLabelPassword))
                         .addGap(18, 18, 18)
                         .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 28, Short.MAX_VALUE))
+                        .addGap(0, 18, Short.MAX_VALUE))
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addGap(119, 119, 119)
                         .addComponent(jLabelErreur, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -214,6 +226,30 @@ public class Inscription extends javax.swing.JPanel{
 
         jPanelBot.setBackground(new java.awt.Color(255, 255, 255));
         add(jPanelBot, java.awt.BorderLayout.PAGE_END);
+
+        jPanelTop.setBackground(new java.awt.Color(0, 0, 51));
+        jPanelTop.setMinimumSize(new java.awt.Dimension(168, 60));
+        jPanelTop.setPreferredSize(new java.awt.Dimension(241, 90));
+        jPanelTop.setLayout(new java.awt.GridLayout(2, 1));
+
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("    WELCOME to Spacelib");
+        jLabel1.setToolTipText("");
+        jPanelTop.add(jLabel1);
+        jPanelTop.add(jLabel5);
+
+        jLabelNomStation.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelNomStation.setForeground(new java.awt.Color(255, 255, 255));
+        jPanelTop.add(jLabelNomStation);
+
+        jLabelUsager.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelUsager.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelUsager.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanelTop.add(jLabelUsager);
+
+        add(jPanelTop, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldPrenomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPrenomActionPerformed
@@ -242,12 +278,24 @@ public class Inscription extends javax.swing.JPanel{
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPasswordActionPerformed
 
+    private void jButtonRetourMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonRetourMouseClicked
+        jframeAccueil.changerJpanel(this, new Login(jframeAccueil,""));
+    }//GEN-LAST:event_jButtonRetourMouseClicked
+
+    private void jButtonRetourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetourActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRetourActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonRetour;
     private javax.swing.JButton jButtonValider;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelErreur;
+    private javax.swing.JLabel jLabelNomStation;
     private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JLabel jLabelUsager;
     private javax.swing.JLabel jLabellogin;
     private javax.swing.JLabel jLabellogin1;
     private javax.swing.JLabel jLabellogin2;

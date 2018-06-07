@@ -44,7 +44,8 @@ public class ReserverNavette extends javax.swing.JPanel {
         this.idClient = j.getIdClient();
         this.idStation = j.getIdStation();
         this.initialiserListStation();
-
+        this.jLabelUsager.setText(j.getNomUsager() + " " + j.getPrenomUsager()+"    ");
+        this.jLabelNomStation.setText("     Station " + j.getNomStation());
         jSpinnerNb = new JSpinner(new SpinnerNumberModel(1,0,8,1)); 
     }
 
@@ -65,11 +66,14 @@ public class ReserverNavette extends javax.swing.JPanel {
         jButtonReserver = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jListStation = new javax.swing.JList();
-        jLabel5 = new javax.swing.JLabel();
-        jFormattedDate = new javax.swing.JFormattedTextField();
+        jLabelErreur = new javax.swing.JLabel();
+        DecoButton = new javax.swing.JButton();
+        jPanelBot = new javax.swing.JPanel();
         jPanelTop = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanelBot = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelNomStation = new javax.swing.JLabel();
+        jLabelUsager = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(700, 700));
@@ -109,99 +113,128 @@ public class ReserverNavette extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(jListStation);
 
-        jLabel5.setText("Date d'arrivée ");
+        jLabelErreur.setForeground(new java.awt.Color(255, 0, 0));
 
-        jFormattedDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        DecoButton.setBackground(new java.awt.Color(0, 0, 51));
+        DecoButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        DecoButton.setForeground(new java.awt.Color(255, 255, 255));
+        DecoButton.setText("Déconnexion");
+        DecoButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        DecoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DecoButtonMouseClicked(evt);
+            }
+        });
+        DecoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DecoButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
         jPanelCenterLayout.setHorizontalGroup(
             jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCenterLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCenterLayout.createSequentialGroup()
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jFormattedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(81, 81, 81))
-                                .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(105, 105, 105)
-                                    .addComponent(jSpinnerNb, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(116, 116, 116)
+                                .addComponent(jSpinnerNb, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelErreur, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonReserver, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 118, Short.MAX_VALUE))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(DecoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(jPanelCenterLayout.createSequentialGroup()
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                        .addGap(308, 308, 308)
+                        .addComponent(jButtonReserver, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 147, Short.MAX_VALUE))
         );
         jPanelCenterLayout.setVerticalGroup(
             jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCenterLayout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCenterLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(DecoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jFormattedDate)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinnerNb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelErreur, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSpinnerNb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addGap(36, 36, 36)
                 .addComponent(jButtonReserver, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         add(jPanelCenter, java.awt.BorderLayout.CENTER);
 
+        jPanelBot.setBackground(new java.awt.Color(255, 255, 255));
+        add(jPanelBot, java.awt.BorderLayout.PAGE_END);
+
         jPanelTop.setBackground(new java.awt.Color(0, 0, 51));
         jPanelTop.setMinimumSize(new java.awt.Dimension(168, 60));
         jPanelTop.setPreferredSize(new java.awt.Dimension(241, 90));
+        jPanelTop.setLayout(new java.awt.GridLayout(2, 1));
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("WELCOME to Spacelib");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("    WELCOME to Spacelib");
         jLabel1.setToolTipText("");
         jPanelTop.add(jLabel1);
+        jPanelTop.add(jLabel5);
+
+        jLabelNomStation.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelNomStation.setForeground(new java.awt.Color(255, 255, 255));
+        jPanelTop.add(jLabelNomStation);
+
+        jLabelUsager.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelUsager.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelUsager.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanelTop.add(jLabelUsager);
 
         add(jPanelTop, java.awt.BorderLayout.PAGE_START);
-
-        jPanelBot.setBackground(new java.awt.Color(255, 255, 255));
-        add(jPanelBot, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonReserverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonReserverMouseClicked
         ObjStation selectedStation = (ObjStation) jListStation.getSelectedValue();
-        Date dateA = new Date(jFormattedDate.getText());
         int nbParticipant = Integer.parseInt(jSpinnerNb.getModel().getValue().toString());
         try {
-            long idReservation = manager.getBorneRemoteSvc().reserverVoyage(this.idStation, selectedStation.getId(),nbParticipant, dateA,this.idClient, this.aujourdhui());
+            long idReservation = manager.getBorneRemoteSvc().reserverVoyage(this.idStation, selectedStation.getId(),nbParticipant,this.idClient, this.aujourdhui());
             jframeAccueil.setIdReservation(idReservation);
             jframeAccueil.changerJpanel(this, new DemarrerVoyage(jframeAccueil));
         } catch (NavetteInconnuException ex) {
-            Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
+            jLabelErreur.setText("La navette n'existe pas.");
         } catch (StationInconnuException ex) {
-            Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
+            jLabelErreur.setText("La station n'existe pas.");
         } catch (PasNavetteDisponibleException ex) {
-            Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
+            jLabelErreur.setText("Pas de navette disponible aujourd'hui.");
         } catch (PasQuaiDisponibleException ex) {
-            Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
+             jLabelErreur.setText("Pas de quai disponible pour le jour de votre arrivée.");
         } catch (UsagerInconnuException ex) {
-            Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
+             jLabelErreur.setText("Vous n'existez pas");
         }
     }//GEN-LAST:event_jButtonReserverMouseClicked
 
@@ -209,10 +242,26 @@ public class ReserverNavette extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButtonReserverActionPerformed
 
+    private void DecoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DecoButtonMouseClicked
+        jframeAccueil.setIdClient(null);
+        jframeAccueil.setIdReservation(null);
+        jframeAccueil.setIdStation(null);
+        jframeAccueil.changerJpanel(this, new SelectionStation(jframeAccueil));
+        jframeAccueil.setNomUsager(null);
+        jframeAccueil.setPrenomUsager(null);
+        jframeAccueil.setNomStation(null);
+        jLabelNomStation.setText("");
+        jLabelUsager.setText("");
+    }//GEN-LAST:event_DecoButtonMouseClicked
+
+    private void DecoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecoButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DecoButtonActionPerformed
+
     public Date aujourdhui() {
         SimpleDateFormat formatter = new SimpleDateFormat ("yyyy.MM.dd" ); 
-        Date dateA = new Date(); 
-        return dateA;
+        Date dateD = new Date(); 
+        return dateD;
     }
     
     public void initialiserListStation(){
@@ -228,13 +277,16 @@ public class ReserverNavette extends javax.swing.JPanel {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DecoButton;
     private javax.swing.JButton jButtonReserver;
-    private javax.swing.JFormattedTextField jFormattedDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelErreur;
+    private javax.swing.JLabel jLabelNomStation;
+    private javax.swing.JLabel jLabelUsager;
     private javax.swing.JList jListStation;
     private javax.swing.JPanel jPanelBot;
     private javax.swing.JPanel jPanelCenter;
