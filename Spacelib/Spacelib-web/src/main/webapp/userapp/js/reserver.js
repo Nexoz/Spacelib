@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    var stations = {}
-
     $.soap({
         beforeSend: function (SOAPEnvelope) {
             console.log(SOAPEnvelope.toString());
@@ -43,8 +41,36 @@ $(document).ready(function () {
     $("#reserverform").change(function () {
         if ($("#datedepart").val() != "" && $("#station_dep").val() != null && $("#station_arr").val() != null) {
             console.log($("#datedepart").val())
-            // Call calculer distance
-            $("#datearrivee").val("ok");
+            
+            var stationd = $('#station_dep').find(":selected").text();
+            var stationa = $('#station_arr').find(":selected").text();
+            console.log(stationd + ' ' + stationa)
+            $.soap({
+                method: "toul:calculerDistance",
+                data: {
+                    nomStationD : stationd,
+                    nomStationA : stationa
+                },
+                success: function (soapResponse) {
+                    console.log(soapResponse.toXML())
+                    console.log();
+                    var day = moment($("#datedepart").val(), "DD/MM/YY");
+                    day.add(soapResponse.toXML().getElementsByTagName("return")[0].childNodes[0].nodeValue, 'days')
+                    $("#datearrivee").val(day.format("DD/MM/YY"));
+                }
+            })
+            if($("#nbpassagers").val() != null) {
+                $("#submit").prop("disabled", false);
+            } else {
+                $("#submit").prop("disabled", true);   
+            }
+        } else {
+            $("#submit").prop("disabled", true);
+        }
+    })
+
+    $("#nbpassagers").change(function () {
+        if ($("#nbpassagers").val() != null && $("#datedepart").val() != "" && $("#station_dep").val() != null && $("#station_arr").val() != null) {
             $("#submit").prop("disabled", false);
         } else {
             $("#submit").prop("disabled", true);
