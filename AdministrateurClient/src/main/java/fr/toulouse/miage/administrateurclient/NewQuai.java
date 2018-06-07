@@ -7,38 +7,53 @@ package fr.toulouse.miage.administrateurclient;
 
 import fr.miage.toulouse.spacelibshared.admin.ObjNavette;
 import fr.miage.toulouse.spacelibshared.admin.ObjQuai;
-import java.awt.Component;
-import javax.swing.JDialog;
+import fr.miage.toulouse.spacelibshared.admin.ObjStation;
+import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
+import fr.toulouse.miage.administrateurclient.services.RMIAdminServiceManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
  * @author pierreliaubet
  */
-public class NewQuai extends JDialog {
+public class NewQuai extends JPanel {
 
-    private JDialog main;
+    private JFrame main;
     
     private Home origin;
     
+    private ObjStation station;
     private static ObjQuai quai;
+    
+    private RMIAdminServiceManager manager;
     
     
     /**
      * Creates new form NewQuai
      */
-    public NewQuai() {
-        setModalityType(ModalityType.APPLICATION_MODAL);
+    public NewQuai(JFrame main, Home origin) {
+        this.main = main;
+        this.origin = origin;
         initComponents();
-        pack();
     }
     
-    public static ObjQuai openForm(Component parent) {
-		quai = null;
-		NewQuai form = new NewQuai();
-		form.setVisible(true);
-		return quai;
-	}
+    public NewQuai(JFrame main, Home origin, ObjStation station) {
+        this.main = main;
+        this.origin = origin;
+        this.station = station;
+        try {
+            manager = new RMIAdminServiceManager();
+        } catch (NamingException ex) {
+            Logger.getLogger(NewQuai.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        initComponents();
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -137,7 +152,7 @@ public class NewQuai extends JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed
-        dispose();
+        main.dispose();
     }//GEN-LAST:event_btnAnnulerActionPerformed
 
     private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
@@ -146,7 +161,14 @@ public class NewQuai extends JDialog {
         if (listeNavette.getSelectedValue() != null){
             quai.setNavette((ObjNavette) listeNavette.getSelectedValue());
         }
-        dispose();
+        try {
+            manager.getAdminRemoteSvc().ajouterQuai(station, quai);
+        } catch (StationInconnuException ex) {
+            Logger.getLogger(NewQuai.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (QuaiInconnuException ex) {
+            Logger.getLogger(NewQuai.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        main.dispose();
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
 

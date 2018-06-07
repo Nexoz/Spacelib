@@ -25,7 +25,7 @@ public interface GestionStationLocal {
     List<Navette> getLesNavettes();
     List<Mecanicien> getLesMecanos();
     List<Quai> getQuaiDispos(long station);
-    void ajouterStation(String nom, String position);
+    void ajouterStation(String nom, String position, List<Quai> quais);
     void supprimerStation(long idStation) throws StationInconnuException;
     void ModifierStation(long idStation) throws StationInconnuException;
     void ajouterQuai(long idStation, Quai quai) throws StationInconnuException, QuaiInconnuException;

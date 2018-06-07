@@ -6,6 +6,7 @@
 package fr.miage.toulouse.spacelibshared.admin;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class ObjStation implements Serializable{
     private long id;
     private String nom;
     private String position;
-    private List<ObjQuai> quais;
+    private List<ObjQuai> quais = new ArrayList<>();
     
     public ObjStation(){
         
