@@ -99,15 +99,19 @@ public class GestionStation implements GestionStationLocal {
     }
 
     @Override
-    public void acheterNavette(Navette navette, long quaiA) throws NavetteInconnuException, QuaiInconnuException{
-        Quai quai = quaiFacade.find(quaiA);
-        if (quai == null) {
-            throw new QuaiInconnuException();
-        }
+    public void acheterNavette(Navette navette) throws NavetteInconnuException, QuaiInconnuException{
+        Quai quai = null;
+        
         
         navetteFacade.create(navette);
-        navetteFacade.arrimer(navette, quai);
-        quaiFacade.arrimer(quai, navette);
+        
+        if (navette.getQuaiArrimage() != null){
+            quai = quaiFacade.find(navette.getQuaiArrimage());
+            if (quai == null) {
+                throw new QuaiInconnuException();
+            }
+            quaiFacade.arrimer(quai, navette);
+        }
     }
 
     @Override
