@@ -9,6 +9,8 @@ import fr.miage.toulouse.spacelibshared.admin.ObjMecanicien;
 import fr.miage.toulouse.spacelibshared.admin.ObjNavette;
 import fr.miage.toulouse.spacelibshared.admin.ObjQuai;
 import fr.miage.toulouse.spacelibshared.admin.ObjStation;
+import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import fr.toulouse.miage.administrateurclient.renderer.StationRenderer;
 import fr.toulouse.miage.administrateurclient.services.RMIAdminServiceManager;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 /**
@@ -23,20 +26,32 @@ import javax.swing.JFrame;
  * @author pierreliaubet
  */
 public class Home extends javax.swing.JPanel {
+    
+    private JFrame origin;
 
     private RMIAdminServiceManager manager;
     
     private ObjStation selectedStation = null;
     
+    private DefaultListModel modelStations = new DefaultListModel<>();
+    private DefaultListModel modelNavettes = new DefaultListModel();
+    private DefaultListModel modelMecanos = new DefaultListModel();
+    
+    private DefaultListModel quaiStationModel = new DefaultListModel();
+
+
+
+    
     /**
      * Creates new form Home
      */
-    public Home() {
+    public Home(JFrame origin) {
         try {
             manager = new RMIAdminServiceManager();
         } catch (NamingException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.origin = origin;
         initComponents();
         
         chargerDonnees();
@@ -45,7 +60,7 @@ public class Home extends javax.swing.JPanel {
     public void afficherStation(){
         labelNomStation.setText(selectedStation.getNom());
         TFPositionStation.setText(selectedStation.getPosition());
-        DefaultListModel quaiStationModel = new DefaultListModel();
+        quaiStationModel = new DefaultListModel();
         for (ObjQuai quai : selectedStation.getQuais()){
             quaiStationModel.addElement(quai);
         }
@@ -62,7 +77,7 @@ public class Home extends javax.swing.JPanel {
         listOperations.setModel(new DefaultListModel());
         
         List<ObjStation> stations = manager.getAdminRemoteSvc().consulterStation();
-        DefaultListModel modelStations = new DefaultListModel<>();
+        modelStations = new DefaultListModel();
         for (ObjStation station : stations) {
             modelStations.addElement(station);
         }
@@ -70,7 +85,7 @@ public class Home extends javax.swing.JPanel {
         listeStations.setCellRenderer(new StationRenderer());
         
         List<ObjNavette> navettes = manager.getAdminRemoteSvc().getLesNavettes();
-        DefaultListModel modelNavettes = new DefaultListModel();
+        modelNavettes = new DefaultListModel();
         for (ObjNavette navette : navettes){
             modelNavettes.addElement(navette);
         }
@@ -78,7 +93,7 @@ public class Home extends javax.swing.JPanel {
         listeNavettes.setCellRenderer(new StationRenderer());
         
         List<ObjMecanicien> mecanos = manager.getAdminRemoteSvc().getlesMecanos();
-        DefaultListModel modelMecanos = new DefaultListModel();
+        modelMecanos = new DefaultListModel();
         for (ObjMecanicien mecano : mecanos){
             modelMecanos.addElement(mecano);
         }
@@ -571,10 +586,17 @@ public class Home extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEnregistrerMecanoActionPerformed
 
     private void btnAddQuaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddQuaiActionPerformed
-        JFrame newQuai = new JFrame();
-        newQuai.add(new NewQuai(newQuai,this));
-        newQuai.pack();
-        newQuai.setVisible(true);
+        final JFrame f = new JFrame("Nouveau quai");
+        ObjQuai quai = NewQuai.openForm(f);
+        quaiStationModel.addElement(quai);
+        try {
+            manager.getAdminRemoteSvc().ajouterQuai(selectedStation, quai);
+        } catch (StationInconnuException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (QuaiInconnuException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        listeQuaiStation.setModel(quaiStationModel);
     }//GEN-LAST:event_btnAddQuaiActionPerformed
 
     private void btnEnregistrerStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerStationActionPerformed

@@ -15,7 +15,7 @@ public class MainApp {
     
     public static void main(String[] args) {
         JFrame mainApp = new JFrame();
-        mainApp.add(new Home());
+        mainApp.add(new Home(mainApp));
         mainApp.pack();
         mainApp.setVisible(true);
         mainApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

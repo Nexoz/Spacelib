@@ -5,27 +5,40 @@
  */
 package fr.toulouse.miage.administrateurclient;
 
+import fr.miage.toulouse.spacelibshared.admin.ObjNavette;
+import fr.miage.toulouse.spacelibshared.admin.ObjQuai;
+import java.awt.Component;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 /**
  *
  * @author pierreliaubet
  */
-public class NewQuai extends javax.swing.JPanel {
+public class NewQuai extends JDialog {
 
-    private JFrame main;
+    private JDialog main;
     
     private Home origin;
+    
+    private static ObjQuai quai;
     
     
     /**
      * Creates new form NewQuai
      */
-    public NewQuai(JFrame main, Home origin) {
-        this.main = main;
-        this.origin = origin;
+    public NewQuai() {
+        setModalityType(ModalityType.APPLICATION_MODAL);
         initComponents();
+        pack();
     }
+    
+    public static ObjQuai openForm(Component parent) {
+		quai = null;
+		NewQuai form = new NewQuai();
+		form.setVisible(true);
+		return quai;
+	}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,7 +53,7 @@ public class NewQuai extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         TFCodeQuai = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listeNavette = new javax.swing.JList<>();
+        listeNavette = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
         btnEnregistrer = new javax.swing.JButton();
         btnAnnuler = new javax.swing.JButton();
@@ -53,16 +66,21 @@ public class NewQuai extends javax.swing.JPanel {
 
         TFCodeQuai.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
 
-        listeNavette.setModel(new javax.swing.AbstractListModel<String>() {
+        listeNavette.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(listeNavette);
 
         jLabel3.setText("Arrimer une navette (optionnel) :");
 
         btnEnregistrer.setText("ENREGISTRER");
+        btnEnregistrer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnregistrerActionPerformed(evt);
+            }
+        });
 
         btnAnnuler.setText("ANNULER");
         btnAnnuler.addActionListener(new java.awt.event.ActionListener() {
@@ -119,8 +137,17 @@ public class NewQuai extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed
-        main.dispose();
+        dispose();
     }//GEN-LAST:event_btnAnnulerActionPerformed
+
+    private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
+        quai = new ObjQuai();
+        quai.setCode(TFCodeQuai.getText());
+        if (listeNavette.getSelectedValue() != null){
+            quai.setNavette((ObjNavette) listeNavette.getSelectedValue());
+        }
+        dispose();
+    }//GEN-LAST:event_btnEnregistrerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -131,6 +158,6 @@ public class NewQuai extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listeNavette;
+    private javax.swing.JList listeNavette;
     // End of variables declaration//GEN-END:variables
 }

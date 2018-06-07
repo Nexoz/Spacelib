@@ -28,10 +28,10 @@ public interface GestionStationLocal {
     void ajouterStation(String nom, String position);
     void supprimerStation(long idStation) throws StationInconnuException;
     void ModifierStation(long idStation) throws StationInconnuException;
-    void ajouterQuai(long idStation, long idQuai) throws StationInconnuException, QuaiInconnuException;
+    void ajouterQuai(long idStation, Quai quai) throws StationInconnuException, QuaiInconnuException;
     void modifierQuai(long idQuai) throws QuaiInconnuException;
     void supprimerQuai(long idQuai)throws QuaiInconnuException;
-    void acheterNavette (long idNavette, long idQuai)throws NavetteInconnuException, QuaiInconnuException;
+    void acheterNavette (Navette navette, long idQuai)throws NavetteInconnuException, QuaiInconnuException;
     void modifierNavette (long idNavette)throws NavetteInconnuException;
     void supprimerNavette (long idNavette)throws NavetteInconnuException;
     Station getStationById(long idStation);

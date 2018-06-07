@@ -81,9 +81,9 @@ public class NewNavette extends javax.swing.JPanel {
         btnAnnuler = new javax.swing.JButton();
         btnEnregister = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listeStations = new javax.swing.JList<>();
+        listeStations = new javax.swing.JList();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listeQuai = new javax.swing.JList<>();
+        listeQuai = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
@@ -108,10 +108,10 @@ public class NewNavette extends javax.swing.JPanel {
             }
         });
 
-        listeStations.setModel(new javax.swing.AbstractListModel<String>() {
+        listeStations.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         listeStations.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -120,10 +120,10 @@ public class NewNavette extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(listeStations);
 
-        listeQuai.setModel(new javax.swing.AbstractListModel<String>() {
+        listeQuai.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane2.setViewportView(listeQuai);
 
@@ -194,10 +194,10 @@ public class NewNavette extends javax.swing.JPanel {
             navette.setQuai(selectedQuai);
         }
         try {
-            manager.getAdminRemoteSvc().acheterNavette(navette, selectedQuai);
-        } catch (NavetteInconnuException ex) {
-            Logger.getLogger(NewNavette.class.getName()).log(Level.SEVERE, null, ex);
+            manager.getAdminRemoteSvc().acheterNavette(navette, selectedQuai.getId());
         } catch (QuaiInconnuException ex) {
+            Logger.getLogger(NewNavette.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NavetteInconnuException ex) {
             Logger.getLogger(NewNavette.class.getName()).log(Level.SEVERE, null, ex);
         }
         origin.chargerDonnees();
@@ -206,6 +206,7 @@ public class NewNavette extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEnregisterActionPerformed
 
     private void listeStationsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listeStationsValueChanged
+        selectedStation = (ObjStation) listeStations.getSelectedValue();
         chargerQuaiDispo();
     }//GEN-LAST:event_listeStationsValueChanged
 
@@ -218,8 +219,8 @@ public class NewNavette extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<String> listeQuai;
-    private javax.swing.JList<String> listeStations;
+    private javax.swing.JList listeQuai;
+    private javax.swing.JList listeStations;
     private javax.swing.JSpinner spinnerNbPlaces;
     // End of variables declaration//GEN-END:variables
 }

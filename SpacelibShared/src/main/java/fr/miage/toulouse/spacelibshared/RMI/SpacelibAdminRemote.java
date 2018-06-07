@@ -31,7 +31,7 @@ public interface SpacelibAdminRemote {
     void modifierQuai(ObjQuai quai) throws QuaiInconnuException;
     void supprimerQuai(ObjQuai quai)throws QuaiInconnuException;
     List<ObjNavette> getLesNavettes();
-    void acheterNavette (ObjNavette navette, ObjQuai quai)throws NavetteInconnuException, QuaiInconnuException;
+    void acheterNavette (ObjNavette navette, long idQuai)throws NavetteInconnuException, QuaiInconnuException;
     void modifierNavette (ObjNavette navette)throws NavetteInconnuException;
     void supprimerNavette (ObjNavette navette)throws NavetteInconnuException;
     List<ObjMecanicien> getlesMecanos();

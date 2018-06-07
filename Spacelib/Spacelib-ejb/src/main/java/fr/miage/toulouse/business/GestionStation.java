@@ -71,14 +71,10 @@ public class GestionStation implements GestionStationLocal {
     }
 
     @Override
-    public void ajouterQuai(long idStation, long idQuai) throws StationInconnuException, QuaiInconnuException{
+    public void ajouterQuai(long idStation, Quai quai) throws StationInconnuException, QuaiInconnuException{
         Station s = stationfacade.find(idStation);
         if (s == null) {
             throw new StationInconnuException();
-        }
-        Quai quai = quaiFacade.find(idQuai);
-        if (quai == null) {
-            throw new QuaiInconnuException();
         }
         s.getListeQuais().add(quai);
         stationfacade.edit(s);
@@ -103,17 +99,15 @@ public class GestionStation implements GestionStationLocal {
     }
 
     @Override
-    public void acheterNavette(long idNavette, long idQuai) throws NavetteInconnuException, QuaiInconnuException{
-        Quai quai = quaiFacade.find(idQuai);
+    public void acheterNavette(Navette navette, long quaiA) throws NavetteInconnuException, QuaiInconnuException{
+        Quai quai = quaiFacade.find(quaiA);
         if (quai == null) {
             throw new QuaiInconnuException();
         }
-        Navette navette = navetteFacade.find(idNavette);
-        if (navette == null) {
-            throw new NavetteInconnuException();
-        }
+        
         navetteFacade.create(navette);
         navetteFacade.arrimer(navette, quai);
+        quaiFacade.arrimer(quai, navette);
     }
 
     @Override

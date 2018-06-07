@@ -5,6 +5,7 @@
  */
 package fr.toulouse.miage.administrateurclient;
 
+import fr.miage.toulouse.spacelibshared.admin.ObjQuai;
 import fr.miage.toulouse.spacelibshared.admin.ObjStation;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import fr.toulouse.miage.administrateurclient.services.RMIAdminServiceManager;
@@ -12,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -29,6 +31,8 @@ public class NewStation extends javax.swing.JPanel {
     
     private ObjStation newStation = new ObjStation();
     
+    private DefaultListModel modelQuais;
+    
     /**
      * Creates new form NewStation
      */
@@ -41,7 +45,8 @@ public class NewStation extends javax.swing.JPanel {
         } catch (NamingException ex) {
             Logger.getLogger(NewStation.class.getName()).log(Level.SEVERE, null, ex);
         }
-        listeQuai.setModel(new DefaultListModel<>());
+        modelQuais = new DefaultListModel();
+        listeQuai.setModel(modelQuais);
     }
 
     /**
@@ -207,10 +212,11 @@ public class NewStation extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAnnulerActionPerformed
 
     private void btnAddQuaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddQuaiActionPerformed
-        JFrame newQuai = new JFrame();
-        newQuai.add(new NewQuai(newQuai, origin));
-        newQuai.pack();
-        newQuai.setVisible(true);
+        NewQuai newQuai = new NewQuai();
+        ObjQuai quai = NewQuai.openForm(newQuai);
+        newStation.getQuais().add(quai);
+        modelQuais.addElement(quai);
+        listeQuai.setModel(modelQuais);
     }//GEN-LAST:event_btnAddQuaiActionPerformed
 
 
