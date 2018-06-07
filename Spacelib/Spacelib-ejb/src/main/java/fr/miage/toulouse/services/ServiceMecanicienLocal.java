@@ -7,6 +7,7 @@ package fr.miage.toulouse.services;
 
 import fr.miage.toulouse.entities.Mecanicien;
 import fr.miage.toulouse.entities.Navette;
+import fr.miage.toulouse.entities.Quai;
 import fr.miage.toulouse.entities.Revision;
 import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
@@ -29,4 +30,5 @@ public interface ServiceMecanicienLocal {
     List<Navette> listerNavetteAReviser(Long ids) throws StationInconnuException;
     void finaliserRevision(Long idr) throws RevisionInconnuException;
     List<Revision> getRevisionsEnCours(Long ids)throws StationInconnuException;
+    List<Quai> getQuaisFromStation(Long idStation) throws StationInconnuException;
 }
