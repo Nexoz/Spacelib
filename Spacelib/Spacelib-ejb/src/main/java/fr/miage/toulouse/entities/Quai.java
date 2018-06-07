@@ -15,12 +15,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author jb
  */
 @Entity
+@XmlSeeAlso({Station.class})
 public class Quai implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,7 +41,7 @@ public class Quai implements Serializable {
     
     public Quai() {}
 
-    private Date DateReservation =null;
+    private Date DateReservation = null;
 
     public Date getDateReservation() {
         return DateReservation;
@@ -56,6 +59,7 @@ public class Quai implements Serializable {
         this.navArrimée = navArrimée;
     }
 
+    @XmlTransient
     public Station getStation() {
         return station;
     }

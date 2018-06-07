@@ -75,7 +75,7 @@ public class Station implements Serializable {
         this.nom = nom;
     }
 
-    @XmlElement(name="quais")
+    @XmlElement(name="quai")
     public List<Quai> getListeQuais() {
         return listeQuais;
     }
