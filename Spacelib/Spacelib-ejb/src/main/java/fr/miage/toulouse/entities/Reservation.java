@@ -25,11 +25,13 @@ public class Reservation extends Operation implements Serializable {
     private Quai quaiArrivee;
     
     private Usager emprunteur;
+    
+    private int nbPassager;
 
     public Reservation() {
     }
     
-    public Reservation(String texte, Quai quaiDepart, Quai quaiA, Date dateA, Usager emprunteur, long nbPassager, Navette navDisponible,Date dateOpe) {//String voyage_initié, Quai quaiD, Quai quaiA, Date dateA, long idEmprunteur, long nbPassager, Navette navDisponible
+    public Reservation(String texte, Quai quaiDepart, Quai quaiA, Date dateA, Usager emprunteur, int nbPassager, Navette navDisponible,Date dateOpe) {//String voyage_initié, Quai quaiD, Quai quaiA, Date dateA, long idEmprunteur, long nbPassager, Navette navDisponible
         super.setQuaiOperation(quaiDepart);
         this.quaiArrivee = quaiA;
         this.emprunteur=emprunteur;
@@ -38,6 +40,7 @@ public class Reservation extends Operation implements Serializable {
         this.setLibelle(texte);
         this.setDateDebut(dateOpe);
         this.setDateFin(dateA);
+        this.nbPassager = nbPassager;
     }
     
     @Override
@@ -52,5 +55,19 @@ public class Reservation extends Operation implements Serializable {
     public void setQuaiArrivee(Quai quaiArrivee) {
         this.quaiArrivee = quaiArrivee;
     }
+
+    public int getNbPassager() {
+        return nbPassager;
+    }
+
+    public void setNbPassager(int nbPassager) {
+        this.nbPassager = nbPassager;
+    }
+
+    public Usager getEmprunteur() {
+        return emprunteur;
+    }
+    
+    
     
 }

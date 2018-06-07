@@ -10,6 +10,7 @@ import fr.miage.toulouse.business.GestionStationLocal;
 import fr.miage.toulouse.business.GestionUtilisateurLocal;
 import fr.miage.toulouse.entities.Mecanicien;
 import fr.miage.toulouse.entities.Navette;
+import fr.miage.toulouse.entities.Quai;
 import fr.miage.toulouse.entities.Revision;
 import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.entities.Utilisateur;
@@ -72,6 +73,12 @@ public class ServiceMecanicien implements ServiceMecanicienLocal {
     @Override
     public List<Revision> getRevisionsEnCours(Long idStation) throws StationInconnuException{
         return gestionRevision.getRevisionsEnCours(idStation);
+    }
+    
+    @Override
+    public List<Quai> getQuaisFromStation(Long idStation) throws StationInconnuException {
+        Station s = gestionStation.getStationById(idStation);
+        return s.getListeQuais();
     }
 
     // Add business logic below. (Right-click in editor and choose

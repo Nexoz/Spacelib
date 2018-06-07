@@ -44,13 +44,13 @@ public class ServiceBorneRMI implements SpacelibBorneRemote{
     GestionUtilisateurLocal gestionUtilisateur;
     
     @Override
-    public void finaliserVoyage(long idNavette, long idReservation, long idQuai) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException{
-        gestionVoyage.finaliserVoyage(idNavette, idReservation, idQuai);
+    public void finaliserVoyage(long idReservation) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException{
+        gestionVoyage.finaliserVoyage(idReservation);
     }
     
     @Override
-    public void reserverVoyage (long idStationD, long idStationA, long nbPassager, Date dateA, long idEmprunteur,Date dateOpe)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException{
-        gestionVoyage.reserverVoyage(idStationD, idStationA, nbPassager, dateA, idEmprunteur, dateOpe);
+    public long reserverVoyage (long idStationD, long idStationA, int nbPassager, Date dateA, long idEmprunteur,Date dateOpe)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException{
+        return gestionVoyage.reserverVoyage(idStationD, idStationA, nbPassager, dateA, idEmprunteur, dateOpe);
     }
     
     @Override
@@ -75,6 +75,11 @@ public class ServiceBorneRMI implements SpacelibBorneRemote{
             return new ObjUsager(null, u.getId(), u.getNom(), u.getPrenom(), u.getLogin(), u.getPassword());
         }
         throw new UsagerInconnuException();
+    }
+    
+    @Override
+    public long creerUsager(String nom, String prenom, String login, String password) {
+        return gestionUtilisateur.creerUsager(nom, prenom, login, password);
     }
     
 }

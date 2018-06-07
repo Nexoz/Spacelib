@@ -34,6 +34,14 @@ public class Usager extends Utilisateur implements Serializable {
     public Usager() {
     }
     
+    public Usager(String nom, String prenom, String login, String password) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.login = login;
+        this.password = password;
+        this.listeReservations = new ArrayList<>();
+    }
+    
     @Override
     public String toString() {
         return "entities.Client[ id=" + this.getId() + " ]";

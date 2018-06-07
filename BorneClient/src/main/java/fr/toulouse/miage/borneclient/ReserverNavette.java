@@ -6,6 +6,21 @@
 package fr.toulouse.miage.borneclient;
 
 import fr.miage.toulouse.spacelibshared.admin.ObjStation;
+import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.PasNavetteDisponibleException;
+import fr.miage.toulouse.spacelibshared.exceptions.PasQuaiDisponibleException;
+import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.UsagerInconnuException;
+import fr.toulouse.miage.borneclient.renderer.StationRenderer;
+import fr.toulouse.miage.borneclient.services.RMIBorneServiceManager;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -15,14 +30,22 @@ public class ReserverNavette extends javax.swing.JPanel {
 
     BorneClient jframeAccueil;
     ObjStation s;
+    private RMIBorneServiceManager manager;
+    private long idClient;
+    private long idStation;
     
     /**
      * Creates new form ReserverNavette
      */
-    public ReserverNavette(BorneClient j) {
+    public ReserverNavette(BorneClient j,String message) {
         initComponents();
-        jframeAccueil = j;
-        
+        this.manager = j.getManager();
+        this.jframeAccueil = j;
+        this.idClient = j.getIdClient();
+        this.idStation = j.getIdStation();
+        this.initialiserListStation();
+
+        jSpinnerNb = new JSpinner(new SpinnerNumberModel(1,0,8,1)); 
     }
 
     /**
@@ -38,10 +61,10 @@ public class ReserverNavette extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jButton1 = new javax.swing.JButton();
+        jSpinnerNb = new javax.swing.JSpinner();
+        jButtonReserver = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jListStation = new javax.swing.JList();
         jLabel5 = new javax.swing.JLabel();
         jFormattedDate = new javax.swing.JFormattedTextField();
         jPanelTop = new javax.swing.JPanel();
@@ -61,32 +84,34 @@ public class ReserverNavette extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Réservation d'un voyage");
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 51));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Réserver");
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jSpinnerNb.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jButtonReserver.setBackground(new java.awt.Color(0, 0, 51));
+        jButtonReserver.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonReserver.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonReserver.setText("Réserver");
+        jButtonReserver.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButtonReserver.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                jButtonReserverMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonReserver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonReserverActionPerformed(evt);
             }
         });
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        jListStation.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane3.setViewportView(jList2);
+        jScrollPane3.setViewportView(jListStation);
 
         jLabel5.setText("Date d'arrivée ");
 
-        jFormattedDate.setText("jFormattedTextField1");
+        jFormattedDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
         javax.swing.GroupLayout jPanelCenterLayout = new javax.swing.GroupLayout(jPanelCenter);
         jPanelCenter.setLayout(jPanelCenterLayout);
@@ -104,15 +129,16 @@ public class ReserverNavette extends javax.swing.JPanel {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jFormattedDate, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(81, 81, 81))
+                                .addGroup(jPanelCenterLayout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(105, 105, 105)
+                                    .addComponent(jSpinnerNb, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addGap(189, 189, 189)
                         .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonReserver, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 118, Short.MAX_VALUE))
         );
@@ -129,13 +155,13 @@ public class ReserverNavette extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinnerNb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonReserver, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );
 
@@ -158,28 +184,62 @@ public class ReserverNavette extends javax.swing.JPanel {
         add(jPanelBot, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        //jframeAccueil.changerJpanel(this, new ReserverNavette());
-    }//GEN-LAST:event_jButton1MouseClicked
+    private void jButtonReserverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonReserverMouseClicked
+        ObjStation selectedStation = (ObjStation) jListStation.getSelectedValue();
+        Date dateA = new Date(jFormattedDate.getText());
+        int nbParticipant = Integer.parseInt(jSpinnerNb.getModel().getValue().toString());
+        try {
+            long idReservation = manager.getBorneRemoteSvc().reserverVoyage(this.idStation, selectedStation.getId(),nbParticipant, dateA,this.idClient, this.aujourdhui());
+            jframeAccueil.setIdReservation(idReservation);
+            jframeAccueil.changerJpanel(this, new DemarrerVoyage(jframeAccueil));
+        } catch (NavetteInconnuException ex) {
+            Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (StationInconnuException ex) {
+            Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (PasNavetteDisponibleException ex) {
+            Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (PasQuaiDisponibleException ex) {
+            Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UsagerInconnuException ex) {
+            Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonReserverMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonReserverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReserverActionPerformed
+        
+    }//GEN-LAST:event_jButtonReserverActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-
+    public Date aujourdhui() {
+        SimpleDateFormat formatter = new SimpleDateFormat ("yyyy.MM.dd" ); 
+        Date dateA = new Date(); 
+        return dateA;
+    }
+    
+    public void initialiserListStation(){
+        jListStation.removeAll();
+        List<ObjStation> stations = manager.getBorneRemoteSvc().consulterStation();
+        DefaultListModel modelStations = new DefaultListModel<>();
+        for (ObjStation station : stations) {
+            modelStations.addElement(station);
+        }
+        jListStation.setModel(modelStations);
+        jListStation.setCellRenderer(new StationRenderer());
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonReserver;
     private javax.swing.JFormattedTextField jFormattedDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JList jListStation;
     private javax.swing.JPanel jPanelBot;
     private javax.swing.JPanel jPanelCenter;
     private javax.swing.JPanel jPanelTop;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinnerNb;
     // End of variables declaration//GEN-END:variables
 }

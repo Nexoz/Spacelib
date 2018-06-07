@@ -5,20 +5,29 @@
  */
 package fr.toulouse.miage.borneclient;
 
+import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.ReservationInconnuException;
+import fr.toulouse.miage.borneclient.services.RMIBorneServiceManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Fanny Mnt
  */
 public class FinaliserVoyage extends javax.swing.JPanel {
 
-    BorneClient jframeAccueil;
+    public BorneClient jframeAccueil;
+    private RMIBorneServiceManager manager;
     
     /**
      * Creates new form FinaliserVoyage
      */
     public FinaliserVoyage(BorneClient j) {
         initComponents();
-        jframeAccueil = j;
+        this.jframeAccueil = j;
+        this.manager = j.getManager();
     }
 
     /**
@@ -133,7 +142,16 @@ public class FinaliserVoyage extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonValiderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValiderMouseClicked
-        jframeAccueil.changerJpanel(this, new ReserverNavette(jframeAccueil));
+        try {
+            manager.getBorneRemoteSvc().finaliserVoyage(jframeAccueil.getIdReservation());
+            jframeAccueil.changerJpanel(this, new ReserverNavette(jframeAccueil,""));
+        } catch (NavetteInconnuException ex) {
+            Logger.getLogger(FinaliserVoyage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ReservationInconnuException ex) {
+            Logger.getLogger(FinaliserVoyage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (QuaiInconnuException ex) {
+            Logger.getLogger(FinaliserVoyage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonValiderMouseClicked
 
     private void jButtonValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderActionPerformed

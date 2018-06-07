@@ -20,6 +20,9 @@ import javax.swing.JPanel;
 public class BorneClient extends javax.swing.JFrame {
 
     private RMIBorneServiceManager manager;
+    private Long idStation;
+    private Long IdClient;
+    private Long IdReservation;
     
     /**
      * Creates new form BorneClient
@@ -31,8 +34,8 @@ public class BorneClient extends javax.swing.JFrame {
         
         try{
             manager = new RMIBorneServiceManager();
-            Login jPanLogin =new Login(this,manager.getBorneRemoteSvc());
-            this.setContentPane(jPanLogin);
+            SelectionStation jPanStation =new SelectionStation(this);
+            this.setContentPane(jPanStation);
             this.pack();
             this.setVisible(true);
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,6 +90,36 @@ public class BorneClient extends javax.swing.JFrame {
         this.setContentPane(jNouvelle);
         this.validate();
     }
+
+    public Long getIdStation() {
+        return idStation;
+    }
+
+    public void setIdStation(Long idStation) {
+        this.idStation = idStation;
+    }
+
+    public Long getIdClient() {
+        return IdClient;
+    }
+
+    public void setIdClient(Long IdClient) {
+        this.IdClient = IdClient;
+    }
+
+    public RMIBorneServiceManager getManager() {
+        return manager;
+    }
+
+    public Long getIdReservation() {
+        return IdReservation;
+    }
+
+    public void setIdReservation(Long IdReservation) {
+        this.IdReservation = IdReservation;
+    }
+    
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

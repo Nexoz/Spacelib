@@ -18,4 +18,5 @@ public interface GestionUtilisateurLocal {
     Utilisateur authentifier(String login, String password);
     long creerCompte(long idUtilisateur);
     long creerMecanicien(String nom, String prenom, String login, String password);
+    long creerUsager(String nom, String prenom, String login, String password);
 }

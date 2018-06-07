@@ -24,9 +24,10 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface SpacelibBorneRemote {
-    void finaliserVoyage(long idNavette, long idReservation, long idQuai) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException;
-    void reserverVoyage (long idStationD, long idStationA, long nbPassager, Date dateA, long idEmprunteur,Date dateOpe)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException;
+    void finaliserVoyage(long idReservation) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException;
+    long reserverVoyage (long idStationD, long idStationA, int nbPassager, Date dateA, long idEmprunteur,Date dateOpe)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException;
     void demarrerVoyage (long idReservation)throws ReservationInconnuException;
     List<ObjStation> consulterStation() ;
     ObjUsager authentifier(String login, String password) throws UsagerInconnuException;
+    long creerUsager(String nom, String prenom, String login, String password);
 }

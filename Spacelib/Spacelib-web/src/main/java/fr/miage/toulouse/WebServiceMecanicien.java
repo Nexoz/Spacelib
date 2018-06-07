@@ -7,6 +7,7 @@ package fr.miage.toulouse;
 
 import fr.miage.toulouse.entities.Mecanicien;
 import fr.miage.toulouse.entities.Navette;
+import fr.miage.toulouse.entities.Quai;
 import fr.miage.toulouse.entities.Revision;
 import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
@@ -71,6 +72,13 @@ public class WebServiceMecanicien {
     public ListWrapper<Revision> getRevisionsEnCours(@WebParam(name = "ids") Long ids) throws StationInconnuException {
         List<Revision> a = ejbRef.getRevisionsEnCours(ids);
         ListWrapper<Revision> w = new ListWrapper<>(a);
+        return w;
+    }
+    
+    @WebMethod(operationName = "getQuaisFromStation")
+    public ListWrapper<Quai> getQuaisFromStation(@WebParam(name = "ids") Long ids) throws StationInconnuException {
+        List<Quai> q = ejbRef.getQuaisFromStation(ids);
+        ListWrapper<Quai> w = new ListWrapper<>(q);
         return w;
     }
     

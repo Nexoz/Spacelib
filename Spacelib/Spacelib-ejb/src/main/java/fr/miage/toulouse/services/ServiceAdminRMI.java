@@ -147,10 +147,6 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
             lesObjMecano.add(new ObjMecanicien(mecano.getId(), mecano.getNom(), mecano.getPrenom(), mecano.getLogin(), mecano.getPassword()));
         }
         return lesObjMecano;
-    }
-
-    
-    
-    
+    }  
     
 }
