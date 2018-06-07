@@ -49,8 +49,9 @@ Le projet est composé de plusieurs dossiers :
 
 #### Appli
 
+- Changer le index.html de la page Hello World (index.html à la racine) pour que ce soit un peu plus voyant
 - Mettre du blabla sur la page d'acceuil
-- Form à faire au propre + Brancher nouvelle réservation
+- Brancher nouvelle réservation
 - Afficher les réservation d'un client
 - Méthode d'annulation d'une réservation + Brancher au bouton
 
