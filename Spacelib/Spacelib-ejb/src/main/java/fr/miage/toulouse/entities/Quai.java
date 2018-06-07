@@ -8,6 +8,7 @@ package fr.miage.toulouse.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +30,7 @@ public class Quai implements Serializable {
     
     private String codeQuai;
     
-    @OneToOne(fetch = LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Navette navArrimée;
     
     @ManyToOne(fetch = LAZY)

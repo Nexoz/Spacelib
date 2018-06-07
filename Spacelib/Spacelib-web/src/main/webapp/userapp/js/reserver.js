@@ -37,20 +37,17 @@ $(document).ready(function () {
                 }))
             }
             $('select').formSelect();
-            $("#station_dep").change(function () {
-                if ($(this).val() !== "" && $("#station_arr").val() !== "") {
-                    $("#submit").prop("disabled", false);
-                } else {
-                    $("#submit").prop("disabled", true);
-                }
-            })
-            $("#station_arr").change(function () {
-                if ($(this).val() !== "" && $("#station_arr").val() !== "") {
-                    $("#submit").prop("disabled", false);
-                } else {
-                    $("#submit").prop("disabled", true);
-                }
-            })
+        }
+    })
+
+    $("#reserverform").change(function () {
+        if ($("#datedepart").val() != "" && $("#station_dep").val() != null && $("#station_arr").val() != null) {
+            console.log($("#datedepart").val())
+            // Call calculer distance
+            $("#datearrivee").val("ok");
+            $("#submit").prop("disabled", false);
+        } else {
+            $("#submit").prop("disabled", true);
         }
     })
 })
