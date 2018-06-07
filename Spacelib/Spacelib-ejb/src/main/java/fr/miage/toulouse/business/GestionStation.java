@@ -46,8 +46,8 @@ public class GestionStation implements GestionStationLocal {
     }
 
     @Override
-    public void ajouterStation(String nom, String position) {
-        Station s = new Station(nom, position);
+    public void ajouterStation(String nom, String position, List<Quai> quais) {
+        Station s = new Station(nom, position, quais);
         stationfacade.create(s);
         System.out.println(s.getId());
     }
@@ -99,15 +99,19 @@ public class GestionStation implements GestionStationLocal {
     }
 
     @Override
-    public void acheterNavette(Navette navette, long quaiA) throws NavetteInconnuException, QuaiInconnuException{
-        Quai quai = quaiFacade.find(quaiA);
-        if (quai == null) {
-            throw new QuaiInconnuException();
-        }
+    public void acheterNavette(Navette navette) throws NavetteInconnuException, QuaiInconnuException{
+        Quai quai = null;
+        
         
         navetteFacade.create(navette);
-        navetteFacade.arrimer(navette, quai);
-        quaiFacade.arrimer(quai, navette);
+        
+        if (navette.getQuaiArrimage() != null){
+            quai = quaiFacade.find(navette.getQuaiArrimage().getId());
+            if (quai == null) {
+                throw new QuaiInconnuException();
+            }
+            quaiFacade.arrimer(quai, navette);
+        }
     }
 
     @Override
@@ -146,6 +150,11 @@ public class GestionStation implements GestionStationLocal {
     @Override
     public List<Quai> getQuaiDispos(long station) {
         return stationfacade.getQuaisDispo(station);
+    }
+
+    @Override
+    public void ajoutouMecano(Mecanicien mecano) {
+        mecanoFacade.create(mecano);
     }
 
 }

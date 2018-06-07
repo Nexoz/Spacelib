@@ -45,6 +45,12 @@ public class Station implements Serializable {
         this.listeQuais = new ArrayList<>();
     }
 
+    public Station(String nom, String position, List<Quai> quais) {
+        this.nom = nom;
+        this.position = position;
+        this.listeQuais = quais;
+    }
+
     public Long getId() {
         return id;
     }
@@ -69,7 +75,7 @@ public class Station implements Serializable {
         this.nom = nom;
     }
 
-    @XmlElement(name="quais")
+    @XmlElement(name="quai")
     public List<Quai> getListeQuais() {
         return listeQuais;
     }

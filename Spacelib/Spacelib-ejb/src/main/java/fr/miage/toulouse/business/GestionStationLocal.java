@@ -25,14 +25,15 @@ public interface GestionStationLocal {
     List<Navette> getLesNavettes();
     List<Mecanicien> getLesMecanos();
     List<Quai> getQuaiDispos(long station);
-    void ajouterStation(String nom, String position);
+    void ajouterStation(String nom, String position, List<Quai> quais);
     void supprimerStation(long idStation) throws StationInconnuException;
     void ModifierStation(long idStation) throws StationInconnuException;
     void ajouterQuai(long idStation, Quai quai) throws StationInconnuException, QuaiInconnuException;
     void modifierQuai(long idQuai) throws QuaiInconnuException;
     void supprimerQuai(long idQuai)throws QuaiInconnuException;
-    void acheterNavette (Navette navette, long idQuai)throws NavetteInconnuException, QuaiInconnuException;
+    void acheterNavette (Navette navette)throws NavetteInconnuException, QuaiInconnuException;
     void modifierNavette (long idNavette)throws NavetteInconnuException;
     void supprimerNavette (long idNavette)throws NavetteInconnuException;
     Station getStationById(long idStation);
+    void ajoutouMecano(Mecanicien mecano);
 }

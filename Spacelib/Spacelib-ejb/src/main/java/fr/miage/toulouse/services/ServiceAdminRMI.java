@@ -42,6 +42,7 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         for(Station s : stations){
             ObjStation tmp = new ObjStation(s.getId(), s.getNom(), s.getPosition(), new ArrayList<ObjQuai>());
             for (Quai q : s.getListeQuais()){
+                System.out.println(q.getId());
                 tmp.getQuais().add(new ObjQuai(q.getId(), q.getCodeQuai(),null));
             }
             objStations.add(tmp);
@@ -51,7 +52,16 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
 
     @Override
     public void ajouterStation(ObjStation station) throws StationInconnuException {
-        gestionStation.ajouterStation(station.getNom(), station.getPosition());
+        List<Quai> lesQuais = new ArrayList<>();
+        for (ObjQuai quai : station.getQuais()){
+            Quai tmp = new Quai();
+            tmp.setCodeQuai(quai.getCode());
+            if (quai.getNavette() != null){
+                Navette navette = new Navette();
+                navette.setId(quai.getNavette().getId());
+            }
+        }
+        gestionStation.ajouterStation(station.getNom(), station.getPosition(), lesQuais);
     }
 
     @Override
@@ -67,7 +77,10 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
     @Override
     public void ajouterQuai(ObjStation station, ObjQuai quai) throws StationInconnuException, QuaiInconnuException {
         Quai newQuai = new Quai();
+        Station st = new Station();
+        st.setId(station.getId());
         newQuai.setCodeQuai(quai.getCode());
+        newQuai.setStation(st);
         if (quai.getNavette() != null){
             Navette navette = new Navette();
             navette.setId(quai.getNavette().getId());
@@ -87,10 +100,15 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
     }
 
     @Override
-    public void acheterNavette(ObjNavette navette, long idQuai) throws NavetteInconnuException, QuaiInconnuException {
+    public void acheterNavette(ObjNavette navette) throws NavetteInconnuException, QuaiInconnuException {
         Navette eNavette = new Navette();
         eNavette.setNbPlaces(navette.getNbPlaces());
-        gestionStation.acheterNavette(eNavette,idQuai);
+        if (navette.getQuai() != null){
+            Quai quai = new Quai();
+            quai.setId(navette.getQuai().getId());
+            eNavette.setQuaiArrimage(quai);
+        }
+        gestionStation.acheterNavette(eNavette);
     }
 
     @Override
@@ -119,9 +137,9 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
                 q = new ObjQuai(tmp.getId(), tmp.getCodeQuai(), null);
             }
             List<ObjOperation> ope = new ArrayList<ObjOperation>();
-            for (Operation o : n.getListeOperations()){
-                ope.add(new ObjOperation(o.getId(), null, o.getDateDebut(), o.getDateFin(), o.getDateOperation(), null));
-            }
+            //for (Operation o : n.getListeOperations()){
+            //    ope.add(new ObjOperation(o.getId(), null, o.getDateDebut(), o.getDateFin(), o.getDateOperation(), null));
+            //}
             ObjNavette navette = new ObjNavette(n.getId(), n.getNbPlaces(), n.getProchaineRevision(), q, ope);
             lesObjNavette.add(navette);
         }
@@ -148,5 +166,15 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         }
         return lesObjMecano;
     }  
+
+    @Override
+    public void ajouterMecano(ObjMecanicien mecano) {
+        Mecanicien nouveau = new Mecanicien();
+        nouveau.setLogin(mecano.getLogin());
+        nouveau.setNom(mecano.getNom());
+        nouveau.setPrenom(mecano.getPrenom());
+        nouveau.setPassword(mecano.getPassword());
+        gestionStation.ajoutouMecano(nouveau);
+    }
     
 }

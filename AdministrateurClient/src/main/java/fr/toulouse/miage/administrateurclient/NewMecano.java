@@ -5,6 +5,11 @@
  */
 package fr.toulouse.miage.administrateurclient;
 
+import fr.miage.toulouse.spacelibshared.admin.ObjMecanicien;
+import fr.toulouse.miage.administrateurclient.services.RMIAdminServiceManager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.swing.JFrame;
 
 /**
@@ -14,12 +19,25 @@ import javax.swing.JFrame;
 public class NewMecano extends javax.swing.JPanel {
 
     private JFrame main;
+    private Home origin;
+    
+    private ObjMecanicien mecano;
+    
+    private RMIAdminServiceManager manager;
     
     /**
      * Creates new form NewMecano
      */
-    public NewMecano(JFrame main) {
+    public NewMecano(JFrame main, Home origin) {
+        mecano = new ObjMecanicien();
+        this.origin = origin;
         this.main = main;
+        try {
+            manager = new RMIAdminServiceManager();
+        } catch (NamingException ex) {
+            Logger.getLogger(NewMecano.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         initComponents();
     }
 
@@ -87,6 +105,11 @@ public class NewMecano extends javax.swing.JPanel {
         });
 
         btnEnregistrer.setText("ENREGISTRER");
+        btnEnregistrer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnregistrerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -159,6 +182,16 @@ public class NewMecano extends javax.swing.JPanel {
     private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed
         main.dispose();
     }//GEN-LAST:event_btnAnnulerActionPerformed
+
+    private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
+        mecano.setLogin(TFLogin.getText());
+        mecano.setNom(TFNom.getText());
+        mecano.setPrenom(TFPrenom.getText());
+        mecano.setPassword(TFPassword.getPassword().toString());
+        manager.getAdminRemoteSvc().ajouterMecano(mecano);
+        System.out.println("mecano créé");
+        origin.chargerDonnees();
+    }//GEN-LAST:event_btnEnregistrerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
