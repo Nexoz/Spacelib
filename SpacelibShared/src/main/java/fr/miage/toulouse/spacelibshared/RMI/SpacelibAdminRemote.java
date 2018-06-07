@@ -35,5 +35,6 @@ public interface SpacelibAdminRemote {
     void modifierNavette (ObjNavette navette)throws NavetteInconnuException;
     void supprimerNavette (ObjNavette navette)throws NavetteInconnuException;
     List<ObjMecanicien> getlesMecanos();
+    void ajouterMecano(ObjMecanicien mecano);
     
 }

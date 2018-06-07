@@ -35,4 +35,5 @@ public interface GestionStationLocal {
     void modifierNavette (long idNavette)throws NavetteInconnuException;
     void supprimerNavette (long idNavette)throws NavetteInconnuException;
     Station getStationById(long idStation);
+    void ajoutouMecano(Mecanicien mecano);
 }

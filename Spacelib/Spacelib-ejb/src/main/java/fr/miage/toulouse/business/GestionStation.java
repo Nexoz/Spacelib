@@ -106,7 +106,7 @@ public class GestionStation implements GestionStationLocal {
         navetteFacade.create(navette);
         
         if (navette.getQuaiArrimage() != null){
-            quai = quaiFacade.find(navette.getQuaiArrimage());
+            quai = quaiFacade.find(navette.getQuaiArrimage().getId());
             if (quai == null) {
                 throw new QuaiInconnuException();
             }
@@ -150,6 +150,11 @@ public class GestionStation implements GestionStationLocal {
     @Override
     public List<Quai> getQuaiDispos(long station) {
         return stationfacade.getQuaisDispo(station);
+    }
+
+    @Override
+    public void ajoutouMecano(Mecanicien mecano) {
+        mecanoFacade.create(mecano);
     }
 
 }

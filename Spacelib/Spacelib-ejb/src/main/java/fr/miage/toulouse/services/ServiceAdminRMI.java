@@ -40,10 +40,8 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         List<Station> stations = gestionStation.consulterStation();
         List<ObjStation> objStations = new ArrayList<>();
         for(Station s : stations){
-            System.out.println("----------------------------------STATION-------------------------");
             ObjStation tmp = new ObjStation(s.getId(), s.getNom(), s.getPosition(), new ArrayList<ObjQuai>());
             for (Quai q : s.getListeQuais()){
-                System.out.println("----------------------QUAI TROUVE------------------");
                 System.out.println(q.getId());
                 tmp.getQuais().add(new ObjQuai(q.getId(), q.getCodeQuai(),null));
             }
@@ -105,6 +103,11 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
     public void acheterNavette(ObjNavette navette) throws NavetteInconnuException, QuaiInconnuException {
         Navette eNavette = new Navette();
         eNavette.setNbPlaces(navette.getNbPlaces());
+        if (navette.getQuai() != null){
+            Quai quai = new Quai();
+            quai.setId(navette.getQuai().getId());
+            eNavette.setQuaiArrimage(quai);
+        }
         gestionStation.acheterNavette(eNavette);
     }
 
@@ -134,9 +137,9 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
                 q = new ObjQuai(tmp.getId(), tmp.getCodeQuai(), null);
             }
             List<ObjOperation> ope = new ArrayList<ObjOperation>();
-            for (Operation o : n.getListeOperations()){
-                ope.add(new ObjOperation(o.getId(), null, o.getDateDebut(), o.getDateFin(), o.getDateOperation(), null));
-            }
+            //for (Operation o : n.getListeOperations()){
+            //    ope.add(new ObjOperation(o.getId(), null, o.getDateDebut(), o.getDateFin(), o.getDateOperation(), null));
+            //}
             ObjNavette navette = new ObjNavette(n.getId(), n.getNbPlaces(), n.getProchaineRevision(), q, ope);
             lesObjNavette.add(navette);
         }
@@ -163,5 +166,15 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         }
         return lesObjMecano;
     }  
+
+    @Override
+    public void ajouterMecano(ObjMecanicien mecano) {
+        Mecanicien nouveau = new Mecanicien();
+        nouveau.setLogin(mecano.getLogin());
+        nouveau.setNom(mecano.getNom());
+        nouveau.setPrenom(mecano.getPrenom());
+        nouveau.setPassword(mecano.getPassword());
+        gestionStation.ajoutouMecano(nouveau);
+    }
     
 }

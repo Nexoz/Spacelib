@@ -31,7 +31,7 @@ public class Home extends javax.swing.JPanel {
 
     private RMIAdminServiceManager manager;
     
-    private ObjStation selectedStation = null;
+    private ObjStation selectedStation = new ObjStation();
     
     private DefaultListModel modelStations = new DefaultListModel<>();
     private DefaultListModel modelNavettes = new DefaultListModel();
@@ -560,7 +560,7 @@ public class Home extends javax.swing.JPanel {
 
     private void btnAddMecanicienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMecanicienActionPerformed
         JFrame newMecano = new JFrame();
-        newMecano.add(new NewMecano(newMecano));
+        newMecano.add(new NewMecano(newMecano, this));
         newMecano.pack();
         newMecano.setVisible(true);
     }//GEN-LAST:event_btnAddMecanicienActionPerformed
