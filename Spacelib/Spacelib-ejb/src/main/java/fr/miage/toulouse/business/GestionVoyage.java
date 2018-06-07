@@ -63,19 +63,21 @@ public class GestionVoyage implements GestionVoyageLocal {
      * @throws QuaiInconnuException 
      */
     @Override
-    public void finaliserVoyage(long idNavette, long idReservation, long idQuai) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException{
-        Navette navette = this.navetteFacade.find(idNavette);
-        if (navette == null) {
-            throw new NavetteInconnuException();
-        }
+    public void finaliserVoyage( long idReservation) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException{
         Reservation reservation = this.reservationFacade.find(idReservation);
         if (reservation == null) {
             throw new ReservationInconnuException();
         }
+        /*Navette navette = this.navetteFacade.find(idNavette);
+        if (navette == null) {
+            throw new NavetteInconnuException();
+        }
         Quai quai = this.quaiFacade.find(idQuai);
         if (quai == null) {
             throw new QuaiInconnuException();
-        }
+        }*/
+        Quai quai = reservation.getQuaiArrivee();
+        Navette navette = reservation.getNavette();
         quaiFacade.arrimer(quai, navette);
         reservationFacade.voyageAchevé(reservation);
         navetteFacade.arrimer(navette, quai);
@@ -102,7 +104,7 @@ public class GestionVoyage implements GestionVoyageLocal {
      * @throws UsagerInconnuException 
      */
     @Override
-    public void reserverVoyage(long idStationD, long idStationA, long nbPassager, Date dateA, long idEmprunteur, Date dateOpe) throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException {
+    public long reserverVoyage(long idStationD, long idStationA, int nbPassager, Date dateA, long idEmprunteur, Date dateOpe) throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException {
         //Tests d'existences
             Station stationDepart = this.stationFacade.find(idStationD);
             if (stationDepart == null) {
@@ -148,6 +150,8 @@ public class GestionVoyage implements GestionVoyageLocal {
             this.usagerFacade.ajouterReservation(emprunteur, reservation);
             this.navetteFacade.ajouterOperation(navDisponible, reservation);
             this.quaiFacade.reserverQuai(quaiA,dateA);
+            
+        return reservation.getId();
     }
 
     /***

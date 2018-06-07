@@ -5,8 +5,6 @@
  */
 package fr.toulouse.miage.borneclient;
 
-import fr.miage.toulouse.spacelibshared.admin.ObjUsager;
-import fr.miage.toulouse.spacelibshared.RMI.SpacelibBorneRemote;
 import fr.toulouse.miage.borneclient.services.RMIBorneServiceManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +23,7 @@ public class Inscription extends javax.swing.JPanel{
     /**
      * Creates new form Login
      */
-    public Inscription(BorneClient j, SpacelibBorneRemote services) {
+    public Inscription(BorneClient j) {
         initComponents();
         jframeAccueil = j;
         try {
@@ -229,6 +227,7 @@ public class Inscription extends javax.swing.JPanel{
     private void jButtonValiderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValiderMouseClicked
         long idUsager = manager.getBorneRemoteSvc().creerUsager(jTextFieldNom.getText(), jTextFieldPrenom.getText(), jTextFieldLogin.getText(), jTextFieldPassword.getText());
         System.out.println("fr.toulouse.miage.borneclient.Inscription.jButtonValiderMouseClicked()" + "     " + idUsager);
+        jframeAccueil.changerJpanel(this, new Login(jframeAccueil,"Inscription terminée ! Veuillez vous connecter"));
     }//GEN-LAST:event_jButtonValiderMouseClicked
 
     private void jTextFieldNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomActionPerformed

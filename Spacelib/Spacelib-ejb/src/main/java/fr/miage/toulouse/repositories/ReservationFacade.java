@@ -65,7 +65,7 @@ public class ReservationFacade extends AbstractFacade<Reservation> implements Re
     }
     
     @Override
-    public Reservation creerReservation(String texte, Quai quaiD, Quai quaiA, Date dateA, Usager emprunteur, long nbPassager, Navette navDisponible,Date dateOpe) {
+    public Reservation creerReservation(String texte, Quai quaiD, Quai quaiA, Date dateA, Usager emprunteur, int nbPassager, Navette navDisponible,Date dateOpe) {
         Reservation c = new Reservation( texte,  quaiD,  quaiA,  dateA,  emprunteur,  nbPassager,  navDisponible, dateOpe);
         this.create(c);
         return c;
