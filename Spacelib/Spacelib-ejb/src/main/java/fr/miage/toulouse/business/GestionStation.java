@@ -20,6 +20,7 @@ import javax.ejb.Stateless;
 import fr.miage.toulouse.repositories.NavetteFacadeLocal;
 import fr.miage.toulouse.repositories.QuaiFacadeLocal;
 import fr.miage.toulouse.repositories.StationFacadeLocal;
+import fr.miage.toulouse.spacelibshared.exceptions.MecanicienInconnuException;
 
 /**
  *
@@ -168,6 +169,15 @@ public class GestionStation implements GestionStationLocal {
     @Override
     public void modifierMecanicien(Mecanicien mecano) {
         mecanoFacade.edit(mecano);
+    }
+
+    @Override
+    public void supprimerMecanicien(long id) throws MecanicienInconnuException{
+        Mecanicien mecano = mecanoFacade.find(id);
+        if (mecano == null) {
+            throw new MecanicienInconnuException();
+        }
+        mecanoFacade.remove(mecano);
     }
 
 }

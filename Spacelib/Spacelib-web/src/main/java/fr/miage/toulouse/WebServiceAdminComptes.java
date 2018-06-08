@@ -7,6 +7,7 @@ package fr.miage.toulouse;
 
 import fr.miage.toulouse.entities.Utilisateur;
 import fr.miage.toulouse.services.ServiceAdminComptesLocal;
+import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.ejb.Stateless;
@@ -26,7 +27,7 @@ public class WebServiceAdminComptes {
     // "Web Service > Add Operation"
 
     @WebMethod(operationName = "addMecano")
-    public long addMecano(@WebParam(name = "nom") String nom, @WebParam(name = "prenom") String prenom, @WebParam(name = "login") String login, @WebParam(name = "password") String password) {
+    public long addMecano(@WebParam(name = "nom") String nom, @WebParam(name = "prenom") String prenom, @WebParam(name = "login") String login, @WebParam(name = "password") String password) throws LoginUsedException {
         return ejbRef.addMecano(nom, prenom, login, password);
     }
     
