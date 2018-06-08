@@ -13,9 +13,11 @@ import fr.miage.toulouse.repositories.UsagerFacadeLocal;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import fr.miage.toulouse.repositories.UtilisateurFacadeLocal;
+import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;
+import java.util.List;
 
 /**
- *
+ * Gestion des comptes utilisateurs
  * @author jb
  */
 @Stateless
@@ -30,32 +32,66 @@ public class GestionUtilisateur implements GestionUtilisateurLocal {
     @EJB
     private MecanicienFacadeLocal mfl;
     
+    /**
+     * Tester si un compte a bien le bon couple login/password
+     * @param login 
+     * @param password
+     * @return Objet utilisateur connecté
+     */
     @Override
     public Utilisateur authentifier(String login, String password) {
         return utfl.authentifier(login, password);
     }
 
+    /**
+     * Créer un usager
+     * @param nom
+     * @param prenom
+     * @param login
+     * @param password
+     * @return id de l'usager
+     * @throws fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException
+     */
     @Override
-    public long creerCompte(long idUtilisateur) {
-        final Utilisateur u = this.utfl.find(idUtilisateur);
-        if(u!= null){
-            utfl.create(u);
-            return u.getId();
+    public long creerUsager(String nom, String prenom, String login, String password) throws LoginUsedException {
+        if(!isLoginUsed(login)){
+            Usager m = new Usager(nom, prenom, login, password);
+            usfl.create(m);
+            return m.getId();
+        } else {
+            throw new LoginUsedException("Login déjà utilisé");
         }
-        return -1;
+        
     }
-
+    
+    /**
+     * Créer un mécanicien
+     * @param nom
+     * @param prenom
+     * @param login
+     * @param password
+     * @return id du mécanicien
+     * @throws fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException
+     */
     @Override
-    public long creerUsager(String nom, String prenom, String login, String password) {
-        Usager m = new Usager(nom, prenom, login, password);
-        usfl.create(m);
-        return m.getId();
+    public long creerMecanicien(String nom, String prenom, String login, String password) throws LoginUsedException {
+        if(!isLoginUsed(login)){
+            Mecanicien m = new Mecanicien(nom, prenom, login, password);
+            mfl.create(m);
+            return m.getId();
+        } else {
+            throw new LoginUsedException("Login déjà utilisé");
+        }      
     }
     
     @Override
-    public long creerMecanicien(String nom, String prenom, String login, String password) {
-        Mecanicien m = new Mecanicien(nom, prenom, login, password);
-        mfl.create(m);
-        return m.getId();
+    public boolean isLoginUsed(String login) {
+        List<Utilisateur> users = utfl.findAll();
+        for (Utilisateur u : users) {
+            if(u.getLogin() == login) {
+                return true;
+            }
+        }
+        return false;
     }
 }

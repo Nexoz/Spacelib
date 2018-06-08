@@ -37,10 +37,8 @@ Le projet est composé de plusieurs projets NetBeans :
 
 #### Application Mécanicien
 
-- Remplacer les lorems
-- Récupérer / Afficher les infos quais / navettes avec vrai jeu de test
+- Afficher date révision ???
 - Brancher débuter une révision
-- Afficher révisions en cours
 - Brancher finir une révision
 
 ### V2

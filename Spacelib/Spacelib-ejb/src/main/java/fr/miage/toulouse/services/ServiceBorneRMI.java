@@ -15,6 +15,7 @@ import fr.miage.toulouse.entities.Utilisateur;
 import fr.miage.toulouse.spacelibshared.RMI.SpacelibBorneRemote;
 import fr.miage.toulouse.spacelibshared.admin.ObjStation;
 import fr.miage.toulouse.spacelibshared.admin.ObjUsager;
+import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasNavetteDisponibleException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasQuaiDisponibleException;
@@ -79,7 +80,7 @@ public class ServiceBorneRMI implements SpacelibBorneRemote{
     }
     
     @Override
-    public long creerUsager(String nom, String prenom, String login, String password) {
+    public long creerUsager(String nom, String prenom, String login, String password) throws LoginUsedException {
         return gestionUtilisateur.creerUsager(nom, prenom, login, password);
     }
 

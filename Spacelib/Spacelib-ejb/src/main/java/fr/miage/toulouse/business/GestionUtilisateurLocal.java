@@ -6,6 +6,7 @@
 package fr.miage.toulouse.business;
 
 import fr.miage.toulouse.entities.Utilisateur;
+import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;
 import javax.ejb.Local;
 
 /**
@@ -16,7 +17,7 @@ import javax.ejb.Local;
 public interface GestionUtilisateurLocal {
  
     Utilisateur authentifier(String login, String password);
-    long creerCompte(long idUtilisateur);
-    long creerMecanicien(String nom, String prenom, String login, String password);
-    long creerUsager(String nom, String prenom, String login, String password);
+    long creerMecanicien(String nom, String prenom, String login, String password) throws LoginUsedException;
+    long creerUsager(String nom, String prenom, String login, String password) throws LoginUsedException;
+    boolean isLoginUsed(String login);
 }
