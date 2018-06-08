@@ -7,6 +7,7 @@ package fr.miage.toulouse.services;
 
 import fr.miage.toulouse.business.GestionUtilisateurLocal;
 import fr.miage.toulouse.entities.Utilisateur;
+import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -21,7 +22,7 @@ public class ServiceAdminComptes implements ServiceAdminComptesLocal {
     private GestionUtilisateurLocal gestUtilisateur; 
 
     @Override
-    public long addMecano(String nom, String prenom, String login, String password) {
+    public long addMecano(String nom, String prenom, String login, String password) throws LoginUsedException {
         return gestUtilisateur.creerMecanicien(nom, prenom, login, password);
     }
     

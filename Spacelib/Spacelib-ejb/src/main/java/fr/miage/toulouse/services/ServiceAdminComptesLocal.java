@@ -6,6 +6,7 @@
 package fr.miage.toulouse.services;
 
 import fr.miage.toulouse.entities.Utilisateur;
+import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;
 import javax.ejb.Local;
 
 /**
@@ -15,6 +16,6 @@ import javax.ejb.Local;
 @Local
 public interface ServiceAdminComptesLocal {
     
-    long addMecano(String nom, String prenom, String login, String password);
+    long addMecano(String nom, String prenom, String login, String password) throws LoginUsedException;
     Utilisateur authentifier(String login, String password);
 }

@@ -9,6 +9,7 @@ import fr.miage.toulouse.spacelibshared.admin.ObjStation;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasNavetteDisponibleException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasQuaiDisponibleException;
+import fr.miage.toulouse.spacelibshared.exceptions.ReservationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.UsagerInconnuException;
 import fr.toulouse.miage.borneclient.renderer.StationRenderer;
@@ -46,7 +47,7 @@ public class ReserverNavette extends javax.swing.JPanel {
         this.initialiserListStation();
         this.jLabelUsager.setText(j.getNomUsager() + " " + j.getPrenomUsager()+"    ");
         this.jLabelNomStation.setText("     Station " + j.getNomStation());
-        jSpinnerNb = new JSpinner(new SpinnerNumberModel(1,0,8,1)); 
+        //jSpinnerNb = new JSpinner(new SpinnerNumberModel(1,0,8,1)); 
     }
 
     /**
@@ -89,6 +90,8 @@ public class ReserverNavette extends javax.swing.JPanel {
         jLabel4.setText("Réservation d'un voyage");
 
         jSpinnerNb.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jSpinnerNb.setRequestFocusEnabled(false);
+        jSpinnerNb.setVerifyInputWhenFocusTarget(false);
 
         jButtonReserver.setBackground(new java.awt.Color(0, 0, 51));
         jButtonReserver.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -220,10 +223,12 @@ public class ReserverNavette extends javax.swing.JPanel {
 
     private void jButtonReserverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonReserverMouseClicked
         ObjStation selectedStation = (ObjStation) jListStation.getSelectedValue();
-        int nbParticipant = Integer.parseInt(jSpinnerNb.getModel().getValue().toString());
+        int nbParticipant = Integer.parseInt(jSpinnerNb.getValue().toString());
         try {
             long idReservation = manager.getBorneRemoteSvc().reserverVoyage(this.idStation, selectedStation.getId(),nbParticipant,this.idClient, this.aujourdhui());
             jframeAccueil.setIdReservation(idReservation);
+            String nomQuaiD = manager.getBorneRemoteSvc().quaiReservation(idReservation);
+            jframeAccueil.setNomQuaiReservation(nomQuaiD);
             jframeAccueil.changerJpanel(this, new DemarrerVoyage(jframeAccueil));
         } catch (NavetteInconnuException ex) {
             jLabelErreur.setText("La navette n'existe pas.");
@@ -232,9 +237,11 @@ public class ReserverNavette extends javax.swing.JPanel {
         } catch (PasNavetteDisponibleException ex) {
             jLabelErreur.setText("Pas de navette disponible aujourd'hui.");
         } catch (PasQuaiDisponibleException ex) {
-             jLabelErreur.setText("Pas de quai disponible pour le jour de votre arrivée.");
+            jLabelErreur.setText("Pas de quai disponible pour le jour de votre arrivée.");
         } catch (UsagerInconnuException ex) {
-             jLabelErreur.setText("Vous n'existez pas");
+            jLabelErreur.setText("Vous n'existez pas");
+        } catch (ReservationInconnuException ex) {
+            Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonReserverMouseClicked
 
@@ -269,7 +276,9 @@ public class ReserverNavette extends javax.swing.JPanel {
         List<ObjStation> stations = manager.getBorneRemoteSvc().consulterStation();
         DefaultListModel modelStations = new DefaultListModel<>();
         for (ObjStation station : stations) {
-            modelStations.addElement(station);
+            if(!station.getNom().equals(jframeAccueil.getNomStation())){
+                modelStations.addElement(station);
+            }
         }
         jListStation.setModel(modelStations);
         jListStation.setCellRenderer(new StationRenderer());

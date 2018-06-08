@@ -30,6 +30,7 @@ public class FinaliserVoyage extends javax.swing.JPanel {
         this.manager = j.getManager();
         this.jLabelUsager.setText(j.getNomUsager() + " " + j.getPrenomUsager()+"    ");
         this.jLabelNomStation.setText("     Station " + j.getNomStation());
+        this.jLabelNumReserv.setText(this.jLabelNumReserv.getText() + jframeAccueil.getIdReservation());
     }
 
     /**
@@ -43,16 +44,13 @@ public class FinaliserVoyage extends javax.swing.JPanel {
 
         jPanelBot = new javax.swing.JPanel();
         jPanelCenter = new javax.swing.JPanel();
-        jLabelStationA = new javax.swing.JLabel();
-        jLabelStationD = new javax.swing.JLabel();
+        jLabelNumReserv = new javax.swing.JLabel();
         jButtonValider = new javax.swing.JButton();
         jLabelTitre = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         DecoButton = new javax.swing.JButton();
         jPanelTop = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelAccueil = new javax.swing.JLabel();
+        jLabelVide = new javax.swing.JLabel();
         jLabelNomStation = new javax.swing.JLabel();
         jLabelUsager = new javax.swing.JLabel();
 
@@ -63,11 +61,8 @@ public class FinaliserVoyage extends javax.swing.JPanel {
 
         jPanelCenter.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabelStationA.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabelStationA.setText("Station d'arrivée");
-
-        jLabelStationD.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabelStationD.setText("Station de départ");
+        jLabelNumReserv.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelNumReserv.setText("Numéro de réservation : ");
 
         jButtonValider.setBackground(new java.awt.Color(0, 0, 51));
         jButtonValider.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -87,10 +82,6 @@ public class FinaliserVoyage extends javax.swing.JPanel {
 
         jLabelTitre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelTitre.setText("Finalisation du voyage");
-
-        jLabel2.setText("Départ le :");
-
-        jLabel3.setText("Arrivée le :");
 
         DecoButton.setBackground(new java.awt.Color(0, 0, 51));
         DecoButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -115,20 +106,16 @@ public class FinaliserVoyage extends javax.swing.JPanel {
             .addGroup(jPanelCenterLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanelCenterLayout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelStationD)
-                            .addGroup(jPanelCenterLayout.createSequentialGroup()
-                                .addComponent(jLabelTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DecoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabelStationA))))
+                    .addComponent(jLabelNumReserv)
+                    .addGroup(jPanelCenterLayout.createSequentialGroup()
+                        .addComponent(jLabelTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DecoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCenterLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
         );
         jPanelCenterLayout.setVerticalGroup(
             jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,19 +124,10 @@ public class FinaliserVoyage extends javax.swing.JPanel {
                     .addComponent(jLabelTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DecoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCenterLayout.createSequentialGroup()
-                        .addComponent(jLabelStationD)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                        .addComponent(jLabelStationA)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCenterLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addComponent(jLabelNumReserv)
+                .addGap(23, 23, 23)
+                .addComponent(jButtonValider, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         add(jPanelCenter, java.awt.BorderLayout.CENTER);
@@ -159,13 +137,13 @@ public class FinaliserVoyage extends javax.swing.JPanel {
         jPanelTop.setPreferredSize(new java.awt.Dimension(241, 90));
         jPanelTop.setLayout(new java.awt.GridLayout(2, 1));
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("    WELCOME to Spacelib");
-        jLabel1.setToolTipText("");
-        jPanelTop.add(jLabel1);
-        jPanelTop.add(jLabel5);
+        jLabelAccueil.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabelAccueil.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelAccueil.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelAccueil.setText("    WELCOME to Spacelib");
+        jLabelAccueil.setToolTipText("");
+        jPanelTop.add(jLabelAccueil);
+        jPanelTop.add(jLabelVide);
 
         jLabelNomStation.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelNomStation.setForeground(new java.awt.Color(255, 255, 255));
@@ -216,15 +194,12 @@ public class FinaliserVoyage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DecoButton;
     private javax.swing.JButton jButtonValider;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelAccueil;
     private javax.swing.JLabel jLabelNomStation;
-    private javax.swing.JLabel jLabelStationA;
-    private javax.swing.JLabel jLabelStationD;
+    private javax.swing.JLabel jLabelNumReserv;
     private javax.swing.JLabel jLabelTitre;
     private javax.swing.JLabel jLabelUsager;
+    private javax.swing.JLabel jLabelVide;
     private javax.swing.JPanel jPanelBot;
     private javax.swing.JPanel jPanelCenter;
     private javax.swing.JPanel jPanelTop;

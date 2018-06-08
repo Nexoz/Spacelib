@@ -33,6 +33,8 @@ public class DemarrerVoyage extends javax.swing.JPanel {
         this.jframeAccueil = j;
         this.jLabelUsager.setText(j.getNomUsager() + " " + j.getPrenomUsager()+"    ");
         this.jLabelNomStation.setText("     Station " + j.getNomStation());
+        
+        this.jLabelDuQuai.setText(this.jLabelDuQuai.getText()+ " " + jframeAccueil.getNomQuaiReservation());
 
     }
 
@@ -46,7 +48,7 @@ public class DemarrerVoyage extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanelCenter = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelDuQuai = new javax.swing.JLabel();
         jButtonDeco = new javax.swing.JButton();
         jPanelBot = new javax.swing.JPanel();
         jPanelTop = new javax.swing.JPanel();
@@ -61,8 +63,8 @@ public class DemarrerVoyage extends javax.swing.JPanel {
 
         jPanelCenter.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Veuillez vous rendre au quai : ");
+        jLabelDuQuai.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelDuQuai.setText("Veuillez vous rendre au quai : ");
 
         jButtonDeco.setBackground(new java.awt.Color(0, 0, 51));
         jButtonDeco.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -87,7 +89,7 @@ public class DemarrerVoyage extends javax.swing.JPanel {
             .addGroup(jPanelCenterLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDuQuai, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelCenterLayout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(jButtonDeco, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -97,7 +99,7 @@ public class DemarrerVoyage extends javax.swing.JPanel {
             jPanelCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCenterLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelDuQuai, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
                 .addComponent(jButtonDeco, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(256, Short.MAX_VALUE))
@@ -159,8 +161,8 @@ public class DemarrerVoyage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDeco;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelDuQuai;
     private javax.swing.JLabel jLabelNomStation;
     private javax.swing.JLabel jLabelUsager;
     private javax.swing.JPanel jPanelBot;
