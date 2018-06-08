@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    // Config
     $.soap({
         beforeSend: function(SOAPEnvelope) {
             console.log(SOAPEnvelope.toString());
@@ -15,6 +16,7 @@ $(document).ready(function () {
         }
     });
 
+    // Récupération des Quais/Navettes pour la station en cours
     $.soap({
         method : "toul:getQuaisFromStation",
         data : {
@@ -26,7 +28,9 @@ $(document).ready(function () {
                 console.log(quai)
                 console.log(quai.getElementsByTagName("navArrimée"))
                 var navette = quai.getElementsByTagName("navArrimée")
+                // Si une navette est arrimée
                 if(navette.length > 0) {
+                    // Génération du tr
                     var tr = "<tr>"
                     tr = tr + "<td>Navette n°" + navette[0].getElementsByTagName("id")[0].childNodes[0].nodeValue + "</td>"
                     tr = tr + "<td>" + quai.getElementsByTagName("codeQuai")[0].childNodes[0].nodeValue + "</td>"
@@ -57,20 +61,3 @@ $(document).ready(function () {
     })
     
 })
-
-/*
-            <tr>
-              <th>Nom</th>
-              <th>N° Quai</th>
-              <th>Etat</th>
-              <th></th>
-            </tr>
-            <tr>
-              <td>Navette n°1</td>
-              <td>2</td>
-              <td>2 voyages restants</td>
-              <td>
-                <a class="waves-effect waves-light btn blue darken-4">VALIDER</a>
-              </td>
-            </tr>
-*/

@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author jb
  */
 @Entity
-public class Utilisateur implements Serializable {
+public abstract class Utilisateur implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
