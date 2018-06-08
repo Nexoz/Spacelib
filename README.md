@@ -28,15 +28,9 @@ Le projet est composé de plusieurs projets NetBeans :
 ### V1
 
 #### Appli Admin
-
 - Forcer le nom de la station créé avec un dropdown ({"Terre", "Dimidium", "Arion", "Brahe", "Amateru", "Tadmor"})
 
-#### Borne
-
-- Vérifier que le login est unique (et pas uniquement avec les usagers, inclure mécanos et admins)
-
 #### Application Mécanicien
-
 - Afficher date révision ???
 - Brancher débuter une révision
 - Brancher finir une révision

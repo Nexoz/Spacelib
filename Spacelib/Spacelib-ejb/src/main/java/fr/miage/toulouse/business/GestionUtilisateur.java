@@ -88,7 +88,7 @@ public class GestionUtilisateur implements GestionUtilisateurLocal {
     public boolean isLoginUsed(String login) {
         List<Utilisateur> users = utfl.findAll();
         for (Utilisateur u : users) {
-            if(u.getLogin() == login) {
+            if(u.getLogin().equals(login)) {
                 return true;
             }
         }
