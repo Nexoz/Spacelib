@@ -44,7 +44,7 @@ $(document).ready(function () {
                             $("#table_navettes").append(tr);
                             break;
                         case '0' :
-                            tr = tr + "<td class='red' colspan='2'>Révision nécessaire</td><td><a class='waves-effect waves-light btn blue darken-4'>REVISER</a></td>"
+                            tr = tr + "<td class='red-text' colspan='2'>Révision nécessaire</td><td><a class='waves-effect waves-light btn blue darken-4'>REVISER</a></td>"
                             tr = tr + "</tr>"
                             $("#table_navettes").append(tr);
                             break;

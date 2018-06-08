@@ -37,7 +37,7 @@ Le projet est composé de plusieurs projets NetBeans :
 
 #### Application Mécanicien
 
-- Remplacer les lorems
+- Afficher date révision ???
 - Brancher débuter une révision
 - Brancher finir une révision
 
