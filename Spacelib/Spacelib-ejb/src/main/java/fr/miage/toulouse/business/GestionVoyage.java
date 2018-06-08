@@ -28,6 +28,7 @@ import fr.miage.toulouse.repositories.ReservationFacadeLocal;
 import fr.miage.toulouse.repositories.StationFacadeLocal;
 import fr.miage.toulouse.repositories.UsagerFacadeLocal;
 import fr.miage.toulouse.spacelibshared.DistancesCalculator;
+import java.util.ArrayList;
 /**
  *
  * @author jb
@@ -163,9 +164,9 @@ public class GestionVoyage implements GestionVoyageLocal {
         if (reserv == null) {
             throw new ReservationInconnuException();
         }
-        Navette navette = navetteFacade.find(reserv.getNavette());
+        Navette navette = navetteFacade.find(reserv.getNavette().getId());
         navetteFacade.desarrimer(navette);
-        Quai quai = quaiFacade.find(navette.getQuaiArrimage());
+        Quai quai = quaiFacade.find(reserv.getQuaiOperation().getId());
         quaiFacade.desarrimer(quai);
         reservationFacade.voyageInitié(reserv);
     }
@@ -188,15 +189,26 @@ public class GestionVoyage implements GestionVoyageLocal {
             if (usager == null) {
                 throw new UsagerInconnuException();
             }
-        if(usagerFacade.reservationsUsager(usager)!=null){
-            for(Reservation r : usagerFacade.reservationsUsager(usager)){
-                if(r.getDateFin()!=null){
+        List<Reservation> listR = new ArrayList<Reservation>();
+        listR = usagerFacade.reservationsUsager(usager);
+        if(listR.size()>=1){
+            for(Reservation r : listR){
+                if(r.getDateFin()==null){
                     return r;
                 }
             }
             return null;
         }
         return null;
+    }
+
+    @Override
+    public String quaiReservation(long idReservation) throws ReservationInconnuException {
+        final Reservation reserv = this.reservationFacade.find(idReservation);
+        if (reserv == null) {
+            throw new ReservationInconnuException();
+        }
+        return reserv.getQuaiOperation().getCodeQuai();
     }
     
     

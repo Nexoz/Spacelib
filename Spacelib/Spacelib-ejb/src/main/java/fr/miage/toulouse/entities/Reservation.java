@@ -8,9 +8,11 @@ package fr.miage.toulouse.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -24,6 +26,7 @@ public class Reservation extends Operation implements Serializable {
 
     private Quai quaiArrivee;
     
+    @ManyToOne(fetch = LAZY)
     private Usager emprunteur;
     
     private int nbPassager;

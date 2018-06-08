@@ -80,3 +80,16 @@ Le projet est composé de plusieurs projets NetBeans :
 
 Dire ce qu'on a codé
 + Choix de conception
+
+## Jeux de données
+###Pour la réalisation d'un voyage :
+-Au moins 3 stations avec des quais
+- Pas de navette disponible
+	- Dans l'une des stations (Terre), des quais mais pas de navette arrimé
+- Pas de quai disponible dans la station d'arrivée pour le jour prévu (Station de départ Brahe a des navettes)
+	- Dans une autre station (Dimidium), quais avec des navettes arrimé + un quai avec date de réservation
+-Dans la station de départ(Arion) une seul navette arrimé avec 4 places
+	- test de réservation avec 6 passagers -> pas de navette disponible
+	- test de réservation avec nombre de passager <=4
+###Pour la finalisation d'un voyage
+- Un usager déja créé + réservation à son nom créé + la réservation démarrer

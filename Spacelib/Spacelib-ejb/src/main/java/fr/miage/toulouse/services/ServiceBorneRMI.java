@@ -92,5 +92,10 @@ public class ServiceBorneRMI implements SpacelibBorneRemote{
             return null;
         }
     }
+
+    @Override
+    public String quaiReservation(long idReservation) throws ReservationInconnuException {
+        return gestionVoyage.quaiReservation(idReservation);
+    }
     
 }

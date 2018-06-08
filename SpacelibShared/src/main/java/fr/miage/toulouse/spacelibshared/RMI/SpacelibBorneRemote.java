@@ -32,5 +32,6 @@ public interface SpacelibBorneRemote {
     ObjUsager authentifier(String login, String password) throws UsagerInconnuException;
     long creerUsager(String nom, String prenom, String login, String password);
     Long derniereReservation(long idUsager) throws UsagerInconnuException;
+    String quaiReservation(long idReservation) throws ReservationInconnuException;
     
 }

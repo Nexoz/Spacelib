@@ -26,6 +26,7 @@ public class BorneClient extends javax.swing.JFrame {
     private String nomStation;
     private String nomUsager;
     private String prenomUsager;
+    private String nomQuaiReservation;
     
     /**
      * Creates new form BorneClient
@@ -144,6 +145,14 @@ public class BorneClient extends javax.swing.JFrame {
 
     public void setPrenomUsager(String prenomUsager) {
         this.prenomUsager = prenomUsager;
+    }
+
+    public String getNomQuaiReservation() {
+        return nomQuaiReservation;
+    }
+
+    public void setNomQuaiReservation(String nomQuaiReservation) {
+        this.nomQuaiReservation = nomQuaiReservation;
     }
     
     
