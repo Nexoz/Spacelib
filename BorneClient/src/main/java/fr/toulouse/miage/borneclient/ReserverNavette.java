@@ -224,10 +224,8 @@ public class ReserverNavette extends javax.swing.JPanel {
     private void jButtonReserverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonReserverMouseClicked
         ObjStation selectedStation = (ObjStation) jListStation.getSelectedValue();
         int nbParticipant = Integer.parseInt(jSpinnerNb.getValue().toString());
-        System.out.println("fr.toulouse.miage.borneclient.ReserverNavette.jButtonReserverMouseClicked() nbParticipant " + nbParticipant);
         try {
             long idReservation = manager.getBorneRemoteSvc().reserverVoyage(this.idStation, selectedStation.getId(),nbParticipant,this.idClient, this.aujourdhui());
-            System.out.println("fr.toulouse.miage.borneclient.ReserverNavette.jButtonReserverMouseClicked()  " + manager.getBorneRemoteSvc().quaiReservation(idReservation));
             jframeAccueil.setIdReservation(idReservation);
             String nomQuaiD = manager.getBorneRemoteSvc().quaiReservation(idReservation);
             jframeAccueil.setNomQuaiReservation(nomQuaiD);

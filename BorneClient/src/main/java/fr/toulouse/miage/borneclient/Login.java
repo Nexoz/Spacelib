@@ -216,7 +216,6 @@ public class Login extends javax.swing.JPanel{
     }//GEN-LAST:event_jButtonValiderActionPerformed
 
     private void jButtonValiderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonValiderMouseClicked
-        System.out.println("fr.toulouse.miage.borneclient.Login.jButtonValiderMouseClicked()" +jTextFieldlogin.getText() + " "+ jPasswordField.getText());
         ObjUsager u;
         try {
             u = manager.getBorneRemoteSvc().authentifier(jTextFieldlogin.getText(),jPasswordField.getText());
@@ -224,7 +223,6 @@ public class Login extends javax.swing.JPanel{
             jframeAccueil.setNomUsager(u.getNom());
             jframeAccueil.setPrenomUsager(u.getPrenom());
             ///////Vérifier si réservation en cours
-            System.out.println("fr.toulouse.miage.borneclient.Login.jButtonValiderMouseClicked() id de l'utilisateur" + u.getId());
             Long idres = manager.getBorneRemoteSvc().derniereReservation(u.getId());
             if(idres==null){
                 jframeAccueil.changerJpanel(this, new ReserverNavette(jframeAccueil,""));

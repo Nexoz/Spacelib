@@ -30,6 +30,9 @@ Le projet est composé de plusieurs projets NetBeans :
 #### Appli Admin
 - Forcer le nom de la station créé avec un dropdown ({"Terre", "Dimidium", "Arion", "Brahe", "Amateru", "Tadmor"})
 
+#### BorneClient
+-Le spinner a réglé
+
 #### Application Mécanicien
 - Afficher date révision ???
 - Brancher débuter une révision

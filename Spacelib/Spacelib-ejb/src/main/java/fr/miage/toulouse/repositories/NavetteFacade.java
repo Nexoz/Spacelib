@@ -41,7 +41,7 @@ public class NavetteFacade extends AbstractFacade<Navette> implements NavetteFac
      */
     @Override
     public boolean isWaitingRevision (Navette navette) {
-        if (navette.getProchaineRevision() < 3){
+        if (navette.getProchaineRevision() >= 3){
             return true;
         }else{
             return false;
@@ -80,7 +80,7 @@ public class NavetteFacade extends AbstractFacade<Navette> implements NavetteFac
 
     @Override
     public void incrementerVoyage(Navette navette) {
-        navette.setProchaineRevision(navette.getProchaineRevision()-1);
+        navette.setProchaineRevision(navette.getProchaineRevision()+1);
     }
 
     @Override
@@ -104,6 +104,9 @@ public class NavetteFacade extends AbstractFacade<Navette> implements NavetteFac
      */
     @Override
     public boolean isDisponible(Navette navette){
+        System.out.println("fr.miage.toulouse.repositories.NavetteFacade.isDisponible()  est en révision " + isEnRevision(navette));
+        System.out.println("fr.miage.toulouse.repositories.NavetteFacade.isDisponible()  est en attente de révision " + isWaitingRevision(navette));
+        System.out.println("fr.miage.toulouse.repositories.NavetteFacade.isDisponible()  a un quai d'arrirame " + navette.getQuaiArrimage());
         return !isEnRevision(navette) && !isWaitingRevision(navette) && navette.getQuaiArrimage()!=null;
     }
 

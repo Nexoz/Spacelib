@@ -123,9 +123,11 @@ public class GestionVoyage implements GestionVoyageLocal {
             Navette nTempo=null;
             for(Quai q : listQuais ){
                 nTempo = q.getNavArrimée();
-                if(nTempo!=null && nTempo.getNbPlaces()>=nbPassager && navetteFacade.isDisponible(nTempo)){
-                    navDisponible = q.getNavArrimée();
-                    quaiD = q;
+                if(nTempo!=null) {
+                    if(nTempo.getNbPlaces()>=nbPassager && navetteFacade.isDisponible(nTempo)){
+                        navDisponible = q.getNavArrimée();
+                        quaiD = q;
+                    }
                 }
             }
             if(navDisponible == null){

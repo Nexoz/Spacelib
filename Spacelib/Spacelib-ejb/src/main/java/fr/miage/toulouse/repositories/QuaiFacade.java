@@ -40,6 +40,7 @@ public class QuaiFacade extends AbstractFacade<Quai> implements QuaiFacadeLocal 
     @Override
     public void arrimer(Quai quai,Navette navette) {
         quai.setNavArrimée(navette);
+        quai.setDateReservation(null);
     }
     
 
