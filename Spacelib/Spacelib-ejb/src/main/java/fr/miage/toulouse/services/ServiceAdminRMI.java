@@ -17,11 +17,14 @@ import fr.miage.toulouse.spacelibshared.admin.ObjNavette;
 import fr.miage.toulouse.spacelibshared.admin.ObjOperation;
 import fr.miage.toulouse.spacelibshared.admin.ObjQuai;
 import fr.miage.toulouse.spacelibshared.admin.ObjStation;
+import fr.miage.toulouse.spacelibshared.exceptions.MecanicienInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -34,6 +37,47 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
 
     @EJB
     GestionStationLocal gestionStation;
+    
+    
+    private Station objStationToStation(ObjStation objStation){
+        Station station = new Station();
+        station.setId(objStation.getId());
+        station.setNom(objStation.getNom());
+        station.setPosition(objStation.getPosition());
+        station.setListeQuais(new ArrayList<Quai>());
+        for (ObjQuai quai : objStation.getQuais()){
+            Quai tmp = new Quai();
+            Navette nav = new Navette();
+            tmp.setCodeQuai(quai.getCode());
+            tmp.setId(quai.getId());
+            if (quai.getNavette() != null){
+                nav.setId(quai.getNavette().getId());
+            }
+            tmp.setStation(station);
+            station.getListeQuais().add(tmp);
+        }
+        return station;
+    }
+    
+    private Navette objNavetteToNavette(ObjNavette objNavette){
+        Navette navette = new Navette();
+        try {
+           navette = gestionStation.getNavette(objNavette.getId());
+        } catch (NavetteInconnuException ex) {
+            Logger.getLogger(ServiceAdminRMI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        navette.setNbPlaces(objNavette.getNbPlaces());
+        return navette;
+    }
+    
+    private Mecanicien objMecanoToMecano(ObjMecanicien objMecano){
+        Mecanicien mecano = new Mecanicien();
+        mecano = gestionStation.getLeMecano(objMecano.getId());
+        mecano.setLogin(objMecano.getLogin());
+        mecano.setPassword(objMecano.getPassword());
+        return mecano;
+    }
+    
     
     @Override
     public List<ObjStation> consulterStation() {
@@ -65,12 +109,13 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
 
     @Override
     public void supprimerStation(ObjStation station) throws StationInconnuException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        gestionStation.supprimerStation(station.getId());
     }
 
     @Override
     public void modifierStation(ObjStation station) throws StationInconnuException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Station update = objStationToStation(station);
+        gestionStation.ModifierStation(update);
     }
 
     @Override
@@ -112,12 +157,13 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
 
     @Override
     public void modifierNavette(ObjNavette navette) throws NavetteInconnuException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Navette update = objNavetteToNavette(navette);
+        gestionStation.modifierNavette(update);
     }
 
     @Override
     public void supprimerNavette(ObjNavette navette) throws NavetteInconnuException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        gestionStation.supprimerNavette(navette.getId());
     }
 
     @Override
@@ -174,6 +220,12 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         nouveau.setPrenom(mecano.getPrenom());
         nouveau.setPassword(mecano.getPassword());
         gestionStation.ajoutouMecano(nouveau);
+    }
+
+    @Override
+    public void modifierMecano(ObjMecanicien mecano) throws MecanicienInconnuException {
+        Mecanicien update = objMecanoToMecano(mecano);
+        gestionStation.modifierMecanicien(update);
     }
     
 }

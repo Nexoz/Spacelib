@@ -209,6 +209,7 @@ public class NewNavette extends javax.swing.JPanel {
         origin.chargerDonnees();
         spinnerNbPlaces.setValue(0);
         chargerQuaiDispo();
+        origin.chargerDonnees();
     }//GEN-LAST:event_btnEnregisterActionPerformed
 
     private void listeStationsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listeStationsValueChanged

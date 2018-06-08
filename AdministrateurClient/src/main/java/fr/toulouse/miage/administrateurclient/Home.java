@@ -9,6 +9,8 @@ import fr.miage.toulouse.spacelibshared.admin.ObjMecanicien;
 import fr.miage.toulouse.spacelibshared.admin.ObjNavette;
 import fr.miage.toulouse.spacelibshared.admin.ObjQuai;
 import fr.miage.toulouse.spacelibshared.admin.ObjStation;
+import fr.miage.toulouse.spacelibshared.exceptions.MecanicienInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import fr.toulouse.miage.administrateurclient.renderer.StationRenderer;
@@ -60,7 +62,7 @@ public class Home extends javax.swing.JPanel {
     }
     
     public void afficherStation(){
-        labelNomStation.setText(selectedStation.getNom());
+        tFNomStation.setText(selectedStation.getNom());
         TFPositionStation.setText(selectedStation.getPosition());
         quaiStationModel = new DefaultListModel();
         for (ObjQuai quai : selectedStation.getQuais()){
@@ -90,6 +92,7 @@ public class Home extends javax.swing.JPanel {
     }
     
     public void chargerDonnees(){
+        
         
         listeStations.removeAll();
         listeNavettes.removeAll();
@@ -135,7 +138,6 @@ public class Home extends javax.swing.JPanel {
         tabs = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         btnAddStation = new javax.swing.JButton();
-        labelNomStation = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         TFPositionStation = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -146,6 +148,7 @@ public class Home extends javax.swing.JPanel {
         btnAddQuai = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         listeStations = new javax.swing.JList();
+        tFNomStation = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listeNavettes = new javax.swing.JList();
@@ -175,6 +178,7 @@ public class Home extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         TFPassword = new javax.swing.JPasswordField();
         btnEnregistrerMecano = new javax.swing.JButton();
+        btnDelMecano = new javax.swing.JButton();
 
         tabs.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -182,15 +186,12 @@ public class Home extends javax.swing.JPanel {
             }
         });
 
-        btnAddStation.setText("+");
+        btnAddStation.setText("AJOUTER");
         btnAddStation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddStationActionPerformed(evt);
             }
         });
-
-        labelNomStation.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        labelNomStation.setText("NomStation");
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel2.setText("Position : ");
@@ -218,7 +219,12 @@ public class Home extends javax.swing.JPanel {
             }
         });
 
-        btnDelStation.setText("-");
+        btnDelStation.setText("SUPPRIMER");
+        btnDelStation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelStationActionPerformed(evt);
+            }
+        });
 
         btnAddQuai.setText("+");
         btnAddQuai.addActionListener(new java.awt.event.ActionListener() {
@@ -239,17 +245,20 @@ public class Home extends javax.swing.JPanel {
         });
         jScrollPane5.setViewportView(listeStations);
 
+        tFNomStation.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        tFNomStation.setText("NomStation");
+        tFNomStation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tFNomStationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(btnAddStation)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEnregistrerStation))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,9 +268,9 @@ public class Home extends javax.swing.JPanel {
                                 .addGap(31, 31, 31)
                                 .addComponent(btnDelQuai))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(labelNomStation)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tFNomStation, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                                 .addComponent(btnDelStation))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(30, 30, 30)
@@ -270,7 +279,12 @@ public class Home extends javax.swing.JPanel {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addGap(18, 18, 18)
-                                        .addComponent(TFPositionStation, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(TFPositionStation, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(btnAddStation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEnregistrerStation)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -278,11 +292,14 @@ public class Home extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelNomStation)
-                            .addComponent(btnDelStation))
-                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnDelStation))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(tFNomStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(TFPositionStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -297,7 +314,7 @@ public class Home extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddStation)
                     .addComponent(btnEnregistrerStation))
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         tabs.addTab("Stations", jPanel1);
@@ -314,7 +331,7 @@ public class Home extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(listeNavettes);
 
-        btnAddNavette.setText("+");
+        btnAddNavette.setText("AJOUTER");
         btnAddNavette.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddNavetteActionPerformed(evt);
@@ -364,7 +381,7 @@ public class Home extends javax.swing.JPanel {
             }
         });
 
-        btnDelNavette.setText("-");
+        btnDelNavette.setText("SUPPRIMER");
         btnDelNavette.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDelNavetteActionPerformed(evt);
@@ -471,7 +488,7 @@ public class Home extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(listeMecaniciens);
 
-        btnAddMecanicien.setText("+");
+        btnAddMecanicien.setText("AJOUTER");
         btnAddMecanicien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddMecanicienActionPerformed(evt);
@@ -512,6 +529,13 @@ public class Home extends javax.swing.JPanel {
             }
         });
 
+        btnDelMecano.setText("SUPPRIMER");
+        btnDelMecano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelMecanoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -524,7 +548,9 @@ public class Home extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(labelPrenomMecano)
                         .addGap(18, 18, 18)
-                        .addComponent(labelNomMecano))
+                        .addComponent(labelNomMecano)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDelMecano))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -553,8 +579,10 @@ public class Home extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelPrenomMecano)
-                            .addComponent(labelNomMecano))
-                        .addGap(67, 67, 67)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(labelNomMecano)
+                                .addComponent(btnDelMecano)))
+                        .addGap(62, 62, 62)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(TFLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -598,11 +626,26 @@ public class Home extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddMecanicienActionPerformed
 
     private void btnEnregistrerNavetteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerNavetteActionPerformed
-        // TODO add your handling code here:
+        if (selectedNavette.getId() != 0){
+            selectedNavette.setNbPlaces(Integer.parseInt(spinnerPlaces.getValue().toString()));
+            try {
+                manager.getAdminRemoteSvc().modifierNavette(selectedNavette);
+            } catch (NavetteInconnuException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+        chargerDonnees();
     }//GEN-LAST:event_btnEnregistrerNavetteActionPerformed
 
     private void btnDelNavetteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelNavetteActionPerformed
-        // TODO add your handling code here:
+        if (selectedNavette.getId() != 0){
+            try {
+                manager.getAdminRemoteSvc().supprimerNavette(selectedNavette);
+            } catch (NavetteInconnuException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        chargerDonnees();
     }//GEN-LAST:event_btnDelNavetteActionPerformed
 
     private void TFLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFLoginActionPerformed
@@ -614,7 +657,14 @@ public class Home extends javax.swing.JPanel {
     }//GEN-LAST:event_TFPasswordActionPerformed
 
     private void btnEnregistrerMecanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerMecanoActionPerformed
-        // TODO add your handling code here:
+        if (selectedMecano.getId() != 0){
+            try {
+                manager.getAdminRemoteSvc().modifierMecano(selectedMecano);
+            } catch (MecanicienInconnuException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        chargerDonnees();
     }//GEN-LAST:event_btnEnregistrerMecanoActionPerformed
 
     private void btnAddQuaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddQuaiActionPerformed
@@ -625,7 +675,14 @@ public class Home extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddQuaiActionPerformed
 
     private void btnEnregistrerStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerStationActionPerformed
-        // TODO add your handling code here:
+        selectedStation.setNom(tFNomStation.getText());
+        selectedStation.setPosition(TFPositionStation.getText());
+        try {
+            manager.getAdminRemoteSvc().modifierStation(selectedStation);
+        } catch (StationInconnuException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        chargerDonnees();
     }//GEN-LAST:event_btnEnregistrerStationActionPerformed
 
     private void TFPositionStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFPositionStationActionPerformed
@@ -658,6 +715,25 @@ public class Home extends javax.swing.JPanel {
         afficherMecano();
     }//GEN-LAST:event_listeMecaniciensValueChanged
 
+    private void tFNomStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFNomStationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tFNomStationActionPerformed
+
+    private void btnDelMecanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelMecanoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDelMecanoActionPerformed
+
+    private void btnDelStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelStationActionPerformed
+        if (selectedStation.getId()!= 0){
+            try {
+                manager.getAdminRemoteSvc().supprimerStation(selectedStation);
+            } catch (StationInconnuException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            chargerDonnees();
+        }
+    }//GEN-LAST:event_btnDelStationActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TFLogin;
@@ -667,6 +743,7 @@ public class Home extends javax.swing.JPanel {
     private javax.swing.JButton btnAddNavette;
     private javax.swing.JButton btnAddQuai;
     private javax.swing.JButton btnAddStation;
+    private javax.swing.JButton btnDelMecano;
     private javax.swing.JButton btnDelNavette;
     private javax.swing.JButton btnDelQuai;
     private javax.swing.JButton btnDelStation;
@@ -691,7 +768,6 @@ public class Home extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel labelEtatRevision;
     private javax.swing.JLabel labelNomMecano;
-    private javax.swing.JLabel labelNomStation;
     private javax.swing.JLabel labelNomStationNavette;
     private javax.swing.JLabel labelNumNavette;
     private javax.swing.JLabel labelPrenomMecano;
@@ -702,6 +778,7 @@ public class Home extends javax.swing.JPanel {
     private javax.swing.JList listeQuaiStation;
     private javax.swing.JList listeStations;
     private javax.swing.JSpinner spinnerPlaces;
+    private javax.swing.JTextField tFNomStation;
     private javax.swing.JTabbedPane tabs;
     // End of variables declaration//GEN-END:variables
 }

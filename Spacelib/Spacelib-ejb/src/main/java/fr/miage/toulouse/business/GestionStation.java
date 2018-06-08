@@ -62,12 +62,8 @@ public class GestionStation implements GestionStationLocal {
     }
 
     @Override
-    public void ModifierStation(long idStation)  throws StationInconnuException{
-        Station s = stationfacade.find(idStation);
-        if (s == null) {
-            throw new StationInconnuException();
-        }
-        stationfacade.edit(s);
+    public void ModifierStation(Station station)  throws StationInconnuException{
+        stationfacade.edit(station);
     }
 
     @Override
@@ -115,11 +111,7 @@ public class GestionStation implements GestionStationLocal {
     }
 
     @Override
-    public void modifierNavette(long idNavette) throws NavetteInconnuException{
-        Navette navette = navetteFacade.find(idNavette);
-        if (navette == null) {
-            throw new NavetteInconnuException();
-        }
+    public void modifierNavette(Navette navette) throws NavetteInconnuException{
         navetteFacade.edit(navette);
     }
 
@@ -155,6 +147,27 @@ public class GestionStation implements GestionStationLocal {
     @Override
     public void ajoutouMecano(Mecanicien mecano) {
         mecanoFacade.create(mecano);
+    }
+
+    @Override
+    public Navette getNavette(long id) throws NavetteInconnuException {
+        try {
+            Navette navette = navetteFacade.find(id);
+            return navette;
+        } catch (Exception e) {
+            throw new NavetteInconnuException();
+        }
+    }
+
+    @Override
+    public Mecanicien getLeMecano(long id) {
+        Mecanicien mecano = mecanoFacade.find(id);
+        return mecano;
+    }
+
+    @Override
+    public void modifierMecanicien(Mecanicien mecano) {
+        mecanoFacade.edit(mecano);
     }
 
 }

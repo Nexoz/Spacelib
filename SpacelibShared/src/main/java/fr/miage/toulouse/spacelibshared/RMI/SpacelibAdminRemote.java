@@ -9,6 +9,7 @@ import fr.miage.toulouse.spacelibshared.admin.ObjMecanicien;
 import fr.miage.toulouse.spacelibshared.admin.ObjNavette;
 import fr.miage.toulouse.spacelibshared.admin.ObjQuai;
 import fr.miage.toulouse.spacelibshared.admin.ObjStation;
+import fr.miage.toulouse.spacelibshared.exceptions.MecanicienInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
@@ -36,5 +37,5 @@ public interface SpacelibAdminRemote {
     void supprimerNavette (ObjNavette navette)throws NavetteInconnuException;
     List<ObjMecanicien> getlesMecanos();
     void ajouterMecano(ObjMecanicien mecano);
-    
+    void modifierMecano(ObjMecanicien mecano) throws MecanicienInconnuException;
 }
