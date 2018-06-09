@@ -16,12 +16,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import static javax.persistence.TemporalType.TIMESTAMP;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author jb
  */
 @Entity
+@XmlSeeAlso({Station.class})
 public class Operation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,6 +65,7 @@ public class Operation implements Serializable {
         this.id = id;
     }
 
+    @XmlTransient
     public Navette getNavette() {
         return navette;
     }
@@ -102,6 +106,7 @@ public class Operation implements Serializable {
         this.libelle = libelle;
     }
 
+    @XmlTransient
     public Quai getQuaiOperation() {
         return quaiOperation;
     }

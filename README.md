@@ -35,8 +35,6 @@ Le projet est composé de plusieurs projets NetBeans :
 
 #### Application Mécanicien
 - Afficher date révision ???
-- Brancher débuter une révision
-- Brancher finir une révision
 
 ### V2
 

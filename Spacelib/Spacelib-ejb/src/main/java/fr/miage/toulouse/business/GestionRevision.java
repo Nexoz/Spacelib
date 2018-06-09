@@ -109,6 +109,7 @@ public class GestionRevision implements GestionRevisionLocal {
         if (mecanicien == null) {
             throw new NavetteInconnuException();
         }
+        navetteFacade.passerEnRevision(navette);
         Revision res = revisionFacade.creerRevision("Révision de la navette " + navette.getId() + " sur " + station.getNom(), navette.getQuaiArrimage(), navette, mecanicien);
         navetteFacade.ajouterOperation(navette, res);
         return res;

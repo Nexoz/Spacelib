@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,8 +33,10 @@ public class Revision extends Operation implements Serializable {
     public Revision(String libelle, Quai quaiRevision, Navette navette,Date dateOpe, Mecanicien mecanicien) {
         super.setQuaiOperation(quaiRevision);
         this.setDateOperation(dateOpe);
+        this.setDateDebut(dateOpe);
         this.setNavette(navette);
         this.setLibelle(libelle);
+        this.setMecanicien(mecanicien);
     }
     
     public Long getId() {
@@ -68,5 +71,14 @@ public class Revision extends Operation implements Serializable {
     public String toString() {
         return "entities.Revision[ id=" + id + " ]";
     }
-    
+
+    @XmlTransient
+    public Mecanicien getMecanicien() {
+        return mecanicien;
+    }
+
+    public void setMecanicien(Mecanicien mecanicien) {
+        this.mecanicien = mecanicien;
+    }
+      
 }

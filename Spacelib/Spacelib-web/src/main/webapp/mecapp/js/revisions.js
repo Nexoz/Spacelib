@@ -1,3 +1,5 @@
+var BreakException = {};
+
 $(document).ready(function () {
 
     $.soap({
@@ -22,6 +24,7 @@ $(document).ready(function () {
         },
         success: function (soapResponse) {
             var lists = soapResponse.toXML().getElementsByTagName("list")
+            var i = 1
             Array.prototype.slice.call(lists).forEach(quai => {
                 console.log(quai)
                 console.log(quai.getElementsByTagName("navArrimée"))
@@ -30,17 +33,41 @@ $(document).ready(function () {
                     var status = navette[0].getElementsByTagName("prochaineRevision")[0].childNodes[0].nodeValue;
                     console.log(status)
                     if (status == "-1") {
-                        var tr = "<tr>"
-                        tr = tr + "<td>Navette n°" + navette[0].getElementsByTagName("id")[0].childNodes[0].nodeValue + "</td>"
-                        tr = tr + "<td>" + quai.getElementsByTagName("codeQuai")[0].childNodes[0].nodeValue + "</td>"
-                        tr = tr + "<td></td><td><a class='waves-effect waves-light btn blue darken-4'>VALIDER</a></td>"
-                        tr = tr + "</tr>"
-                        $("#table_revisions").append(tr);
+                        var operations = navette[0].getElementsByTagName("operations");
+                        try {
+                            Array.prototype.slice.call(operations).forEach(ope => {
+                                console.log(ope)
+                                if(ope.getElementsByTagName("dateFin").length == 0) {
+                                    var tr = "<tr id='revision" + i + "'>"
+                                    tr = tr + "<td>Navette n°" + navette[0].getElementsByTagName("id")[0].childNodes[0].nodeValue + "</td>"
+                                    tr = tr + "<td>" + quai.getElementsByTagName("codeQuai")[0].childNodes[0].nodeValue + "</td>"
+                                    tr = tr + "<td></td><td><a onclick='terminerRevision(" + i + "," + ope.getElementsByTagName("id")[0].childNodes[0].nodeValue + ")' class='waves-effect waves-light btn blue darken-4'>VALIDER</a></td>"
+                                    tr = tr + "</tr>"
+                                    $("#table_revisions").append(tr);
+                                    i++;
+                                    throw BreakException;
+                                }
+                            })
+                        } catch (e) {
+                            if (e !== BreakException) throw e;
+                        }   
                     }
                 }
 
             });
         }
     })
-
 })
+
+function terminerRevision(index, idr) {
+    $.soap({
+        method : "toul:finaliserRevision",
+        data : {
+            idr : idr
+        },
+        success : function(soapResponse) {
+            $("#revision" + index).remove()
+            M.toast({html: 'Révision selectionnée'})       
+        }
+    })
+}
