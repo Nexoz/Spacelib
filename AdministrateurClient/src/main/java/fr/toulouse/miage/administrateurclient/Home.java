@@ -720,7 +720,14 @@ public class Home extends javax.swing.JPanel {
     }//GEN-LAST:event_tFNomStationActionPerformed
 
     private void btnDelMecanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelMecanoActionPerformed
-        // TODO add your handling code here:
+        if (selectedMecano.getId() != 0){
+            try {
+                manager.getAdminRemoteSvc().supprimerMecano(selectedMecano);
+            } catch (MecanicienInconnuException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            chargerDonnees();
+        }
     }//GEN-LAST:event_btnDelMecanoActionPerformed
 
     private void btnDelStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelStationActionPerformed

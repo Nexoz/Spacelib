@@ -17,7 +17,7 @@ public class ObjNavette implements Serializable {
     
     private long id;
     private int nbPlaces;
-    private int prochaineRevision;
+    private int prochaineRevision = 3;
     private ObjQuai quai;
     private List<ObjOperation> operations;
 

@@ -38,4 +38,5 @@ public interface SpacelibAdminRemote {
     List<ObjMecanicien> getlesMecanos();
     void ajouterMecano(ObjMecanicien mecano);
     void modifierMecano(ObjMecanicien mecano) throws MecanicienInconnuException;
+    void supprimerMecano(ObjMecanicien mecano) throws MecanicienInconnuException;
 }

@@ -227,5 +227,10 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         Mecanicien update = objMecanoToMecano(mecano);
         gestionStation.modifierMecanicien(update);
     }
+
+    @Override
+    public void supprimerMecano(ObjMecanicien mecano) throws MecanicienInconnuException {
+        gestionStation.supprimerMecanicien(mecano.getId());
+    }
     
 }

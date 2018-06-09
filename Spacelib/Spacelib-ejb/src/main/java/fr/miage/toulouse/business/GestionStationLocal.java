@@ -9,6 +9,7 @@ import fr.miage.toulouse.entities.Mecanicien;
 import fr.miage.toulouse.entities.Navette;
 import fr.miage.toulouse.entities.Quai;
 import fr.miage.toulouse.entities.Station;
+import fr.miage.toulouse.spacelibshared.exceptions.MecanicienInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.QuaiInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
@@ -40,5 +41,6 @@ public interface GestionStationLocal {
 
     public Mecanicien getLeMecano(long id);
     void modifierMecanicien(Mecanicien mecano);
+    void supprimerMecanicien(long id) throws MecanicienInconnuException;
     
 }
