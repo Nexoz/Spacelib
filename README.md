@@ -29,7 +29,6 @@ Nous avons une application en version 2 "fonctionnelle" dans le sens que les sc�
 #### Documentation
 
 - Javadoc (au moins les gestions)
-- Ce README a mettre au propre (pour dire brièvement que fait l'appli, qu'est-ce qu'on a codé, comment elle se lance, et si y a des choses praticulières à dire -choix de conceptions...-)
 
 ## Installation
 
@@ -74,19 +73,18 @@ Nous avons une application en version 2 "fonctionnelle" dans le sens que les sc�
 
 #### Carte
 
-- Carte des stations à dessiner
-- Mettre à la place de l'image d'espace en placeholder sur l'acceuil
+- Carte plus jolie et propre sur les finitions
+- Carte interactive
 
 #### Appli
 
-- Changer le index.html de la page Hello World (index.html à la racine) pour que ce soit un peu plus voyant
-- Mettre du blabla sur la page d'acceuil
+- Mettre des textes pour que le site fasse plus "commercial", notamment sur la page d'acceuil
 - Problème de cache au niveau des réservations supprimées
-- Modifier les annotations XML pour permettre d'afficher les Stations de départ/arrivé dans "Mon Compte"
+- Modifier les annotations XML pour permettre d'afficher les Stations de départ/arrivée dans "Mon Compte"
 
 #### Back-end
 
-- Génération de messages d'erreurs dans le webservice pour l'application lorsqu'une exception est levée
+- Génération de messages d'erreurs dans le webservice pour l'application lorsqu'une exception est levée car c'est actuellement une erreur 500 qui est proposée
 
 ### Autres
 
