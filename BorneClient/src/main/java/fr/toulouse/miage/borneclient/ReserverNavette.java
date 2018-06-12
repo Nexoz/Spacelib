@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
 /**
@@ -47,7 +48,9 @@ public class ReserverNavette extends javax.swing.JPanel {
         this.initialiserListStation();
         this.jLabelUsager.setText(j.getNomUsager() + " " + j.getPrenomUsager()+"    ");
         this.jLabelNomStation.setText("     Station " + j.getNomStation());
-        //jSpinnerNb = new JSpinner(new SpinnerNumberModel(1,0,8,1)); 
+        SpinnerModel model = new SpinnerNumberModel(1, 1,8,1);
+        jSpinnerNb.setModel(model);
+        //jSpinnerNb = new JSpinner(model); 
     }
 
     /**
@@ -223,25 +226,30 @@ public class ReserverNavette extends javax.swing.JPanel {
 
     private void jButtonReserverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonReserverMouseClicked
         ObjStation selectedStation = (ObjStation) jListStation.getSelectedValue();
-        int nbParticipant = Integer.parseInt(jSpinnerNb.getValue().toString());
-        try {
-            long idReservation = manager.getBorneRemoteSvc().reserverVoyage(this.idStation, selectedStation.getId(),nbParticipant,this.idClient, this.aujourdhui());
-            jframeAccueil.setIdReservation(idReservation);
-            String nomQuaiD = manager.getBorneRemoteSvc().quaiReservation(idReservation);
-            jframeAccueil.setNomQuaiReservation(nomQuaiD);
-            jframeAccueil.changerJpanel(this, new DemarrerVoyage(jframeAccueil));
-        } catch (NavetteInconnuException ex) {
-            jLabelErreur.setText("La navette n'existe pas.");
-        } catch (StationInconnuException ex) {
-            jLabelErreur.setText("La station n'existe pas.");
-        } catch (PasNavetteDisponibleException ex) {
-            jLabelErreur.setText("Pas de navette disponible aujourd'hui.");
-        } catch (PasQuaiDisponibleException ex) {
-            jLabelErreur.setText("Pas de quai disponible pour le jour de votre arrivée.");
-        } catch (UsagerInconnuException ex) {
-            jLabelErreur.setText("Vous n'existez pas");
-        } catch (ReservationInconnuException ex) {
-            Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
+        if(selectedStation==null){
+            jLabelErreur.setText("Veuillez sélectionner une station d'arrivée !");
+        } else {
+            int nbParticipant = Integer.parseInt(jSpinnerNb.getValue().toString());
+            System.out.println("fr.toulouse.miage.borneclient.ReserverNavette.jButtonReserverMouseClicked()   nbParticipant"  + nbParticipant);
+            try {
+                long idReservation = manager.getBorneRemoteSvc().reserverVoyage(this.idStation, selectedStation.getId(),nbParticipant,this.idClient, this.aujourdhui());
+                jframeAccueil.setIdReservation(idReservation);
+                String nomQuaiD = manager.getBorneRemoteSvc().quaiReservation(idReservation);
+                jframeAccueil.setNomQuaiReservation(nomQuaiD);
+                jframeAccueil.changerJpanel(this, new DemarrerVoyage(jframeAccueil));
+            } catch (NavetteInconnuException ex) {
+                jLabelErreur.setText("La navette n'existe pas.");
+            } catch (StationInconnuException ex) {
+                jLabelErreur.setText("La station n'existe pas.");
+            } catch (PasNavetteDisponibleException ex) {
+                jLabelErreur.setText("Pas de navette disponible aujourd'hui.");
+            } catch (PasQuaiDisponibleException ex) {
+                jLabelErreur.setText("Pas de quai disponible pour le jour de votre arrivée.");
+            } catch (UsagerInconnuException ex) {
+                jLabelErreur.setText("Vous n'existez pas");
+            } catch (ReservationInconnuException ex) {
+                Logger.getLogger(ReserverNavette.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButtonReserverMouseClicked
 
