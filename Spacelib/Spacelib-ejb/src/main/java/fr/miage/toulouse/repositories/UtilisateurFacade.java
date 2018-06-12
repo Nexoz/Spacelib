@@ -6,13 +6,12 @@
 package fr.miage.toulouse.repositories;
 
 import fr.miage.toulouse.entities.Utilisateur;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
+ * Façade des utilisateurs
  * @author jb
  */
 @Stateless

@@ -5,8 +5,6 @@
  */
 package fr.miage.toulouse.repositories;
 
-import fr.miage.toulouse.entities.Quai;
-import fr.miage.toulouse.entities.Reservation;
 import fr.miage.toulouse.entities.Navette;
 import fr.miage.toulouse.entities.Quai;
 import fr.miage.toulouse.entities.Reservation;
@@ -17,7 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- * 
+ * Façade des réservations
  * @author jb
  */
 @Stateless
@@ -35,20 +33,14 @@ public class ReservationFacade extends AbstractFacade<Reservation> implements Re
         super(Reservation.class);
     }
 
-    /**
-     * Marque la fin d'un voyage
-     * @param r Réservation conercnée
-     */
+
     @Override
     public void voyageAchevé(Reservation r) {
         r.setDateFin(new Date());
         r.setLibelle("Voyage achevé");
     }
 
-    /**
-     * Marque le début d'un voyage
-     * @param r Réservation conercnée
-     */
+
     @Override
     public void voyageInitié(Reservation r) {
         r.setDateDebut(new Date());

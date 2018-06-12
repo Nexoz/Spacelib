@@ -32,26 +32,13 @@ public class GestionUtilisateur implements GestionUtilisateurLocal {
     @EJB
     private MecanicienFacadeLocal mfl;
     
-    /**
-     * Tester si un compte a bien le bon couple login/password
-     * @param login 
-     * @param password
-     * @return Objet utilisateur connecté
-     */
+
     @Override
     public Utilisateur authentifier(String login, String password) {
         return utfl.authentifier(login, password);
     }
 
-    /**
-     * Créer un usager
-     * @param nom
-     * @param prenom
-     * @param login
-     * @param password
-     * @return id de l'usager
-     * @throws fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException
-     */
+
     @Override
     public long creerUsager(String nom, String prenom, String login, String password) throws LoginUsedException {
         if(!isLoginUsed(login)){
@@ -64,15 +51,7 @@ public class GestionUtilisateur implements GestionUtilisateurLocal {
         
     }
     
-    /**
-     * Créer un mécanicien
-     * @param nom
-     * @param prenom
-     * @param login
-     * @param password
-     * @return id du mécanicien
-     * @throws fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException
-     */
+
     @Override
     public long creerMecanicien(String nom, String prenom, String login, String password) throws LoginUsedException {
         if(!isLoginUsed(login)){

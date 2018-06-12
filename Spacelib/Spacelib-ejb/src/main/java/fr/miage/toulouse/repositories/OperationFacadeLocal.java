@@ -8,12 +8,11 @@ package fr.miage.toulouse.repositories;
 import fr.miage.toulouse.entities.Navette;
 import fr.miage.toulouse.entities.Operation;
 import fr.miage.toulouse.entities.Quai;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
 /**
- *
+ * Interfce de la façade de l'opération
  * @author jb
  */
 @Local
@@ -33,6 +32,13 @@ public interface OperationFacadeLocal {
 
     int count();
     
+    /**
+     * Permet de créer une opération
+     * @param libelle libellé de l'opération
+     * @param quai quai où s'opère l'opération
+     * @param nav navette de l'opération
+     * @return operation
+     */
     Operation creerOperation(String libelle,Quai quai, Navette nav);
     
 }

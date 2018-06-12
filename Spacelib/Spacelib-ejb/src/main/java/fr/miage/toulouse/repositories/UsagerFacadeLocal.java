@@ -31,9 +31,18 @@ public interface UsagerFacadeLocal {
 
     int count();
     
+    /**
+     * Permet d'ajouter une réservation à la liste des réservation de l'usager
+     * @param usager l'usager
+     * @param r réservation à enregistrer
+     */
     void ajouterReservation(Usager usager,Reservation r);
     
+    /**
+     * Renvoie la liste de toutes les réservations d'un usager
+     * @param usager l'usager
+     * @return List de réservation
+     */
     List<Reservation> reservationsUsager(Usager usager);
     
-   // Usager nouvelUsager( String nom,String prenom, String login, String password);
 }

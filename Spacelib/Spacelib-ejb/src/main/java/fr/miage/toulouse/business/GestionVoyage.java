@@ -54,13 +54,7 @@ public class GestionVoyage implements GestionVoyageLocal {
     @EJB
     private OperationFacadeLocal operationFacade;
     
-    /***
-     * Effectue les taches necessaires à l'arrivée d'une navette 
-     * @param idReservation identifiant du voyage qui se termine
-     * @throws NavetteInconnuException
-     * @throws ReservationInconnuException
-     * @throws QuaiInconnuException 
-     */
+    
     @Override
     public void finaliserVoyage( long idReservation) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException{
         Reservation reservation = this.reservationFacade.find(idReservation);
@@ -92,19 +86,7 @@ public class GestionVoyage implements GestionVoyageLocal {
         
     }
 
-    /***
-     * Enregistre la réservation d'un voyage 
-     * @param idStationD identifiant de la station de départ 
-     * @param idStationA identifiant de la station d'arrivée
-     * @param nbPassager nombre de passagers pour le voyage 
-     * @param idEmprunteur identifiant de l'usager qui réserve le voyage 
-     * @param dateOpe date de l'enregistrement de la réservation
-     * @throws NavetteInconnuException
-     * @throws StationInconnuException
-     * @throws PasNavetteDisponibleException
-     * @throws PasQuaiDisponibleException
-     * @throws UsagerInconnuException 
-     */
+    
     @Override
     public long reserverVoyage(long idStationD, long idStationA, int nbPassager, long idEmprunteur, Date dateOpe, Date dateDebut) throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException {
         //Tests d'existences
@@ -159,11 +141,7 @@ public class GestionVoyage implements GestionVoyageLocal {
         return reservation.getId();
     }
 
-    /***
-     * Initie le départ d'une navette pour un voyage
-     * @param idReservation identifiant de la réservation qui débute
-     * @throws ReservationInconnuException 
-     */
+    
     @Override
     public void demarrerVoyage(long idReservation) throws ReservationInconnuException {
         final Reservation reserv = this.reservationFacade.find(idReservation);
@@ -177,13 +155,7 @@ public class GestionVoyage implements GestionVoyageLocal {
         reservationFacade.voyageInitié(reserv);
     }
 
-    /**
-     * Permet de calculer la distance en jours entre deux stations
-     * Il est obligatoire de passer des noms en paramètre car nous connaissons uniquement la distance entre 2 stations grâce à leur nom
-     * @param nomStationD Nom de la station de départ
-     * @param nomStationA Nom de la station d'arrivée
-     * @return Nombre de jours nécessaires
-     */
+
     @Override
     public Integer calculerDistance(String nomStationD, String nomStationA) {
         return DistancesCalculator.getInstance().calculerDistance(nomStationD, nomStationA);

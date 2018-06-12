@@ -22,11 +22,19 @@ public class RMIBorneServiceManager {
     private InitialContext namingContext;
     private SpacelibBorneRemote splacelibBorne;
 
+    /**
+     * Permet d'initialiser RMIBorneServiceManager
+     * @throws NamingException 
+     */
     public RMIBorneServiceManager() throws NamingException {
         this.initJndi();
         this.retrieveRemoteServicesBorne();
     }
 
+    /**
+     * Permet d'initialiser les propriété du JNDI
+     * @throws NamingException 
+     */
     private void initJndi() throws NamingException {
         Properties jNDIProperties = new Properties();
         jNDIProperties.setProperty("java.naming.factory.initial", "com.sun.enterprise.naming.SerialInitContextFactory");
@@ -35,10 +43,18 @@ public class RMIBorneServiceManager {
         this.namingContext = new InitialContext(jNDIProperties);
     }
 
+    /**
+     * 
+     * @throws NamingException 
+     */
     private void retrieveRemoteServicesBorne() throws NamingException {
         this.splacelibBorne = (SpacelibBorneRemote) this.namingContext.lookup(SERVICES_BORNE_EJB_URI);
     }
 
+    /**
+     * Donne le service de la borne
+     * @return spacelibBorne
+     */
     public SpacelibBorneRemote getBorneRemoteSvc() {
         return splacelibBorne;
     }
