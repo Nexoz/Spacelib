@@ -31,14 +31,14 @@ public class Reservation extends Operation implements Serializable {
     public Reservation() {
     }
     
-    public Reservation(String texte, Quai quaiDepart, Quai quaiA, Usager emprunteur, int nbPassager, Navette navDisponible,Date dateOpe) {//String voyage_initié, Quai quaiD, Quai quaiA, Date dateA, long idEmprunteur, long nbPassager, Navette navDisponible
+    public Reservation(String texte, Quai quaiDepart, Quai quaiA, Usager emprunteur, int nbPassager, Navette navDisponible, Date dateOpe, Date dateDebut) {//String voyage_initié, Quai quaiD, Quai quaiA, Date dateA, long idEmprunteur, long nbPassager, Navette navDisponible
         super.setQuaiOperation(quaiDepart);
         this.quaiArrivee = quaiA;
         this.emprunteur=emprunteur;
         this.setDateOperation(dateOpe);
         this.setNavette(navDisponible);
         this.setLibelle(texte);
-        this.setDateDebut(dateOpe);
+        this.setDateDebut(dateDebut);
         this.setDateFin(null);
         this.nbPassager = nbPassager;
     }

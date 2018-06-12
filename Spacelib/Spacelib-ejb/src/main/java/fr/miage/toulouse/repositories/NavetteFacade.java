@@ -64,7 +64,7 @@ public class NavetteFacade extends AbstractFacade<Navette> implements NavetteFac
      */
     @Override
     public void resetRevision(Navette navette) {
-        navette.setProchaineRevision(0);
+        navette.setProchaineRevision(3);
     }
 
     @Override

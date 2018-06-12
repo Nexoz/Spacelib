@@ -12,6 +12,7 @@ $(document).ready(function () {
         appendMethodToURL: false,
         error: function (SOAPResponse) {
             console.log(SOAPResponse)// show error
+            M.toast({html : 'Erreur'})
         }
     })
 
@@ -60,20 +61,45 @@ $(document).ready(function () {
                 }
             })
             if($("#nbpassagers").val() != null) {
-                $("#submit").prop("disabled", false);
+                $("#submit_reserver").prop("disabled", false);
             } else {
-                $("#submit").prop("disabled", true);   
+                $("#submit_reserver").prop("disabled", true);   
             }
         } else {
-            $("#submit").prop("disabled", true);
+            $("#submit_reserver").prop("disabled", true);
         }
     })
 
     $("#nbpassagers").change(function () {
         if ($("#nbpassagers").val() != null && $("#datedepart").val() != "" && $("#station_dep").val() != null && $("#station_arr").val() != null) {
-            $("#submit").prop("disabled", false);
+            $("#submit_reserver").prop("disabled", false);
         } else {
-            $("#submit").prop("disabled", true);
+            $("#submit_reserver").prop("disabled", true);
         }
+    })
+
+    $("#submit_reserver").click(function (evt) {
+        evt.preventDefault();
+
+        var idstationd = $("#station_dep").val(); 
+        var idstationa = $("#station_arr").val(); 
+        var nbpassager = $("#nbpassagers").val();
+        var idemprunteur = sessionStorage.getItem('userid')
+        var datedebut = $("#datedepart").val();
+
+        $.soap({
+            method : "toul:reserverVoyage",
+            data : {
+                idstationd : idstationd,
+                idstationa : idstationa,
+                nbpassager : nbpassager,
+                idemprunteur : idemprunteur,
+                datedebut : datedebut
+            },
+            success : function(soapResponse) {
+                console.log(soapResponse.toXML())
+                window.location = "home.html";
+            }
+        })
     })
 })

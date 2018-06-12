@@ -8,7 +8,16 @@ package fr.miage.toulouse;
 import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.entities.Utilisateur;
 import fr.miage.toulouse.services.ServiceReservationUsagerLocal;
-import java.util.List;
+import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;
+import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.PasNavetteDisponibleException;
+import fr.miage.toulouse.spacelibshared.exceptions.PasQuaiDisponibleException;
+import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
+import fr.miage.toulouse.spacelibshared.exceptions.UsagerInconnuException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.ejb.Stateless;
@@ -35,6 +44,26 @@ public class WebServiceReservationUsager {
     @WebMethod(operationName = "calculerDistance")
     public Integer calculerDistance(@WebParam(name = "nomStationD") String nomStationD, @WebParam(name = "nomStationA") String nomStationA) {
         return ejbRef.calculerDistance(nomStationD, nomStationA);
+    }
+    
+    @WebMethod(operationName = "creerUsager")
+    public long creerUsager(@WebParam(name = "surname") String nom, @WebParam(name = "name") String prenom, @WebParam(name = "login") String login, @WebParam(name = "password") String password) throws LoginUsedException {
+        return ejbRef.creerUsager(nom, prenom, login, password);
+    }
+    
+    @WebMethod(operationName = "reserverVoyage")
+    public long reserverVoyage (@WebParam(name = "idstationd") long idStationD, @WebParam(name = "idstationa") long idStationA, @WebParam(name = "nbpassager") int nbPassager, @WebParam(name = "idemprunteur") long idEmprunteur, @WebParam(name = "datedebut") String dateDebut) throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException, ParseException {    
+        // Parser les dates
+        try {
+           Calendar c = Calendar.getInstance();
+            DateFormat df = new SimpleDateFormat("dd/MM/yy");
+            System.out.println("dateDeb : " + dateDebut);
+            return ejbRef.reserverVoyage(idStationD, idStationA, nbPassager, idEmprunteur, c.getTime(), df.parse(dateDebut)); 
+        } catch (Exception e) {
+            System.out.println(e.getClass());
+            throw e;
+        }
+        
     }
     
 }

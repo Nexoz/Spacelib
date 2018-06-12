@@ -1,6 +1,7 @@
 <html lang='fr'>
 
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>SpaceLib</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -35,26 +36,34 @@
 
               <div class='row'>
                 <div class='input-field col m10 offset-m1'>
-                  <input class='validate' type="text" name='login' id='login' />
-                  <label for='text'>Identifiant</label>
+                  <input class='validate' type="text" name='surname' id='surname' />
+                  <label for='text'>Nom</label>
                 </div>
               </div>
 
               <div class='row'>
                 <div class='input-field col m10 offset-m1'>
+                  <input class='validate' type="text" name='name' id='name' />
+                  <label for='text'>Prénom</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class='input-field col s10 m5 offset-m1'>
+                  <input class='validate' type="text" name='login' id='login' />
+                  <label for='text'>Identifiant</label>
+                </div>
+                <div class='input-field col m5'>
                   <input class='validate' type='password' name='password' id='password' />
                   <label for='password'>Mot de passe</label>
                 </div>
               </div>
-
-
-              <br />
               <center>
                 <div class='row'>
-                  <button type='submit' id='btn_login' name='btn_login' class='col m10 offset-m1 btn btn-large waves-effect indigo'>S'authentifier</button>
+                  <button type='submit' id='btn_register' name='btn_register' class='col m10 offset-m1 btn btn-large waves-effect indigo'>S'authentifier</button>
                 </div>
                 <div class='row'>
-                  <a href='register.html' name='btn_register' class='col m10 offset-m1 btn btn-large waves-effect blue-grey darken-4'>Creer un nouveau compte</a>
+                  <a href='index.html' name='btn_cancel' class='col m10 offset-m1 btn btn-large waves-effect red'>Annuler</a>
                 </div>
               </center>
             </form>
@@ -72,7 +81,7 @@
   <script src="lib/materialize.js"></script>
   <script src="lib/xml2json.js"></script>
   <script src="lib/jquery.soap.js"></script>
-  <script src="js/login.js"></script>
+  <script src="js/register.js"></script>
 </body>
 
 </html>

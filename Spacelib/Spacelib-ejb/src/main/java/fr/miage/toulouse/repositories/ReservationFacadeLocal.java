@@ -60,6 +60,7 @@ public interface ReservationFacadeLocal {
      */
     void quaiArrivee(Reservation r, Quai quai);
    
+
     /**
      * Création d'une réservation
      * @param voyage_initié libellé de la réservation
@@ -69,9 +70,10 @@ public interface ReservationFacadeLocal {
      * @param nbPassager nombre de passager du voyage
      * @param navDisponible navette utilisée pour le voyage
      * @param dateOpe date de la création de l'opération
+     * @param dateDebut date de début de l'opératon
      * @return 
      */
-    Reservation creerReservation(String voyage_initié, Quai quaiD, Quai quaiA, Usager idEmprunteur, int nbPassager, Navette navDisponible,Date dateOpe);
+    Reservation creerReservation(String voyage_initié, Quai quaiD, Quai quaiA, Usager idEmprunteur, int nbPassager, Navette navDisponible, Date dateOpe, Date dateDebut);
     
     
 }

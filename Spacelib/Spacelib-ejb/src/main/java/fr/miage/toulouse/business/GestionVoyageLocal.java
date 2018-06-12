@@ -31,6 +31,7 @@ public interface GestionVoyageLocal {
      * @throws QuaiInconnuException 
      */
     void finaliserVoyage(long idReservation) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException;
+
     
     /***
      * Enregistre la réservation d'un voyage 
@@ -45,7 +46,7 @@ public interface GestionVoyageLocal {
      * @throws PasQuaiDisponibleException
      * @throws UsagerInconnuException 
      */
-    long reserverVoyage (long idStationD, long idStationA, int nbPassager, long idEmprunteur,Date dateOpe)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException;
+    long reserverVoyage (long idStationD, long idStationA, int nbPassager, long idEmprunteur,Date dateOpe, Date dateDebut)throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException;
     
     /***
      * Initie le départ d'une navette pour un voyage
