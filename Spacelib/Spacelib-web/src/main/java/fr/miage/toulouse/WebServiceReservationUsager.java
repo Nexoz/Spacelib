@@ -13,6 +13,7 @@ import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasNavetteDisponibleException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasQuaiDisponibleException;
+import fr.miage.toulouse.spacelibshared.exceptions.ReservationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.UsagerInconnuException;
 import java.text.DateFormat;
@@ -72,6 +73,12 @@ public class WebServiceReservationUsager {
         List<Reservation> r = ejbRef.getReservationsForUsager(idUsager);
         ListWrapper<Reservation> w = new ListWrapper<>(r);
         return w;
+    }
+    
+    @WebMethod(operationName = "annulerReservation")
+    public boolean annulerReservation(@WebParam(name = "idReservation") long idReservation) throws ReservationInconnuException {
+        ejbRef.annulerReservation(idReservation);
+        return true;
     }
     
 }

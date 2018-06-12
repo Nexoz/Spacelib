@@ -11,6 +11,7 @@ import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasNavetteDisponibleException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasQuaiDisponibleException;
+import fr.miage.toulouse.spacelibshared.exceptions.ReservationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.UsagerInconnuException;
 import java.util.Date;
@@ -29,5 +30,6 @@ public interface ServiceReservationUsagerLocal {
     long creerUsager(String nom, String prenom, String login, String password) throws LoginUsedException;
     long reserverVoyage (long idStationD, long idStationA, int nbPassager, long idEmprunteur, Date dateOpe, Date dateDebut) throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException;
     List<Reservation> getReservationsForUsager(long idUsager) throws UsagerInconnuException;
+    void annulerReservation(long idReservation) throws ReservationInconnuException;
     
 }

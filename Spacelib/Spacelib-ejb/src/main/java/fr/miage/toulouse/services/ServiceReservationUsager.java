@@ -15,6 +15,7 @@ import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;
 import fr.miage.toulouse.spacelibshared.exceptions.NavetteInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasNavetteDisponibleException;
 import fr.miage.toulouse.spacelibshared.exceptions.PasQuaiDisponibleException;
+import fr.miage.toulouse.spacelibshared.exceptions.ReservationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.UsagerInconnuException;
 import java.util.Date;
@@ -63,6 +64,11 @@ public class ServiceReservationUsager implements ServiceReservationUsagerLocal {
     @Override
     public List<Reservation> getReservationsForUsager(long idUsager) throws UsagerInconnuException {
         return gestVoyage.getReservationsForUsager(idUsager);
+    }
+    
+    @Override
+    public void annulerReservation(long idReservation) throws ReservationInconnuException {
+        gestVoyage.annulerReservation(idReservation);
     }
     
     

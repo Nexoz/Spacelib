@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
@@ -26,7 +27,7 @@ public class Usager extends Utilisateur implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @OneToMany(fetch = LAZY, mappedBy = "emprunteur")
+    @OneToMany(fetch = EAGER, mappedBy = "emprunteur")
     private List<Reservation> listeReservations;
   
     public Usager() {

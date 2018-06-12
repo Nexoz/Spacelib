@@ -12,6 +12,7 @@ $(document).ready(function () {
         appendMethodToURL: false,
         error: function (SOAPResponse) {
             console.log(SOAPResponse)// show error
+            M.toast({html : 'Erreur'})
         }
     })
 
@@ -42,10 +43,10 @@ $(document).ready(function () {
                     tr = tr + "<td><button class='waves-effect waves-light btn red darken-1' disabled>ANNULER</button><td>"
                 } else {
                     tr = tr + "<td>Plannifié</td>"
-                    tr = tr + "<td><button onclick='annulerResa(" + i + "," + id + ") class='waves-effect waves-light btn red darken-1'>ANNULER</button><td>"
+                    tr = tr + "<td><button onclick='annulerResa(" + i + "," + id + ")' class='waves-effect waves-light btn red darken-1'>ANNULER</button><td>"
                 }
                 tr = tr + "</tr>"
-                $("#table_resa").append(tr);
+                $("#table_resa").prepend(tr);
                 i++;
             })
         }
@@ -53,5 +54,14 @@ $(document).ready(function () {
 })
 
 function annulerResa(index, idr){
-
+    $.soap({
+        method : "toul:annulerReservation",
+        data : {
+            idReservation : idr
+        },
+        success : function(soapResponse) {
+            $("#resa" + index).remove()
+            M.toast({html: 'Réservation annulée'})       
+        }
+    })
 }

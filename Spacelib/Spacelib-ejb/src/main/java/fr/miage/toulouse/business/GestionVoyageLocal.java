@@ -81,4 +81,5 @@ public interface GestionVoyageLocal {
      */
     String quaiReservation(long idReservation) throws ReservationInconnuException;
     List<Reservation> getReservationsForUsager(long idUsager) throws UsagerInconnuException;
+    void annulerReservation(long idReservation) throws ReservationInconnuException;
 }

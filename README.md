@@ -49,7 +49,7 @@ Le projet est composé de plusieurs projets NetBeans :
 - Changer le index.html de la page Hello World (index.html à la racine) pour que ce soit un peu plus voyant
 - Mettre du blabla sur la page d'acceuil
 - Toaster les 500 (register/reserver fait)
-- Méthode d'annulation d'une réservation + Brancher au bouton
+- Problème de cache au niveau des réservations supprimées
 - Title des html incorrects
 
 ### V3

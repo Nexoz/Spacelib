@@ -198,6 +198,21 @@ public class GestionVoyage implements GestionVoyageLocal {
         return usagerFacade.reservationsUsager(usager);
     }
     
+    @Override
+    public void annulerReservation(long idReservation) throws ReservationInconnuException {
+        Reservation r = reservationFacade.find(idReservation);
+        if (r == null) {
+            throw new ReservationInconnuException();
+        }
+        Usager u = r.getEmprunteur();
+        Quai q = r.getQuaiArrivee();
+        reservationFacade.remove(r);
+        usagerFacade.edit(u);
+        q.setDateReservation(null);
+        quaiFacade.edit(q);
+        
+    }
+    
     
     
     
