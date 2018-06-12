@@ -29,13 +29,12 @@ Le projet est composé de plusieurs projets NetBeans :
 ### V1
 
 #### Appli Admin
+
 - Forcer le nom de la station créé avec un dropdown ({"Terre", "Dimidium", "Arion", "Brahe", "Amateru", "Tadmor"})
 
-#### BorneClient
-- Le spinner a réglé
-
 #### Application Mécanicien
-- Afficher date révision ???
+
+- Afficher date révision
 
 ### V2
 
@@ -49,6 +48,7 @@ Le projet est composé de plusieurs projets NetBeans :
 - Changer le index.html de la page Hello World (index.html à la racine) pour que ce soit un peu plus voyant
 - Mettre du blabla sur la page d'acceuil
 - Problème de cache au niveau des réservations supprimées
+- Modifier les annotations XML pour permettre d'afficher les Stations de départ/arrivé dans "Mon Compte"
 
 ### V3
 
