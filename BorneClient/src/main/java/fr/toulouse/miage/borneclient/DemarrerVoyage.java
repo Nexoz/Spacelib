@@ -7,15 +7,12 @@ package fr.toulouse.miage.borneclient;
 
 import fr.miage.toulouse.spacelibshared.admin.ObjStation;
 import fr.miage.toulouse.spacelibshared.exceptions.ReservationInconnuException;
-import fr.toulouse.miage.borneclient.renderer.StationRenderer;
 import fr.toulouse.miage.borneclient.services.RMIBorneServiceManager;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
 
 /**
- *
+ * Interface pour démarrer un voyage
  * @author Fanny Mnt
  */
 public class DemarrerVoyage extends javax.swing.JPanel {
@@ -25,7 +22,8 @@ public class DemarrerVoyage extends javax.swing.JPanel {
     private ObjStation selectedStation = null;
     
     /**
-     * Creates new form ReserverNavette
+     * Constructeur d'un voyage
+     * @param j jframe parente
      */
     public DemarrerVoyage(BorneClient j) {
         initComponents();

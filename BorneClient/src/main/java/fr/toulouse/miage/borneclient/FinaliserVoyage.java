@@ -13,16 +13,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Interface pour finaliser un voyage
  * @author Fanny Mnt
  */
 public class FinaliserVoyage extends javax.swing.JPanel {
 
     public BorneClient jframeAccueil;
+    
+    /**
+     * manager de la borne
+     */
     private RMIBorneServiceManager manager;
     
     /**
-     * Creates new form FinaliserVoyage
+     * Constructeur pour finaliser un voyage
+     * @param j jframe parente
      */
     public FinaliserVoyage(BorneClient j) {
         initComponents();

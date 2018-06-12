@@ -10,17 +10,30 @@ import fr.miage.toulouse.spacelibshared.exceptions.UsagerInconnuException;
 import fr.toulouse.miage.borneclient.services.RMIBorneServiceManager;
 
 /**
- *
- * @author pierreliaubet
+ * Interface d'identification
+ * @author Fanny Mnt
  */
 public class Login extends javax.swing.JPanel{
 
+    /**
+     * Jframe parente
+     */
     public BorneClient jframeAccueil;
-    private RMIBorneServiceManager manager;
-    private Long idStation; 
     
     /**
-     * Creates new form Login
+     * manager de la borne
+     */
+    private RMIBorneServiceManager manager;
+    
+    /**
+     * id de la station de la borne
+     */
+    private Long idStation; 
+
+    /**
+     * Constructeur de la page d'identification
+     * @param j
+     * @param message 
      */
     public Login(BorneClient j, String message) {
         initComponents();

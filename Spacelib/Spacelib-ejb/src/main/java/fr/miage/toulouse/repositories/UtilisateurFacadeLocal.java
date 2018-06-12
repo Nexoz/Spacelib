@@ -10,7 +10,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 /**
- *
+ * Interface de la façade des utilsiateurs
  * @author jb
  */
 @Local
@@ -30,6 +30,12 @@ public interface UtilisateurFacadeLocal {
 
     int count();
     
+    /**
+     * Permet de s'authentifier
+     * @param login identifiant de l'usager
+     * @param MDP mot de passe du compte
+     * @return l'utilisateur du compte
+     */
     Utilisateur authentifier(String login, String MDP);
     
 }
