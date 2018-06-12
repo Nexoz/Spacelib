@@ -5,6 +5,7 @@
  */
 package fr.miage.toulouse;
 
+import fr.miage.toulouse.entities.Reservation;
 import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.entities.Utilisateur;
 import fr.miage.toulouse.services.ServiceReservationUsagerLocal;
@@ -18,6 +19,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.ejb.Stateless;
@@ -62,8 +64,14 @@ public class WebServiceReservationUsager {
         } catch (Exception e) {
             System.out.println(e.getClass());
             throw e;
-        }
-        
+        }  
+    }
+    
+    @WebMethod(operationName = "getReservationsForUsager")
+    public ListWrapper<Reservation> getReservationsForUsager(@WebParam(name = "idUsager") long idUsager) throws UsagerInconnuException {
+        List<Reservation> r = ejbRef.getReservationsForUsager(idUsager);
+        ListWrapper<Reservation> w = new ListWrapper<>(r);
+        return w;
     }
     
 }

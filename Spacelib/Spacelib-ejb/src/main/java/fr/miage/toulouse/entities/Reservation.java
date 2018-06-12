@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -48,6 +49,7 @@ public class Reservation extends Operation implements Serializable {
         return "Réservation " + super.toString();
     }
 
+    @XmlTransient
     public Quai getQuaiArrivee() {
         return quaiArrivee;
     }

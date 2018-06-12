@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author jb
  */
 @Entity
-@XmlSeeAlso({Station.class})
+@XmlSeeAlso({Station.class, Reservation.class})
 public class Operation implements Serializable {
 
     private static final long serialVersionUID = 1L;

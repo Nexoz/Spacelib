@@ -14,6 +14,7 @@ import fr.miage.toulouse.spacelibshared.exceptions.ReservationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.StationInconnuException;
 import fr.miage.toulouse.spacelibshared.exceptions.UsagerInconnuException;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -28,4 +29,5 @@ public interface GestionVoyageLocal {
     Integer calculerDistance(String nomStationD, String nomStationA);
     Reservation derniereReservation(long idUsager) throws UsagerInconnuException;
     String quaiReservation(long idReservation) throws ReservationInconnuException;
+    List<Reservation> getReservationsForUsager(long idUsager) throws UsagerInconnuException;
 }

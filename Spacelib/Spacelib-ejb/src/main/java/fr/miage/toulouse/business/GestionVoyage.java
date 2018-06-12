@@ -217,6 +217,15 @@ public class GestionVoyage implements GestionVoyageLocal {
         return reserv.getQuaiOperation().getCodeQuai();
     }
     
+    @Override
+    public List<Reservation> getReservationsForUsager(long idUsager) throws UsagerInconnuException {
+        Usager usager = this.usagerFacade.find(idUsager);
+        if (usager == null) {
+            throw new UsagerInconnuException();
+        }
+        return usagerFacade.reservationsUsager(usager);
+    }
+    
     
     
     

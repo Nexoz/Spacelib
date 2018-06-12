@@ -13,6 +13,7 @@ import static javax.persistence.FetchType.LAZY;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  *
@@ -20,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement(name="usager")
+@XmlSeeAlso({Reservation.class})
 public class Usager extends Utilisateur implements Serializable {
 
     private static final long serialVersionUID = 1L;
