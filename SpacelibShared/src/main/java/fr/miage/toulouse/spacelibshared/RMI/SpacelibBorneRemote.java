@@ -32,7 +32,7 @@ public interface SpacelibBorneRemote {
      * @throws ReservationInconnuException
      * @throws QuaiInconnuException 
      */
-    void finaliserVoyage(long idReservation) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException;
+    void finaliserVoyage(long idReservation) throws ReservationInconnuException;
     
     /**
      * Permet de réserver une navette

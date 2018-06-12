@@ -30,7 +30,7 @@ public interface GestionVoyageLocal {
      * @throws ReservationInconnuException
      * @throws QuaiInconnuException 
      */
-    void finaliserVoyage(long idReservation) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException;
+    void finaliserVoyage(long idReservation) throws ReservationInconnuException;
 
     
     /***
