@@ -8,6 +8,7 @@ package fr.miage.toulouse.services;
 import fr.miage.toulouse.business.GestionUtilisateurLocal;
 import fr.miage.toulouse.business.GestionVoyageLocal;
 import fr.miage.toulouse.entities.Utilisateur;
+import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -32,5 +33,10 @@ public class ServiceReservationUsager implements ServiceReservationUsagerLocal {
     @Override
     public Integer calculerDistance(String nomStationD, String nomStationA) {
         return gestVoyage.calculerDistance(nomStationD, nomStationA);
+    }
+    
+    @Override
+    public long creerUsager(String nom, String prenom, String login, String password) throws LoginUsedException {
+        return gestUtilisateur.creerUsager(nom, prenom, login, password);
     }
 }

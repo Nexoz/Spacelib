@@ -57,3 +57,7 @@ p {
 h4 {
   margin-bottom:4vh;
 }
+
+.toast, #toast-container {
+  z-index: 11001 !important;
+}

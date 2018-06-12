@@ -8,6 +8,7 @@ package fr.miage.toulouse;
 import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.entities.Utilisateur;
 import fr.miage.toulouse.services.ServiceReservationUsagerLocal;
+import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
@@ -35,6 +36,11 @@ public class WebServiceReservationUsager {
     @WebMethod(operationName = "calculerDistance")
     public Integer calculerDistance(@WebParam(name = "nomStationD") String nomStationD, @WebParam(name = "nomStationA") String nomStationA) {
         return ejbRef.calculerDistance(nomStationD, nomStationA);
+    }
+    
+    @WebMethod(operationName = "creerUsager")
+    public long creerUsager(@WebParam(name = "surname") String nom, @WebParam(name = "name") String prenom, @WebParam(name = "login") String login, @WebParam(name = "password") String password) throws LoginUsedException {
+        return ejbRef.creerUsager(nom, prenom, login, password);
     }
     
 }
