@@ -9,9 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
