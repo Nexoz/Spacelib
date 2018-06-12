@@ -12,6 +12,7 @@ $(document).ready(function() {
         appendMethodToURL : false,
         error: function (SOAPResponse) {
             console.log(SOAPResponse)// show error
+            M.toast({html : 'Erreur'})
         }
     });
 
