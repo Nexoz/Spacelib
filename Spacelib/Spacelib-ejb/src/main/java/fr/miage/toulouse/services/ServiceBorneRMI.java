@@ -46,7 +46,7 @@ public class ServiceBorneRMI implements SpacelibBorneRemote{
     GestionUtilisateurLocal gestionUtilisateur;
     
     @Override
-    public void finaliserVoyage(long idReservation) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException{
+    public void finaliserVoyage(long idReservation) throws ReservationInconnuException{
         gestionVoyage.finaliserVoyage(idReservation);
     }
     

@@ -56,19 +56,11 @@ public class GestionVoyage implements GestionVoyageLocal {
     
     
     @Override
-    public void finaliserVoyage( long idReservation) throws NavetteInconnuException, ReservationInconnuException,QuaiInconnuException{
+    public void finaliserVoyage( long idReservation) throws ReservationInconnuException{
         Reservation reservation = this.reservationFacade.find(idReservation);
         if (reservation == null) {
             throw new ReservationInconnuException();
         }
-        /*Navette navette = this.navetteFacade.find(idNavette);
-        if (navette == null) {
-            throw new NavetteInconnuException();
-        }
-        Quai quai = this.quaiFacade.find(idQuai);
-        if (quai == null) {
-            throw new QuaiInconnuException();
-        }*/
         Quai quaiD = reservation.getQuaiOperation();
         if(quaiD.getNavArrimée() == reservation.getNavette()) {
             quaiFacade.desarrimer(quaiD);
@@ -80,7 +72,7 @@ public class GestionVoyage implements GestionVoyageLocal {
         navetteFacade.arrimer(navette, quai);
         navetteFacade.incrementerVoyage(navette);
         
-        if(navette.getProchaineRevision()==0){
+        if(navette.getProchaineRevision()==3){
             navetteFacade.ajouterOperation(navette, operationFacade.creerOperation("Révision nécessaire", quai, navette));
         }
         
