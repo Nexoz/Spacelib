@@ -75,6 +75,10 @@ public class GestionVoyage implements GestionVoyageLocal {
         if (quai == null) {
             throw new QuaiInconnuException();
         }*/
+        Quai quaiD = reservation.getQuaiOperation();
+        if(quaiD.getNavArrimée() == reservation.getNavette()) {
+            quaiFacade.desarrimer(quaiD);
+        }
         Quai quai = reservation.getQuaiArrivee();
         Navette navette = reservation.getNavette();
         quaiFacade.arrimer(quai, navette);
@@ -102,7 +106,7 @@ public class GestionVoyage implements GestionVoyageLocal {
      * @throws UsagerInconnuException 
      */
     @Override
-    public long reserverVoyage(long idStationD, long idStationA, int nbPassager, long idEmprunteur, Date dateOpe) throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException {
+    public long reserverVoyage(long idStationD, long idStationA, int nbPassager, long idEmprunteur, Date dateOpe, Date dateDebut) throws NavetteInconnuException,StationInconnuException,PasNavetteDisponibleException,PasQuaiDisponibleException,UsagerInconnuException {
         //Tests d'existences
             Station stationDepart = this.stationFacade.find(idStationD);
             if (stationDepart == null) {
@@ -145,7 +149,7 @@ public class GestionVoyage implements GestionVoyageLocal {
                 throw new PasQuaiDisponibleException();
             }
         //création de la réservation
-            Reservation reservation = this.reservationFacade.creerReservation("Voyage enregistré",quaiD, quaiA, emprunteur,nbPassager, navDisponible, dateOpe);
+            Reservation reservation = this.reservationFacade.creerReservation("Voyage enregistré",quaiD, quaiA, emprunteur,nbPassager, navDisponible, dateOpe, dateDebut);
             this.usagerFacade.ajouterReservation(emprunteur, reservation);
             this.navetteFacade.ajouterOperation(navDisponible, reservation);
             Date dateA = new Date();

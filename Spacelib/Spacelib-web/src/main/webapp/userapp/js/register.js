@@ -12,7 +12,7 @@ $(document).ready(function() {
         appendMethodToURL : false,
         error: function (SOAPResponse) {
             console.log(SOAPResponse)// show error
-            M.toast("Login déjà existant")
+            M.toast({html :"Login déjà existant"})
         }
     });
 

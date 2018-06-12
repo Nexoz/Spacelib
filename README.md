@@ -19,6 +19,7 @@ Le projet est composé de plusieurs projets NetBeans :
 
 - Squelette Dossier
 - Mettre UML à jour à la fin de la V1
+  - Modifier tout ce qui est lié à réservation car nouveau paramètre dateDebut partout
 
 #### Documentation
 

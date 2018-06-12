@@ -36,7 +36,10 @@ public class OperationFacade extends AbstractFacade<Operation> implements Operat
     
     public Operation creerOperation(String libelle,Quai quai,Navette nav){
         Calendar now = Calendar.getInstance(Locale.FRENCH);
-        Operation operation = new Operation("Révision nécessaire",quai,nav, now.getTime());
+        Date d = now.getTime();
+        Operation operation = new Operation("Révision nécessaire",quai,nav, d);
+        operation.setDateDebut(d);
+        operation.setDateFin(d);
         this.create(operation);
         return operation;
     }
