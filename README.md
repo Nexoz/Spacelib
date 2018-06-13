@@ -16,25 +16,11 @@ Le projet est composé de plusieurs projets NetBeans :
 
 Nous avons une application en version 2 "fonctionnelle" dans le sens que les scénarios souhaités pour cette version sont réalisables, même si ils sont soumis à quelques problèmes (voir section Points d'amélioration)
 
-## Reste à faire
-
-### Rendus
-
-#### Dossier de conception
-
-- Squelette Dossier
-- Mettre UML à jour à la fin de la V1
-  - Modifier tout ce qui est lié à réservation car nouveau paramètre dateDebut partout
-
-#### Documentation
-
-- Javadoc (au moins les gestions)
-
 ## Installation
 
 ### Mise en place
 
-- Le fichier glassfish-resources.xml n'est pas pris en charge automatiquement par le projet, il est donc nécessaire d'ajouter la ressource "à la main" sur le serveur Glassfish grâce à l'invite de commande et l'utilitaire asadmin.
+- Le fichier glassfish-resources.xml n'est pas forcément pris en charge automatiquement par le projet, dans ce cas, il est donc nécessaire d'ajouter la ressource "à la main" sur le serveur Glassfish grâce à l'invite de commande et l'utilitaire asadmin.
 - Construire SpacelibShared
 - Construire avec les dépendances Spacelib-ear
     ==> Une page web apparaitra alors avec 2 liens correspondants aux deux applications web (Mécaniciens & Usagers)
