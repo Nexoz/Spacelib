@@ -199,9 +199,6 @@ public class GestionVoyage implements GestionVoyageLocal {
         Usager u = r.getEmprunteur();
         Quai q = r.getQuaiArrivee();
         reservationFacade.remove(r);
-        usagerFacade.edit(u);
-        q.setDateReservation(null);
-        quaiFacade.edit(q);
         
     }
     

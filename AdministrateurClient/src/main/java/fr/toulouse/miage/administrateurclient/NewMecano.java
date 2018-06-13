@@ -187,7 +187,7 @@ public class NewMecano extends javax.swing.JPanel {
         mecano.setLogin(TFLogin.getText());
         mecano.setNom(TFNom.getText());
         mecano.setPrenom(TFPrenom.getText());
-        mecano.setPassword(TFPassword.getPassword().toString());
+        mecano.setPassword(TFPassword.getText());
         manager.getAdminRemoteSvc().ajouterMecano(mecano);
         System.out.println("mecano créé");
         origin.chargerDonnees();

@@ -166,11 +166,7 @@ public class FinaliserVoyage extends javax.swing.JPanel {
         try {
             manager.getBorneRemoteSvc().finaliserVoyage(jframeAccueil.getIdReservation());
             jframeAccueil.changerJpanel(this, new ReserverNavette(jframeAccueil,""));
-        } catch (NavetteInconnuException ex) {
-            Logger.getLogger(FinaliserVoyage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ReservationInconnuException ex) {
-            Logger.getLogger(FinaliserVoyage.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (QuaiInconnuException ex) {
             Logger.getLogger(FinaliserVoyage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonValiderMouseClicked
