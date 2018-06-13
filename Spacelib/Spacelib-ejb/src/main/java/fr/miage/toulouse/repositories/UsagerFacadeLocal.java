@@ -17,31 +17,62 @@ import javax.ejb.Local;
 @Local
 public interface UsagerFacadeLocal {
 
+    /**
+     * Creation d'un usager 
+     * @param usager usager à créer 
+     */
     void create(Usager usager);
 
+    /**
+     * Modification d'un usager 
+     * @param usager usager à modifier 
+     */
     void edit(Usager usager);
 
+    /**
+     * Supprime un usager 
+     * @param usager usager à supprimer 
+     */
     void remove(Usager usager);
 
+    
+    /**
+     * Retourne un usager 
+     * @param id id de l'usager à renvoyer 
+     * @return usager à trouver 
+     */
     Usager find(Object id);
 
+    /**
+     * Retourne tous les usagers 
+     * @return List<Usager> les usagers de Spacelib
+     */
     List<Usager> findAll();
 
+    /**
+     *
+     * @param range
+     * @return 
+     */
     List<Usager> findRange(int[] range);
 
+    /**
+     * Retourne le nombre d'usagers de Spacelib
+     * @return 
+     */
     int count();
     
     /**
-     * Permet d'ajouter une réservation à la liste des réservation de l'usager
-     * @param usager l'usager
-     * @param r réservation à enregistrer
+     * Ajoute une réservation à un usager
+     * @param usager l'usager à qui on ajoute une opération 
+     * @param r Réxservation à ajouter à l'usager 
      */
     void ajouterReservation(Usager usager,Reservation r);
     
     /**
-     * Renvoie la liste de toutes les réservations d'un usager
-     * @param usager l'usager
-     * @return List de réservation
+     * retourne la liste des réservations d'un usager 
+     * @param usager l'usager dont on veut les réservations
+     * @return List<Reservation> liste des réservations de l'usager 
      */
     List<Reservation> reservationsUsager(Usager usager);
     

@@ -29,7 +29,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
- *
+ * Classe qui implémente le service defini dans l'interface du SpacelibShared
  * @author pierreliaubet
  */
 @Stateless
@@ -38,7 +38,11 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
     @EJB
     GestionStationLocal gestionStation;
     
-    
+    /**
+     * Transforme un ObjStation en Station 
+     * @param objStation objet ObjStation à convertir
+     * @return entité de Station de objStation
+     */
     private Station objStationToStation(ObjStation objStation){
         Station station = new Station();
         station.setId(objStation.getId());
@@ -59,6 +63,11 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         return station;
     }
     
+    /**
+     * Transforme un ObjNavette en Navette 
+     * @param objNavette objet ObjNavette à convertir 
+     * @return entité de Navette de objNavette
+     */
     private Navette objNavetteToNavette(ObjNavette objNavette){
         Navette navette = new Navette();
         try {
@@ -70,6 +79,11 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         return navette;
     }
     
+    /**
+     * Transforme un ObjMecano en Mecano 
+     * @param objMecano objet ObjMecano à convertir
+     * @return entité de Mecano de objMecano
+     */
     private Mecanicien objMecanoToMecano(ObjMecanicien objMecano){
         Mecanicien mecano = new Mecanicien();
         mecano = gestionStation.getLeMecano(objMecano.getId());
@@ -79,6 +93,10 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
     }
     
     
+    /**
+     * Retourne la liste des stations de Spacelib avec les quais qui y sont rattachés
+     * @return List<ObjStation> liste des stations de Spacelib
+     */
     @Override
     public List<ObjStation> consulterStation() {
         List<Station> stations = gestionStation.consulterStation();
@@ -93,6 +111,11 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         return objStations;
     }
 
+    /**
+     * Ajoute une station à Spacelib 
+     * @param station ObjSation à ajouter 
+     * @throws StationInconnuException 
+     */
     @Override
     public void ajouterStation(ObjStation station) throws StationInconnuException {
         List<Quai> lesQuais = new ArrayList<>();
@@ -107,17 +130,34 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         gestionStation.ajouterStation(station.getNom(), station.getPosition(), lesQuais);
     }
 
+    /**
+     * Supprime une station de spacelib
+     * @param station ObjStation à supprimer 
+     * @throws StationInconnuException 
+     */
     @Override
     public void supprimerStation(ObjStation station) throws StationInconnuException {
         gestionStation.supprimerStation(station.getId());
     }
 
+    /**
+     * Modifie la stattion passée en paramètre 
+     * @param station ObjStation à modifier
+     * @throws StationInconnuException 
+     */
     @Override
     public void modifierStation(ObjStation station) throws StationInconnuException {
         Station update = objStationToStation(station);
         gestionStation.ModifierStation(update);
     }
 
+    /**
+     * Ajoute un quai à une station de spacelib
+     * @param station ObjStation de là où on ajoute le quai 
+     * @param quai ObjQuai à ajouter dans le système de gestion de Spacelib
+     * @throws StationInconnuException
+     * @throws QuaiInconnuException 
+     */
     @Override
     public void ajouterQuai(ObjStation station, ObjQuai quai) throws StationInconnuException, QuaiInconnuException {
         Quai newQuai = new Quai();
@@ -133,16 +173,32 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         gestionStation.ajouterQuai(station.getId(), newQuai);
     }
 
+    /**
+     * Modifie un quai 
+     * @param quai
+     * @throws QuaiInconnuException 
+     */
     @Override
     public void modifierQuai(ObjQuai quai) throws QuaiInconnuException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Supprime un quai 
+     * @param quai ObjQuai à supprimer 
+     * @throws QuaiInconnuException 
+     */
     @Override
     public void supprimerQuai(ObjQuai quai) throws QuaiInconnuException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Crée une nouvelle Navette dans le système de gestion de Spacelib 
+     * @param navette ObjNavette à ajouter 
+     * @throws NavetteInconnuException
+     * @throws QuaiInconnuException 
+     */
     @Override
     public void acheterNavette(ObjNavette navette) throws NavetteInconnuException, QuaiInconnuException {
         Navette eNavette = new Navette();
@@ -155,22 +211,41 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         gestionStation.acheterNavette(eNavette);
     }
 
+    /**
+     * Modifie une Navette 
+     * @param navette ObjNavette à modifier 
+     * @throws NavetteInconnuException 
+     */
     @Override
     public void modifierNavette(ObjNavette navette) throws NavetteInconnuException {
         Navette update = objNavetteToNavette(navette);
         gestionStation.modifierNavette(update);
     }
 
+    /**
+     * Supprime une Navette du système de gestion de Spacelib
+     * @param navette ObjNavette à supprimer
+     * @throws NavetteInconnuException 
+     */
     @Override
     public void supprimerNavette(ObjNavette navette) throws NavetteInconnuException {
         gestionStation.supprimerNavette(navette.getId());
     }
 
+    /**
+     * retroue la liste des quais 
+     * @return List<Quai> des quais de Spacelib
+     */
     @Override
     public List<ObjQuai> getLesQuais() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    
+    /**
+     * Retourne la liste des Navettes de SpaceLib
+     * @return List<ObjNavette> les ObjNavettes de Spacelib 
+     */
     @Override
     public List<ObjNavette> getLesNavettes() {
         List<Navette> lesNavettes = gestionStation.getLesNavettes();
@@ -191,6 +266,11 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         return lesObjNavette;
     }
 
+    /**
+     * Retourne la liste des quais disponibles dans une sation 
+     * @param station Id de la station concernée 
+     * @return List<ObjQuai> des quais disponibles dans la station 
+     */
     @Override
     public List<ObjQuai> getLesQuaisDispo(long station) {
         
@@ -202,6 +282,10 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         return quaisDispos;
     }
 
+    /**
+     * Retourne la liste des mécaniciens de Spacelib
+     * @return List<ObjMecanicien> des mécaniciens de Spacelib 
+     */
     @Override
     public List<ObjMecanicien> getlesMecanos() {
         List<Mecanicien> lesMecanos = gestionStation.getLesMecanos();
@@ -212,6 +296,10 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         return lesObjMecano;
     }  
 
+    /**
+     * Ajoute un mécano dans le système de gestion de Spacelib
+     * @param mecano ObjMecanicien à ajouter 
+     */
     @Override
     public void ajouterMecano(ObjMecanicien mecano) {
         Mecanicien nouveau = new Mecanicien();
@@ -222,12 +310,22 @@ public class ServiceAdminRMI implements SpacelibAdminRemote{
         gestionStation.ajoutouMecano(nouveau);
     }
 
+    /**
+     * Modifie un Mecano dans le système de gestion de Spacelib
+     * @param mecano ObjMecanicien à modifier 
+     * @throws MecanicienInconnuException 
+     */
     @Override
     public void modifierMecano(ObjMecanicien mecano) throws MecanicienInconnuException {
         Mecanicien update = objMecanoToMecano(mecano);
         gestionStation.modifierMecanicien(update);
     }
 
+    /**
+     * Supprime un Mecano du système de gestion de Spacelib 
+     * @param mecano ObjMecano à supprimer
+     * @throws MecanicienInconnuException 
+     */
     @Override
     public void supprimerMecano(ObjMecanicien mecano) throws MecanicienInconnuException {
         gestionStation.supprimerMecanicien(mecano.getId());
