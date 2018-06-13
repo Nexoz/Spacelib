@@ -6,7 +6,6 @@
 package fr.miage.toulouse;
 
 import fr.miage.toulouse.entities.Reservation;
-import fr.miage.toulouse.entities.Station;
 import fr.miage.toulouse.entities.Utilisateur;
 import fr.miage.toulouse.services.ServiceReservationUsagerLocal;
 import fr.miage.toulouse.spacelibshared.exceptions.LoginUsedException;

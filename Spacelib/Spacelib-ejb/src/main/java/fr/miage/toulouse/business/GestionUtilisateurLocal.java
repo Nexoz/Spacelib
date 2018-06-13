@@ -49,7 +49,7 @@ public interface GestionUtilisateurLocal {
     /**
      * Permet de vérifier si un login est déjà utilisé.
      * @param login lofin à vérifier
-     * @return 
+     * @return true si le login est déjà utilisé
      */
     boolean isLoginUsed(String login);
 }

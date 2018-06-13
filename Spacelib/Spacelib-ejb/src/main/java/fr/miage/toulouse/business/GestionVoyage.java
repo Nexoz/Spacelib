@@ -205,7 +205,4 @@ public class GestionVoyage implements GestionVoyageLocal {
         
     }
     
-    
-    
-    
 }

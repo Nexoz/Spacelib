@@ -80,6 +80,19 @@ public interface GestionVoyageLocal {
      * @throws ReservationInconnuException 
      */
     String quaiReservation(long idReservation) throws ReservationInconnuException;
+    
+    /**
+     * Retourne la liste des différents voyages qu'un usager a effectué
+     * @param idUsager Usager en question
+     * @return La liste de ses voyages
+     * @throws UsagerInconnuException 
+     */
     List<Reservation> getReservationsForUsager(long idUsager) throws UsagerInconnuException;
+    
+    /**
+     * Annule et supprime la réservation identifiée en paramètre
+     * @param idReservation
+     * @throws ReservationInconnuException 
+     */
     void annulerReservation(long idReservation) throws ReservationInconnuException;
 }
