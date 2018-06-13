@@ -12,25 +12,33 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 
 /**
- *
+ * Interface simulant la station de la borne
  * @author Fanny Mnt
  */
 public class SelectionStation extends javax.swing.JPanel {
 
+    /**
+     * Jframe parente du Jpanel
+     */
     public BorneClient jframeAccueil;
+    /**
+     * manager de la borme
+     */
     private RMIBorneServiceManager manager;
+    /**
+     * Station sélectionné
+     */
     private ObjStation selectedStation = null;
     
     /**
-     * Creates new form ReserverNavette
+     * Constructeur
+     * @param j jframe parente
      */
     public SelectionStation(BorneClient j) {
         initComponents();
         this.manager = j.getManager();
         this.jframeAccueil = j;
-        
         this.initialiserListStation();
-
     }
 
     /**
@@ -143,6 +151,9 @@ public class SelectionStation extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonSélectionActionPerformed
 
 
+    /**
+     * Permet d'initialiser la liste des station du SI
+     */
     public void initialiserListStation(){
         jListStation.removeAll();
         List<ObjStation> stations = manager.getBorneRemoteSvc().consulterStation();

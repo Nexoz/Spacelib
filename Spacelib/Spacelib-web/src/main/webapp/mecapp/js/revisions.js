@@ -14,6 +14,7 @@ $(document).ready(function () {
         appendMethodToURL: false,
         error: function (SOAPResponse) {
             console.log(SOAPResponse)// show error
+            M.toast({html : 'Erreur'})
         }
     });
 
@@ -41,7 +42,7 @@ $(document).ready(function () {
                                     var tr = "<tr id='revision" + i + "'>"
                                     tr = tr + "<td>Navette n°" + navette[0].getElementsByTagName("id")[0].childNodes[0].nodeValue + "</td>"
                                     tr = tr + "<td>" + quai.getElementsByTagName("codeQuai")[0].childNodes[0].nodeValue + "</td>"
-                                    tr = tr + "<td></td><td><a onclick='terminerRevision(" + i + "," + ope.getElementsByTagName("id")[0].childNodes[0].nodeValue + ")' class='waves-effect waves-light btn blue darken-4'>VALIDER</a></td>"
+                                    tr = tr + "<td><a onclick='terminerRevision(" + i + "," + ope.getElementsByTagName("id")[0].childNodes[0].nodeValue + ")' class='waves-effect waves-light btn blue darken-4'>VALIDER</a></td>"
                                     tr = tr + "</tr>"
                                     $("#table_revisions").append(tr);
                                     i++;

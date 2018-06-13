@@ -1,0 +1,87 @@
+<html lang='fr'>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>SpaceLib</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/index.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <style>
+  </style>
+</head>
+
+<body class="">
+  <div class="section"></div>
+  <main>
+    <center>
+      <div class="section"></div>
+
+      <h5 class="white-text">
+        <i class="fas fa-rocket"></i> SpaceLib</h5>
+      <div class="section"></div>
+
+      <div class="container">
+        <div class="z-depth-1 grey lighten-4 row">
+
+          <div id="form_container">
+            <form class="col m12" method="post">
+              <div class='row'>
+                <div class='col m12'>
+                  <h5>Veuillez rentrer vos identifiants</h5>
+                </div>
+              </div>
+
+
+              <div class='row'>
+                <div class='input-field col m10 offset-m1'>
+                  <input class='validate' type="text" name='surname' id='surname' />
+                  <label for='text'>Nom</label>
+                </div>
+              </div>
+
+              <div class='row'>
+                <div class='input-field col m10 offset-m1'>
+                  <input class='validate' type="text" name='name' id='name' />
+                  <label for='text'>Prénom</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class='input-field col s10 m5 offset-m1'>
+                  <input class='validate' type="text" name='login' id='login' />
+                  <label for='text'>Identifiant</label>
+                </div>
+                <div class='input-field col m5'>
+                  <input class='validate' type='password' name='password' id='password' />
+                  <label for='password'>Mot de passe</label>
+                </div>
+              </div>
+              <center>
+                <div class='row'>
+                  <button type='submit' id='btn_register' name='btn_register' class='col m10 offset-m1 btn btn-large waves-effect indigo'>S'authentifier</button>
+                </div>
+                <div class='row'>
+                  <a href='index.html' name='btn_cancel' class='col m10 offset-m1 btn btn-large waves-effect red'>Annuler</a>
+                </div>
+              </center>
+            </form>
+          </div>
+        </div>
+      </div>
+    </center>
+
+    <div class="section"></div>
+    <div class="section"></div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="lib/materialize.js"></script>
+  <script src="lib/xml2json.js"></script>
+  <script src="lib/jquery.soap.js"></script>
+  <script src="js/register.js"></script>
+</body>
+
+</html>

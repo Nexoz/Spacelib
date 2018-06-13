@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -24,6 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @Entity
 @XmlRootElement(name="station")
+@XmlSeeAlso({Reservation.class})
 public class Station implements Serializable {
 
     private static final long serialVersionUID = 1L;

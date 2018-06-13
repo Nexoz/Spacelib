@@ -9,10 +9,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
-import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.FetchType.EAGER;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
  *
@@ -20,11 +21,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement(name="usager")
+@XmlSeeAlso({Reservation.class})
 public class Usager extends Utilisateur implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @OneToMany(fetch = LAZY, mappedBy = "emprunteur")
+    @OneToMany(fetch = EAGER, mappedBy = "emprunteur")
     private List<Reservation> listeReservations;
   
     public Usager() {

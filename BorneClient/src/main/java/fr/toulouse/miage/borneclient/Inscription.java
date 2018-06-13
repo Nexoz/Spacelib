@@ -12,13 +12,19 @@ import java.util.logging.Logger;
 import javax.naming.NamingException;
 
 /**
- *
- * @author pierreliaubet
+ * interface d'insciption
+ * @author Fanny Mnt
  */
 public class Inscription extends javax.swing.JPanel{
 
+    /**
+     * Jframe parente
+     */
     BorneClient jframeAccueil;
     
+    /**
+     * manager de la borne
+     */
     private RMIBorneServiceManager manager;
     
     /**

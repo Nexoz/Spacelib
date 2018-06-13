@@ -14,18 +14,49 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- *
+ * Jframe de la borne
  * @author Fanny Mnt
  */
 public class BorneClient extends javax.swing.JFrame {
 
+    /**
+     * manager de la borne 
+     */
     private RMIBorneServiceManager manager;
+    
+    /**
+     * id de la station de la borne
+     */
     private Long idStation;
+    
+    /**
+     * Id du client connecté
+     */
     private Long IdClient;
+    
+    /**
+     * id de la réservation de l'usager connecté
+     */
     private Long IdReservation;
+    
+    /**
+     * nom de la station de la borne
+     */
     private String nomStation;
+    
+    /**
+     * nom de l'usager connecté
+     */
     private String nomUsager;
+    
+    /**
+     * prénom de l'usager connecté
+     */
     private String prenomUsager;
+    
+    /**
+     * Nom du quai de la résesrvation où il faut se rendre
+     */
     private String nomQuaiReservation;
     
     /**
@@ -89,6 +120,11 @@ public class BorneClient extends javax.swing.JFrame {
         
     }
 
+    /**
+     * permet de changer de jpanel dans la jframe
+     * @param jAncienne
+     * @param jNouvelle 
+     */
     public void changerJpanel(JPanel jAncienne, JPanel jNouvelle){
         this.remove(jAncienne);
         this.setContentPane(jNouvelle);

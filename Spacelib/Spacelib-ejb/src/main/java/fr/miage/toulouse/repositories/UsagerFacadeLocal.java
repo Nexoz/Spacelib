@@ -76,5 +76,4 @@ public interface UsagerFacadeLocal {
      */
     List<Reservation> reservationsUsager(Usager usager);
     
-   // Usager nouvelUsager( String nom,String prenom, String login, String password);
 }

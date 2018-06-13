@@ -10,7 +10,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
+ * Classe utilitaire pour l'affichage XML
  * @author jb
  */
 @XmlRootElement

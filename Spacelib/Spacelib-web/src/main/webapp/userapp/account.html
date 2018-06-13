@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-  <title>MecApp - SpaceLib</title>
+  <title>SpaceLib</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -39,13 +39,13 @@
           <div class="divider">
         </li>
         <li>
-          <a href="reserver.html">Navettes</a>
+          <a href="reserver.html">Réserver</a>
         </li>
         <li>
           <div class="divider">
         </li>
         <li>
-          <a href="account.html">Révisions</a>
+          <a href="account.html">Mon Compte</a>
         </li>
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger">
@@ -68,91 +68,11 @@
             <tr>
               <th>ID</th>
               <th>Date départ</th>
-              <th>Station départ</th>
-              <th></th>
-              <th>Station arrivée</th>
               <th>Date arrivée</th>
               <th></th>
             </tr>
-            <tr>
-              <td>#12421</td>
-              <td>12/11/17</td>
-              <td>Alpha031</td>
-              <td>
-                <i class="fas fa-arrow-right"></i>
-              </td>
-              <td>Sard17</td>
-              <td>12/11/17</td>
-              <td>
-                <button class="waves-effect waves-light btn red darken-1">ANNULER</button>
-              </td>
-            </tr>
-            <tr>
-              <td>#12421</td>
-              <td>12/11/17</td>
-              <td>Alpha031</td>
-              <td>
-                <i class="fas fa-arrow-right"></i>
-              </td>
-              <td>Sard17</td>
-              <td>12/11/17</td>
-              <td>
-                <button class="waves-effect waves-light btn blue darken-4" disabled>ANNULER</button>
-              </td>
-            </tr>
-            <tr>
-              <td>#12421</td>
-              <td>12/11/17</td>
-              <td>Alpha031</td>
-              <td>
-                <i class="fas fa-arrow-right"></i>
-              </td>
-              <td>Sard17</td>
-              <td>12/11/17</td>
-              <td>
-                <button class="waves-effect waves-light btn blue darken-4" disabled>ANNULER</button>
-              </td>
-            </tr>
-            <tr>
-              <td>#12421</td>
-              <td>12/11/17</td>
-              <td>Alpha031</td>
-              <td>
-                <i class="fas fa-arrow-right"></i>
-              </td>
-              <td>Sard17</td>
-              <td>12/11/17</td>
-              <td>
-                <button class="waves-effect waves-light btn blue darken-4" disabled>ANNULER</button>
-              </td>
-            </tr>
-            <tr>
-              <td>#12421</td>
-              <td>12/11/17</td>
-              <td>Alpha031</td>
-              <td>
-                <i class="fas fa-arrow-right"></i>
-              </td>
-              <td>Sard17</td>
-              <td>12/11/17</td>
-              <td>
-                <button class="waves-effect waves-light btn blue darken-4" disabled>ANNULER</button>
-              </td>
-            </tr>
-            <tr>
-              <td>#12421</td>
-              <td>12/11/17</td>
-              <td>Alpha031</td>
-              <td>
-                <i class="fas fa-arrow-right"></i>
-              </td>
-              <td>Sard17</td>
-              <td>12/11/17</td>
-              <td>
-                <button class="waves-effect waves-light btn blue darken-4" disabled>ANNULER</button>
-              </td>
-            </tr>
-          </table>
+            <tbody id='table_resa'></tbody>
+         </table>
         </div>
       </div>
     </div>
@@ -182,6 +102,7 @@
   <script src="lib/materialize.js"></script>
   <script src="lib/xml2json.js"></script>
   <script src="lib/jquery.soap.js"></script>
+  <script src="lib/moment.js"></script>
   <script src="js/app.js"></script>
   <script src="js/account.js"></script>
 

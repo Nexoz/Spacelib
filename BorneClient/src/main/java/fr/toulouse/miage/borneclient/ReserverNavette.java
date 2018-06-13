@@ -20,24 +20,38 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
 /**
- *
+ * Interface pour réserver une navette
  * @author Fanny Mnt
  */
 public class ReserverNavette extends javax.swing.JPanel {
 
+    /**
+     * Jframe parente
+     */
     BorneClient jframeAccueil;
-    ObjStation s;
+
+    /**
+     * Manager de la borne
+     */
     private RMIBorneServiceManager manager;
+    /**
+     * id du client connecté
+     */
     private long idClient;
+    /**
+     * id de la station
+     */
     private long idStation;
     
+
     /**
-     * Creates new form ReserverNavette
+     * Constructeur pour réserver une navette
+     * @param j jframe parente
+     * @param message message à afficher si nécessaire
      */
     public ReserverNavette(BorneClient j,String message) {
         initComponents();
@@ -50,7 +64,6 @@ public class ReserverNavette extends javax.swing.JPanel {
         this.jLabelNomStation.setText("     Station " + j.getNomStation());
         SpinnerModel model = new SpinnerNumberModel(1, 1,8,1);
         jSpinnerNb.setModel(model);
-        //jSpinnerNb = new JSpinner(model); 
     }
 
     /**
@@ -230,7 +243,6 @@ public class ReserverNavette extends javax.swing.JPanel {
             jLabelErreur.setText("Veuillez sélectionner une station d'arrivée !");
         } else {
             int nbParticipant = Integer.parseInt(jSpinnerNb.getValue().toString());
-            System.out.println("fr.toulouse.miage.borneclient.ReserverNavette.jButtonReserverMouseClicked()   nbParticipant"  + nbParticipant);
             try {
                 long idReservation = manager.getBorneRemoteSvc().reserverVoyage(this.idStation, selectedStation.getId(),nbParticipant,this.idClient, this.aujourdhui());
                 jframeAccueil.setIdReservation(idReservation);
@@ -273,12 +285,19 @@ public class ReserverNavette extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_DecoButtonActionPerformed
 
+    /**
+     * permet de générer la date de créatio nde l'opération
+     * @return date du jour
+     */
     public Date aujourdhui() {
         SimpleDateFormat formatter = new SimpleDateFormat ("yyyy.MM.dd" ); 
         Date dateD = new Date(); 
         return dateD;
     }
     
+    /**
+     * Permet de récupérer toutes les stations du SI
+     */
     public void initialiserListStation(){
         jListStation.removeAll();
         List<ObjStation> stations = manager.getBorneRemoteSvc().consulterStation();

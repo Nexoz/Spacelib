@@ -1,5 +1,6 @@
 # Spacelib
-Projet de JEE de Master 1 MIAGE à Toulouse
+
+Projet de JEE de Master 1 MIAGE à Toulouse réalisé par Pierre Liaubet, Fanny Montuy et Jean-Baptiste Roubelat
 
 Le projet est composé de plusieurs projets NetBeans :
 
@@ -11,6 +12,10 @@ Le projet est composé de plusieurs projets NetBeans :
 - AdministrateurClient : Application lourde Swing pour l'administration des stations
 - BorneClient : Application lourde Swing pour les différentes bornes de réservation des stations
 
+## Avancement du projet
+
+Nous avons une application en version 2 "fonctionnelle" dans le sens que les scénarios souhaités pour cette version sont réalisables, même si ils sont soumis à quelques problèmes (voir section Points d'amélioration)
+
 ## Reste à faire
 
 ### Rendus
@@ -19,45 +24,11 @@ Le projet est composé de plusieurs projets NetBeans :
 
 - Squelette Dossier
 - Mettre UML à jour à la fin de la V1
+  - Modifier tout ce qui est lié à réservation car nouveau paramètre dateDebut partout
 
 #### Documentation
 
 - Javadoc (au moins les gestions)
-- Ce README a mettre au propre (pour dire brièvement que fait l'appli, qu'est-ce qu'on a codé, comment elle se lance, et si y a des choses praticulières à dire -choix de conceptions...-)
-
-### V1
-
-#### Appli Admin
-- Forcer le nom de la station créé avec un dropdown ({"Terre", "Dimidium", "Arion", "Brahe", "Amateru", "Tadmor"})
-
-#### BorneClient
--Le spinner a réglé
-
-#### Application Mécanicien
-- Afficher date révision ???
-
-### V2
-
-#### Carte
-
-- Carte des stations à dessiner
-- Mettre à la place de l'image d'espace en placeholder sur l'acceuil
-
-#### Appli
-
-- Changer le index.html de la page Hello World (index.html à la racine) pour que ce soit un peu plus voyant
-- Mettre du blabla sur la page d'acceuil
-- Brancher nouvelle réservation
-- Afficher les réservation d'un client
-- Méthode d'annulation d'une réservation + Brancher au bouton
-
-### V3
-
-- Estimer le temps à mettre, sachant que l'appli web est quasiement uniquement du CtrlC/CtrlV
-
-### V4
-
-- Code pour enlever les réservation rapide à faire
 
 ## Installation
 
@@ -69,20 +40,52 @@ Le projet est composé de plusieurs projets NetBeans :
     ==> Une page web apparaitra alors avec 2 liens correspondants aux deux applications web (Mécaniciens & Usagers)
 - Vous pourrez alors utiliser AdministrateurClient ou BorneClient ainsi que les applications web
 
-## Avancement du projet
+## Jeu de données fourni
 
-Dire ce qu'on a codé
-+ Choix de conception
+### Pour la réalisation d'un voyage
 
-## Jeux de données
-###Pour la réalisation d'un voyage :
--Au moins 3 stations avec des quais
+- Au moins 3 stations avec des quais
 - Pas de navette disponible
-	- Dans l'une des stations (Terre), des quais mais pas de navette arrimé
+  - Dans l'une des stations (Terre), des quais mais pas de navettes arrimées
 - Pas de quai disponible dans la station d'arrivée pour le jour prévu (Station de départ Brahe a des navettes)
-	- Dans une autre station (Dimidium), quais avec des navettes arrimé + un quai avec date de réservation
--Dans la station de départ(Arion) une seul navette arrimé avec 4 places
-	- test de réservation avec 6 passagers -> pas de navette disponible
-	- test de réservation avec nombre de passager <=4
-###Pour la finalisation d'un voyage
-- Un usager déja créé + réservation à son nom créé + la réservation démarrer
+  - Dans une autre station (Dimidium), quais avec des navettes arrimé + un quai avec date de réservation
+- Dans la station de départ(Arion) une seule navette arrimée avec 4 places
+  - test de réservation avec 6 passagers -> pas de navette disponible
+  - test de réservation avec nombre de passagers <= 4
+
+### Pour la finalisation d'un voyage
+
+- Un usager déja créé + réservation à son nom créé + la réservation démarrée
+
+## Points d'amélioration
+
+### V1
+
+#### Appli Admin
+
+- Forcer le nom de la station créé avec un dropdown ({"Terre", "Dimidium", "Arion", "Brahe", "Amateru", "Tadmor"})
+
+#### Application Mécanicien
+
+- Afficher date révision
+
+### V2
+
+#### Carte
+
+- Carte plus jolie et propre sur les finitions
+- Carte interactive
+
+#### Appli
+
+- Mettre des textes pour que le site fasse plus "commercial", notamment sur la page d'acceuil
+- Problème de cache au niveau des réservations supprimées
+- Modifier les annotations XML pour permettre d'afficher les Stations de départ/arrivée dans "Mon Compte"
+
+#### Back-end
+
+- Génération de messages d'erreurs dans le webservice pour l'application lorsqu'une exception est levée car c'est actuellement une erreur 500 qui est proposée
+
+### Autres
+
+- Réalisation des autres versions
